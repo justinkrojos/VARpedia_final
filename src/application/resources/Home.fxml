@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -11,13 +13,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.HomeController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="821.0" layoutX="-167.0" layoutY="-100.0" stroke="WHITE" strokeType="INSIDE" width="566.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebedee" height="464.0" layoutX="38.0" layoutY="129.0" stroke="#ebedee" strokeType="INSIDE" strokeWidth="2.0" width="320.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7e1e4" height="41.0" layoutX="-3.0" layoutY="11.0" stroke="#d7e1e4" strokeType="INSIDE" strokeWidth="2.0" width="1286.0" />
       <Text fx:id="_title" layoutX="-4.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VARpedia" textAlignment="CENTER" wrappingWidth="1294.4443359375">
          <font>
             <Font size="22.0" />
          </font></Text>
-      <ListView fx:id="_creationList" layoutX="38.0" layoutY="129.0" onMouseClicked="#selectItem" prefHeight="464.0" prefWidth="320.0" />
       <Text fx:id="_creationTitle" layoutX="39.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation LIst">
          <font>
             <Font name="System Italic" size="13.0" />
@@ -32,5 +32,27 @@
       <Button fx:id="btnBackward" layoutX="549.0" layoutY="654.0" mnemonicParsing="false" text="&lt;&lt;" />
       <Button fx:id="btnForward" layoutX="697.0" layoutY="654.0" mnemonicParsing="false" text="&gt;&gt;" />
       <Button layoutX="39.0" layoutY="670.0" mnemonicParsing="false" onAction="#handleBtnBack" text="Back" />
+      <TabPane layoutX="37.0" layoutY="129.0" prefHeight="467.0" prefWidth="320.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="All Creations">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="248.0" prefWidth="122.0">
+                     <children>
+                        <ListView fx:id="_creationList" onMouseClicked="#selectItem" prefHeight="434.0" prefWidth="320.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Favourites">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="_creationList1" onMouseClicked="#selectItem" prefHeight="434.0" prefWidth="320.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>
