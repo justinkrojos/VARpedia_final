@@ -77,6 +77,9 @@ public class HomeController {
     @FXML
     private TabPane creationCategories;
 
+    @FXML
+    private ToggleButton btnFavourite;
+
     public void initialize(){
         updateListTree();
         btnBackward.setVisible(false);
@@ -97,7 +100,7 @@ public class HomeController {
     private void handleBtnPlay() {
         _player.getChildren().removeAll();
         _player.getChildren().clear();
-       // btnPlay.setDisable(true);
+        // btnPlay.setDisable(true);
         //System.out.println("Playing");//TODO Play/pause stop not done yet
         if (_selectedItem == null) {
             alertNullSelection();
@@ -123,7 +126,7 @@ public class HomeController {
             @Override
             public void run() {
                 _player.getChildren().removeAll();
-               // btnPlay.setDisable(false);
+                // btnPlay.setDisable(false);
                 //mediaView = null;
             }
         });
@@ -194,6 +197,18 @@ public class HomeController {
         updateListTree();
     }
 
+    @FXML
+    public void handleBtnFavourite() {
+        if (_selectedItem == null) {
+            alertNullSelection();
+        }
+        else if (btnFavourite.isSelected()) {
+            _favouriteList.getItems().add(_selectedItem);
+        } else {
+            _favouriteList.getItems().remove(_selectedItem);
+        }
+    }
+
     /**
      * Get the creations in the folder.
      */
@@ -224,12 +239,20 @@ public class HomeController {
     private void selectItem() {
         if (creationCategories.getSelectionModel().getSelectedIndex() == 0) {
             _selectedItem = (String) _creationList.getSelectionModel().getSelectedItem();
-            //System.out.println(_selectedItem);
+
         }
         else {
             _selectedItem = (String) _favouriteList.getSelectionModel().getSelectedItem();
         }
 
+        if (_favouriteList.getItems().contains(_selectedItem)) {
+            btnFavourite.setSelected(true);
+        }
+        else {
+            btnFavourite.setSelected(false);
+        }
+
+    //System.out.println(_selectedItem);
     }
 
     /**
