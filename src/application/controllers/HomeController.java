@@ -80,6 +80,11 @@ public class HomeController {
         btnPause.setVisible(false);
     }
 
+    @FXML
+    private void handleBtnBack() throws IOException {
+        Main.changeScene("resources/Welcome.fxml");
+    }
+
     /**
      * Play a video creation.
      */

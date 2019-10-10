@@ -2,10 +2,13 @@ package application;
 
 import application.controllers.CreateController;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -19,19 +22,44 @@ public class Main extends Application {
 
     //private String _creationDir;
 
+    private static Stage _primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         //System.out.println(this.getClass().getResource("resources/Home.fxml"));
 
-        //_primaryStage = primaryStage;
+        _primaryStage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("resources/Home.fxml"));
+        loader.setLocation(this.getClass().getResource("resources/Welcome.fxml"));
         Parent layout = loader.load();
         Scene scene = new Scene(layout);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
+
+    /**
+     * This method changes the scene, for the main menu window.
+     * @param fxml
+     * @throws IOException
+     */
+    public static void changeScene(String fxml) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource(fxml));
+        Parent layout = loader.load();
+        Scene scene = new Scene(layout);
+        _primaryStage.setScene(scene);
+        _primaryStage.show();
+    }
+
 
 /*    public Stage getPrimaryStage() {
         return _primaryStage;
