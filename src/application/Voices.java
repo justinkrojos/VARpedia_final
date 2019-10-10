@@ -2,9 +2,9 @@ package application;
 
 public enum Voices {
 
-    Voice1 ("(voice_kal_diphone)"),
-    Voice2 ("(voice_akl_nz_jdt_diphone)"),
-    Voice3 ("(voice_akl_nz_cw_cg_cg)")
+    Default ("(voice_kal_diphone)"),
+    Kiwi_Male ("(voice_akl_nz_jdt_diphone)"),
+    Kiwi_Female ("(voice_akl_nz_cw_cg_cg)")
     ;
 
     private final String voicesPackage;

@@ -55,23 +55,23 @@
          </font></Text>
       <Button fx:id="btnPreviewAudio" disable="true" layoutX="86.0" layoutY="478.0" mnemonicParsing="false" onAction="#handlePreviewBtn" prefHeight="26.0" prefWidth="149.0" text="Preview Audio" />
       <Text layoutX="80.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Save as:" />
-      <ChoiceBox fx:id="voicesChoiceBox" layoutX="140.0" layoutY="261.0" prefHeight="26.0" prefWidth="109.0" value="Voice1">
+      <ChoiceBox fx:id="voicesChoiceBox" layoutX="140.0" layoutY="261.0" prefHeight="26.0" prefWidth="109.0" value="Default">
               <items>
                  <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Voice1" />
-                    <String fx:value="Voice2" />
-                    <String fx:value="Voice3" />
+                    <String fx:value="Default" />
+                    <String fx:value="Kiwi Male" />
+                    <String fx:value="Kiwi Female" />
                  </FXCollections>
               </items>
       </ChoiceBox>
       <Button fx:id="btnStopAudio" disable="true" layoutX="241.0" layoutY="478.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" text="Stop" />
       <Button fx:id="btnSaveAudioFile" disable="true" layoutX="86.0" layoutY="508.0" mnemonicParsing="false" onAction="#handleSaveFinalAudioBtn" prefHeight="26.0" prefWidth="218.0" text="Save Audio Queue " />
-      <ChoiceBox fx:id="voicesChoiceBox1" layoutX="154.0" layoutY="191.0" prefHeight="26.0" prefWidth="109.0" value="Voice1">
+      <ChoiceBox fx:id="voicesChoiceBox1" layoutX="154.0" layoutY="191.0" prefHeight="26.0" prefWidth="109.0" value="Default">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Voice1" />
-               <String fx:value="Voice2" />
-               <String fx:value="Voice3" />
+               <String fx:value="Default" />
+               <String fx:value="Kiwi Male" />
+               <String fx:value="Kiwi Female" />
             </FXCollections>
          </items>
       </ChoiceBox>

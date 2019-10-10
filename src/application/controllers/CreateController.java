@@ -587,14 +587,14 @@ public class CreateController {
      */
 
     public Voices getVoicesObject(String voiceCode) {
-        if (voiceCode.equals("Voice1")) {
-            return Voices.Voice1;
+        if (voiceCode.equals("Default")) {
+            return Voices.Default;
         }
-        else if (voiceCode.equals("Voice2")) {
-            return Voices.Voice2;
+        else if (voiceCode.equals("Kiwi Male")) {
+            return Voices.Kiwi_Male;
         }
         else {
-            return Voices.Voice3;
+            return Voices.Kiwi_Female;
         }
     }
 
