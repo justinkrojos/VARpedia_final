@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -46,6 +43,9 @@ public class HomeController {
     private ListView _creationList;
 
     @FXML
+    private ListView _favouriteList;
+
+    @FXML
     private Button btnPlay;
 
     @FXML
@@ -73,6 +73,9 @@ public class HomeController {
     private Button btnBackward;
 
     //private MediaView mediaView;
+
+    @FXML
+    private TabPane creationCategories;
 
     public void initialize(){
         updateListTree();
@@ -219,8 +222,13 @@ public class HomeController {
 
     @FXML
     private void selectItem() {
-        _selectedItem = (String) _creationList.getSelectionModel().getSelectedItem();
-        //System.out.println(_selectedItem);
+        if (creationCategories.getSelectionModel().getSelectedIndex() == 0) {
+            _selectedItem = (String) _creationList.getSelectionModel().getSelectedItem();
+            //System.out.println(_selectedItem);
+        }
+        else {
+            _selectedItem = (String) _favouriteList.getSelectionModel().getSelectedItem();
+        }
 
     }
 
