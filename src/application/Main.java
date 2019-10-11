@@ -84,6 +84,39 @@ public class Main extends Application {
         return creationsDir;
     }
 
+    /**
+     * Get the quiz directory
+     * @return
+     */
+    public static String getQuizDir() {
+        String creationsDir = null;
+        try {
+            creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
+            creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
+/*            System.out.println(creationsDir);
+            String systemDir = System.getProperty("user.dir");
+            System.out.println(systemDir);*/
+            creationsDir = creationsDir + "/quiz";
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return creationsDir;
+    }
+
+    private static void createDirectory(String dir) throws InterruptedException, IOException {
+        //String creationsDir = dir;
+        String cmd = "[ ! -d " + dir + " ]";
+        ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+
+        Process process = pb.start();
+        //System.out.println(process.waitFor());
+        if (process.waitFor() == 0) {
+            cmd = "mkdir -p " + dir;
+            ProcessBuilder mkdirpb = new ProcessBuilder("bash", "-c", cmd);
+            Process mkdirP = mkdirpb.start();
+        }
+    }
+
     public static void main(String[] args) {
         try {
 /*            String systemDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
@@ -94,7 +127,7 @@ public class Main extends Application {
             String creationsDir = systemDir + "/creations";*/
             //System.out.println(System.getProperty("user.dir"));
 
-            String creationsDir = getCreationDir();
+/*            String creationsDir = getCreationDir();
             String cmd = "[ ! -d " + creationsDir + " ]";
             ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
 
@@ -104,7 +137,12 @@ public class Main extends Application {
                 cmd = "mkdir -p " + creationsDir;
                 ProcessBuilder mkdirpb = new ProcessBuilder("bash", "-c", cmd);
                 Process mkdirP = mkdirpb.start();
-            }
+            }*/
+
+            createDirectory(getCreationDir());
+            createDirectory(getQuizDir());
+
+
             launch(args);
         } catch (Exception e) {
             e.printStackTrace();
