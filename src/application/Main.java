@@ -84,6 +84,21 @@ public class Main extends Application {
         return creationsDir;
     }
 
+    public static String getFavouriteDir() {
+        String creationsDir = null;
+        try {
+            creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
+            creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
+/*            System.out.println(creationsDir);
+            String systemDir = System.getProperty("user.dir");
+            System.out.println(systemDir);*/
+            creationsDir = creationsDir + "/favourites";
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return creationsDir;
+    }
+
     /**
      * Get the quiz directory
      * @return
@@ -139,6 +154,7 @@ public class Main extends Application {
                 Process mkdirP = mkdirpb.start();
             }*/
 
+createDirectory(getFavouriteDir());
             createDirectory(getCreationDir());
             createDirectory(getQuizDir());
 
