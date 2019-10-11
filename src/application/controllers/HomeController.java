@@ -198,15 +198,29 @@ public class HomeController {
     }
 
     @FXML
-    public void handleBtnFavourite() {
+    public void handleBtnFavourite() throws IOException {
         if (_selectedItem == null) {
             alertNullSelection();
         }
         else if (btnFavourite.isSelected()) {
             _favouriteList.getItems().add(_selectedItem);
+
+
+
         } else {
             _favouriteList.getItems().remove(_selectedItem);
         }
+
+        String listOfFavourites = "";
+
+        for (int i = 0; i < _favouriteList.getItems().size(); i++) {
+            listOfFavourites += _favouriteList.getItems().get(i) + ".mp4 ";
+        }
+
+        String cmd = "echo '" + listOfFavourites + "' > " + Main.getCreationDir() + "/favourites.txt";
+
+        ProcessBuilder getFavouritespb = new ProcessBuilder("bash", "-c", cmd);
+        Process getFavouritesprocess = getFavouritespb.start();
     }
 
     /**
