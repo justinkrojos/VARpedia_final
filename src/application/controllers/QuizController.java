@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class QuizController {
+    MediaPlayer player;
 
     private String _term;
 
@@ -33,6 +34,12 @@ public class QuizController {
 
     @FXML
     private void handleBtnBack() throws IOException {
+        if (player != null) {
+            player.stop();
+            player = null;
+        }
+
+        _btnStart.setDisable(false);
         Main.changeScene("resources/Welcome.fxml");
     }
 
@@ -47,7 +54,7 @@ public class QuizController {
         _term = selectedItem;
         File fileUrl = new File(Main.getQuizDir()+"/"+selectedItem+".mp4");
         Media video = new Media(fileUrl.toURI().toString());
-        MediaPlayer player = new MediaPlayer(video);
+        player = new MediaPlayer(video);
         player.setAutoPlay(true);
         MediaView mediaView = new MediaView(player);
         mediaView.setFitWidth(800);
