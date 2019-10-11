@@ -18,10 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -80,12 +79,32 @@ public class HomeController {
     @FXML
     private ToggleButton btnFavourite;
 
-    public void initialize(){
+    public void initialize() {
         updateListTree();
         btnBackward.setVisible(false);
         btnForward.setVisible(false);
         btnMute.setVisible(false);
         btnPause.setVisible(false);
+
+        try {
+            sortFavourites();
+        } catch (FileNotFoundException e) {
+            // do nothing
+        }
+    }
+
+    public void sortFavourites() throws FileNotFoundException {
+
+        String allFavourites = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A").next();
+
+        String[] favouriteArray = allFavourites.split(".mp4 ");
+
+        Arrays.sort(favouriteArray);
+
+        _favouriteList.getItems().clear();
+        for (int i = 1; i < favouriteArray.length; i++) {
+            _favouriteList.getItems().add(favouriteArray[i]);
+        }
     }
 
     @FXML
@@ -198,7 +217,7 @@ public class HomeController {
     }
 
     @FXML
-    public void handleBtnFavourite() throws IOException {
+    public void handleBtnFavourite() throws IOException, InterruptedException {
         if (_selectedItem == null) {
             alertNullSelection();
         }
@@ -206,21 +225,28 @@ public class HomeController {
             _favouriteList.getItems().add(_selectedItem);
 
 
-
         } else {
             _favouriteList.getItems().remove(_selectedItem);
         }
 
-        String listOfFavourites = "";
+        String listOfFavourites = new String();
 
         for (int i = 0; i < _favouriteList.getItems().size(); i++) {
             listOfFavourites += _favouriteList.getItems().get(i) + ".mp4 ";
         }
 
-        String cmd = "echo '" + listOfFavourites + "' > " + Main.getCreationDir() + "/favourites.txt";
+        String cmd = "echo -e '" + listOfFavourites + "' > " + Main.getFavouriteDir() + "/favourites.txt";
 
         ProcessBuilder getFavouritespb = new ProcessBuilder("bash", "-c", cmd);
         Process getFavouritesprocess = getFavouritespb.start();
+        getFavouritesprocess.waitFor();
+
+        try {
+            sortFavourites();
+        }
+        catch (FileNotFoundException e) {
+            // do nothing
+        }
     }
 
     /**
@@ -266,7 +292,7 @@ public class HomeController {
             btnFavourite.setSelected(false);
         }
 
-    //System.out.println(_selectedItem);
+        //System.out.println(_selectedItem);
     }
 
     /**
