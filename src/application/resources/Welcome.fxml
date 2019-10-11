@@ -33,6 +33,6 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <ToggleButton layoutX="474.0" layoutY="24.0" mnemonicParsing="false" text="Music: ON" />
+      <ToggleButton fx:id="music" layoutX="474.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
    </children>
 </AnchorPane>
