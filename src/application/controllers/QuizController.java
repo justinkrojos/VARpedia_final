@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -17,7 +18,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class QuizController {
+
     MediaPlayer player;
+    MediaPlayer bgmusic;
 
     private String _term;
 
@@ -26,6 +29,9 @@ public class QuizController {
 
     @FXML
     private TextField _answerField;
+
+    @FXML
+    private ToggleButton music;
 
     private Quiz _quiz = new Quiz();
 
@@ -105,5 +111,22 @@ public class QuizController {
             alert.showAndWait();
         }
 
+    }
+
+    @FXML
+    public void handleMusic() {
+
+        if (music.isSelected()) {
+            music.setText("Music: OFF");
+            bgmusic.pause();
+        }
+        else {
+            music.setText("Music: ON");
+            bgmusic.play();
+        }
+    }
+
+    public void transferMusic(MediaPlayer bgmusic) {
+        this.bgmusic = bgmusic;
     }
 }

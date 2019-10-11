@@ -18,17 +18,21 @@ public class WelcomeController {
     @FXML
     ToggleButton music = new ToggleButton();
 
-    MediaPlayer player;
+    MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/src/bgmusic.wav").toURI().toString()));
+
+    FXMLLoader loader;
 
     public void initialize() {
 
-        player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/src/bgmusic.wav").toURI().toString()));
-        player.play();
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+            player.play();
+
 
     }
 
     @FXML
     public void handleMusic() {
+
         if (music.isSelected()) {
             music.setText("Music: OFF");
             player.pause();
@@ -41,12 +45,14 @@ public class WelcomeController {
 
     @FXML
     private void handleBtnQuiz() throws IOException {
-        Main.changeScene("resources/Quiz.fxml");
+        loader = Main.changeScene("resources/Quiz.fxml");
+        QuizController quizController = loader.<QuizController>getController();
+        quizController.transferMusic(player);
     }
 
     @FXML
     private void handleBtnPlay() throws IOException {
-        Main.changeScene("resources/Home.fxml");
+        loader = Main.changeScene("resources/Home.fxml");
     }
 
     /**

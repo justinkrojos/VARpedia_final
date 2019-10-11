@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -51,13 +53,14 @@ public class Main extends Application {
      * @param fxml
      * @throws IOException
      */
-    public static void changeScene(String fxml) throws IOException {
+    public static FXMLLoader changeScene(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource(fxml));
         Parent layout = loader.load();
         Scene scene = new Scene(layout);
         _primaryStage.setScene(scene);
         _primaryStage.show();
+        return loader;
     }
 
 
@@ -154,7 +157,7 @@ public class Main extends Application {
                 Process mkdirP = mkdirpb.start();
             }*/
 
-createDirectory(getFavouriteDir());
+            createDirectory(getFavouriteDir());
             createDirectory(getCreationDir());
             createDirectory(getQuizDir());
 
