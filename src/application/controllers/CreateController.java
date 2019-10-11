@@ -290,8 +290,12 @@ public class CreateController {
         }*/
 
         String creationName = _creationNameField.getText();
+        String term = _termField.getText();
         MergeTask task = new MergeTask(creationName);
         team.submit(task);
+
+        QuizTask quizTask = new QuizTask(term, creationName);
+        team.submit(quizTask);
 
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
