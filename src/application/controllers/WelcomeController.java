@@ -5,13 +5,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class WelcomeController {
 
     public void initialize() {
+
+        MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/src/bgmusic.wav").toURI().toString()));
+        player.play();
 
     }
 
