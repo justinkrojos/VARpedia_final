@@ -11,6 +11,11 @@ public class QuizTask extends Task<Void> {
         _creationName = creation;
     }
 
+    /**
+     * Merge video without the term with audio.
+     * @return
+     * @throws Exception
+     */
     @Override
     protected Void call() throws Exception {
         String command = "ffmpeg -y -i "+Main.getCreationDir()+"/"+_creationName+"/"+"video.mp4 -i "+Main.getCreationDir()+"/"+_creationName+"/"+_creationName+".wav -r 25 " + Main.getQuizDir()+"/"+_term+".mp4";
