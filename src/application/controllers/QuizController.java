@@ -23,8 +23,6 @@ public class QuizController {
     MediaPlayer player;
     MediaPlayer bgmusic;
 
-    FXMLLoader loader;
-
     private String _term;
 
     @FXML
@@ -49,7 +47,7 @@ public class QuizController {
         }
 
         _btnStart.setDisable(false);
-        loader = Main.changeScene("resources/Welcome.fxml");
+        FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
@@ -119,7 +117,7 @@ public class QuizController {
     }
 
     @FXML
-    public void handleMusic() {
+    private void handleMusic() {
 
         if (music.isSelected()) {
             music.setText("Music: OFF");

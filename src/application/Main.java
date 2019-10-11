@@ -40,7 +40,7 @@ public class Main extends Application {
         loader.setLocation(this.getClass().getResource("resources/Welcome.fxml"));
 
         Parent layout = loader.load();
-        
+
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMediaPlayer(player);
         player.play();

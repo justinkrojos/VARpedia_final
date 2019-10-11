@@ -79,6 +79,11 @@ public class HomeController {
     @FXML
     private ToggleButton btnFavourite;
 
+    @FXML
+    private ToggleButton music;
+
+    private MediaPlayer bgmusic;
+
     public void initialize() {
         updateListTree();
         btnBackward.setVisible(false);
@@ -109,7 +114,9 @@ public class HomeController {
 
     @FXML
     private void handleBtnBack() throws IOException {
-        Main.changeScene("resources/Welcome.fxml");
+        FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
+        WelcomeController welcomeController = loader.<WelcomeController>getController();
+        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
 
     /**
@@ -304,6 +311,24 @@ public class HomeController {
         alert.setHeaderText("No item has been selected.");
         alert.setContentText("Pease select a creation");
         alert.showAndWait();
+    }
+
+    @FXML
+    private void handleMusic() {
+        if (music.isSelected()) {
+            music.setText("Music: OFF");
+            bgmusic.pause();
+        }
+        else {
+            music.setText("Music: ON");
+            bgmusic.play();
+        }
+    }
+
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
+        this.bgmusic = bgmusic;
+        music.setSelected(toggle);
+        music.setText(text);
     }
 
 }

@@ -48,6 +48,8 @@ public class WelcomeController {
     @FXML
     private void handleBtnPlay() throws IOException {
         loader = Main.changeScene("resources/Home.fxml");
+        HomeController homeController = loader.<HomeController>getController();
+        homeController.transferMusic(player, music.isSelected(), music.getText());
     }
 
     /**
