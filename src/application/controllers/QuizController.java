@@ -3,6 +3,7 @@ package application.controllers;
 import application.Main;
 import application.Quiz;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -21,6 +22,8 @@ public class QuizController {
 
     MediaPlayer player;
     MediaPlayer bgmusic;
+
+    FXMLLoader loader;
 
     private String _term;
 
@@ -46,7 +49,9 @@ public class QuizController {
         }
 
         _btnStart.setDisable(false);
-        Main.changeScene("resources/Welcome.fxml");
+        loader = Main.changeScene("resources/Welcome.fxml");
+        WelcomeController welcomeController = loader.<WelcomeController>getController();
+        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
 
 
@@ -126,7 +131,9 @@ public class QuizController {
         }
     }
 
-    public void transferMusic(MediaPlayer bgmusic) {
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
         this.bgmusic = bgmusic;
+        music.setSelected(toggle);
+        music.setText(text);
     }
 }

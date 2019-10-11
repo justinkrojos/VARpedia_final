@@ -1,6 +1,7 @@
 package application;
 
 import application.controllers.CreateController;
+import application.controllers.WelcomeController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -26,15 +27,24 @@ public class Main extends Application {
 
     private static Stage _primaryStage;
 
+
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         //System.out.println(this.getClass().getResource("resources/Home.fxml"));
 
+        MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/bgmusic.wav").toURI().toString()));
         _primaryStage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("resources/Welcome.fxml"));
+
         Parent layout = loader.load();
+        
+        WelcomeController welcomeController = loader.<WelcomeController>getController();
+        welcomeController.transferMediaPlayer(player);
+        player.play();
+
         Scene scene = new Scene(layout);
         primaryStage.setScene(scene);
         primaryStage.show();

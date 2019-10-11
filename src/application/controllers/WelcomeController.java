@@ -18,16 +18,11 @@ public class WelcomeController {
     @FXML
     ToggleButton music = new ToggleButton();
 
-    MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/src/bgmusic.wav").toURI().toString()));
+    MediaPlayer player;
 
     FXMLLoader loader;
 
     public void initialize() {
-
-        player.setCycleCount(MediaPlayer.INDEFINITE);
-            player.play();
-
-
     }
 
     @FXML
@@ -47,7 +42,7 @@ public class WelcomeController {
     private void handleBtnQuiz() throws IOException {
         loader = Main.changeScene("resources/Quiz.fxml");
         QuizController quizController = loader.<QuizController>getController();
-        quizController.transferMusic(player);
+        quizController.transferMusic(player, music.isSelected(), music.getText());
     }
 
     @FXML
@@ -71,5 +66,15 @@ public class WelcomeController {
         //controller.setUp(creationStage, this);
         creationStage.setScene(scene);
         creationStage.show();
+    }
+
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
+        player = bgmusic;
+        music.setSelected(toggle);
+        music.setText(text);
+    }
+
+    public void transferMediaPlayer(MediaPlayer bgmusic) {
+        player = bgmusic;
     }
 }
