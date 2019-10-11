@@ -11,6 +11,15 @@ import java.io.IOException;
 
 public class WelcomeController {
 
+    public void initialize() {
+
+    }
+
+    @FXML
+    private void handleBtnQuiz() throws IOException {
+        Main.changeScene("resources/Quiz.fxml");
+    }
+
     @FXML
     private void handleBtnPlay() throws IOException {
         Main.changeScene("resources/Home.fxml");

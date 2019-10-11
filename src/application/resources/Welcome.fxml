@@ -22,7 +22,7 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Button layoutX="76.0" layoutY="244.0" mnemonicParsing="false" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Quiz">
+      <Button layoutX="76.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleBtnQuiz" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Quiz">
          <font>
             <Font size="24.0" />
          </font>
