@@ -88,6 +88,7 @@ public class HomeController {
     @FXML
     private Pane startUp;
 
+
     private MediaPlayer bgmusic;
 
     private MediaPlayer player;
@@ -109,6 +110,12 @@ public class HomeController {
                     selectItem();
                     startUp.setVisible(false);
                 }
+                if (btnFavourite.isSelected()) {
+                    btnFavourite.setText("U N\nF A V O U R I T E");
+                }
+                else {
+                    btnFavourite.setText("F A V O U R I T E");
+                }
 
             }
         });
@@ -120,6 +127,12 @@ public class HomeController {
                     buttonPane.setVisible(true);
                     selectItem();
                     startUp.setVisible(false);
+                }
+                if (btnFavourite.isSelected()) {
+                    btnFavourite.setText("U N\nF A V O U R I T E");
+                }
+                else {
+                    btnFavourite.setText("F A V O U R I T E");
                 }
 
             }
@@ -272,10 +285,12 @@ public class HomeController {
         }
         else if (btnFavourite.isSelected()) {
             _favouriteList.getItems().add(_selectedItem);
+            btnFavourite.setText("U N\nF A V O U R I T E");
 
 
         } else {
             _favouriteList.getItems().remove(_selectedItem);
+            btnFavourite.setText("F A V O U R I T E");
         }
 
         String listOfFavourites = new String();
@@ -351,7 +366,7 @@ public class HomeController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Please Select A Creation");
         alert.setHeaderText("No item has been selected.");
-        alert.setContentText("Pease select a creation");
+        alert.setContentText("Please select a creation");
         alert.showAndWait();
     }
 

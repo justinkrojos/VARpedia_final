@@ -61,32 +61,27 @@
        <ToggleButton fx:id="music" layoutX="814.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
       <Pane fx:id="buttonPane" layoutX="386.0" layoutY="124.0" prefHeight="479.0" prefWidth="512.0" visible="false">
          <children>
-            <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="479.0" prefWidth="241.0" style="-fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20; -fx-border-color: black;">
+            <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="479.0" prefWidth="241.0" style="-fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20; -fx-border-color: black;" text="P L A Y">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <font>
+                  <Font name="Manjari Thin" size="53.0" />
+               </font>
             </Button>
-            <Text layoutX="34.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAY IT">
+            <Button fx:id="btnDel" layoutX="271.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="221.0" prefWidth="241.0" style="-fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20; -fx-border-color: black;" text="D E L E T E">
                <font>
-                  <Font name="Manjari Thin" size="52.0" />
-               </font>
-            </Text>
-            <Button fx:id="btnDel" layoutX="271.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="221.0" prefWidth="241.0" style="-fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20; -fx-border-color: black;" />
-            <ToggleButton fx:id="btnFavourite" layoutX="271.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleBtnFavourite" prefHeight="233.0" prefWidth="241.0" style="-fx-background-radius: 20 20 20 20; -fx-border-color: black; -fx-border-radius: 20 20 20 20;" />
-            <Text layoutX="303.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DELETE IT" wrappingWidth="176.642578125">
+                  <Font name="Manjari Thin" size="34.0" />
+               </font></Button>
+            <ToggleButton fx:id="btnFavourite" layoutX="271.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleBtnFavourite" prefHeight="233.0" prefWidth="241.0" style="-fx-background-radius: 20 20 20 20; -fx-border-color: black; -fx-border-radius: 20 20 20 20;" text="F A V O U R I T E" wrapText="true">
                <font>
-                  <Font name="Manjari Thin" size="39.0" />
-               </font>
-            </Text>
-            <Text layoutX="290.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAVOURITE IT" wrappingWidth="206.642578125">
-               <font>
-                  <Font name="Manjari Thin" size="33.0" />
-               </font>
-            </Text>
+                  <Font name="Manjari Thin" size="24.0" />
+               </font></ToggleButton>
+
          </children>
       </Pane>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Pane fx:id="startUp" visible="false" layoutX="431.0" layoutY="205.0" opacity="0.93" prefHeight="287.0" prefWidth="419.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);">
+      <Pane fx:id="startUp" layoutX="431.0" layoutY="205.0" opacity="0.93" prefHeight="287.0" prefWidth="419.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" visible="false">
          <children>
             <Text layoutX="73.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C L I C K  a">
                <font>
