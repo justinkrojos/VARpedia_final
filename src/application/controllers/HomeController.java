@@ -82,6 +82,9 @@ public class HomeController {
     @FXML
     private ToggleButton music;
 
+    @FXML
+    private Pane buttonPane;
+
     private MediaPlayer bgmusic;
 
     public void initialize() {
@@ -90,6 +93,22 @@ public class HomeController {
         btnForward.setVisible(false);
         btnMute.setVisible(false);
         btnPause.setVisible(false);
+
+        _creationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                buttonPane.setVisible(true);
+                selectItem();
+            }
+        });
+
+        _favouriteList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                buttonPane.setVisible(true);
+                selectItem();
+            }
+        });
 
         try {
             sortFavourites();
@@ -124,6 +143,9 @@ public class HomeController {
      */
     @FXML
     private void handleBtnPlay() {
+        buttonPane.setVisible(false);
+        _player.setVisible(true);
+
         _player.getChildren().removeAll();
         _player.getChildren().clear();
         // btnPlay.setDisable(true);
@@ -152,6 +174,8 @@ public class HomeController {
             @Override
             public void run() {
                 _player.getChildren().removeAll();
+                buttonPane.setVisible(true);
+                _player.setVisible(false);
                 // btnPlay.setDisable(false);
                 //mediaView = null;
             }
