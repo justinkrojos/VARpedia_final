@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="1845.0" fitWidth="951.0" layoutX="-3.0" layoutY="-43.0" opacity="0.53" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
-            <Image url="@../../woodtexture.jpg" />
+            <Image url="@woodtexture.jpg" />
          </image>
       </ImageView>
       <Pane fx:id="_player" layoutX="386.0" layoutY="124.0" prefHeight="479.0" prefWidth="512.0" visible="false" />
