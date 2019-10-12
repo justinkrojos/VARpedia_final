@@ -97,16 +97,22 @@ public class HomeController {
         _creationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                buttonPane.setVisible(true);
-                selectItem();
+                if (!_player.isVisible()) {
+                    buttonPane.setVisible(true);
+                    selectItem();
+                }
+
             }
         });
 
         _favouriteList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                buttonPane.setVisible(true);
-                selectItem();
+                if (!_player.isVisible()) {
+                    buttonPane.setVisible(true);
+                    selectItem();
+                }
+
             }
         });
 
@@ -161,8 +167,8 @@ public class HomeController {
         MediaPlayer player = new MediaPlayer(video);
         player.setAutoPlay(true);
         MediaView mediaView = new MediaView(player);
-        mediaView.setFitWidth(800);
-        mediaView.setFitHeight(600);
+        mediaView.setFitWidth(_player.getWidth());
+        mediaView.setFitHeight(_player.getHeight());
         player.setOnReady(new Runnable() {
             @Override
             public void run() {
