@@ -87,6 +87,8 @@ public class HomeController {
 
     private MediaPlayer bgmusic;
 
+    private MediaPlayer player;
+
     public void initialize() {
         updateListTree();
         btnBackward.setVisible(false);
@@ -139,6 +141,9 @@ public class HomeController {
 
     @FXML
     private void handleBtnBack() throws IOException {
+        if (_player.isVisible()) {
+            player.stop();
+        }
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
@@ -164,7 +169,7 @@ public class HomeController {
         //File fileUrl = new File(Main.getCreationDir()+"/"+_selectedItem+"/"+_selectedItem+".mp4");
         File fileUrl = new File(Main.getCreationDir()+"/"+_selectedItem+".mp4");
         Media video = new Media(fileUrl.toURI().toString());
-        MediaPlayer player = new MediaPlayer(video);
+        player = new MediaPlayer(video);
         player.setAutoPlay(true);
         MediaView mediaView = new MediaView(player);
         mediaView.setFitWidth(_player.getWidth());
