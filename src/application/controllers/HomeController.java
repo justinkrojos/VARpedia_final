@@ -85,6 +85,9 @@ public class HomeController {
     @FXML
     private Pane buttonPane;
 
+    @FXML
+    private Pane startUp;
+
     private MediaPlayer bgmusic;
 
     private MediaPlayer player;
@@ -96,12 +99,15 @@ public class HomeController {
         btnMute.setVisible(false);
         btnPause.setVisible(false);
 
+        startUp.setVisible(true);
+
         _creationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (!_player.isVisible()) {
                     buttonPane.setVisible(true);
                     selectItem();
+                    startUp.setVisible(false);
                 }
 
             }
@@ -113,6 +119,7 @@ public class HomeController {
                 if (!_player.isVisible()) {
                     buttonPane.setVisible(true);
                     selectItem();
+                    startUp.setVisible(false);
                 }
 
             }

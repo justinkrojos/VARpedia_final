@@ -20,10 +20,10 @@
             <Image url="@../../woodtexture.jpg" />
          </image>
       </ImageView>
-      <Pane fx:id="_player" visible="false" layoutX="386.0" layoutY="124.0" prefHeight="479.0" prefWidth="512.0" />
-      <Text fx:id="_title" layoutX="-180.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAY A CREATION" textAlignment="CENTER" wrappingWidth="1294.4443359375">
+      <Pane fx:id="_player" layoutX="386.0" layoutY="124.0" prefHeight="479.0" prefWidth="512.0" visible="false" />
+      <Text fx:id="_title" layoutX="-4.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAY A CREATION" textAlignment="CENTER" wrappingWidth="943.4443359375">
          <font>
-            <Font name="Manjari Thin" size="35.0" />
+            <Font name="Manjari Regular" size="35.0" />
          </font></Text>
       <Text fx:id="_creationTitle" layoutX="39.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation LIst">
          <font>
@@ -58,13 +58,8 @@
           </Tab>
         </tabs>
       </TabPane>
-       <ToggleButton fx:id="music" layoutX="813.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
-      <Button layoutX="97.0" layoutY="35.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="50.0" text="?">
-         <font>
-            <Font name="Noto Sans CJK JP Bold" size="15.0" />
-         </font>
-      </Button>
-      <Pane fx:id="buttonPane" visible="false" layoutX="386.0" layoutY="124.0" prefHeight="479.0" prefWidth="512.0">
+       <ToggleButton fx:id="music" layoutX="814.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
+      <Pane fx:id="buttonPane" layoutX="386.0" layoutY="124.0" prefHeight="479.0" prefWidth="512.0" visible="false">
          <children>
             <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="479.0" prefWidth="241.0" style="-fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20; -fx-border-color: black;">
                <opaqueInsets>
@@ -86,6 +81,26 @@
             <Text layoutX="290.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAVOURITE IT" wrappingWidth="206.642578125">
                <font>
                   <Font name="Manjari Thin" size="33.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Pane fx:id="startUp" visible="false" layoutX="431.0" layoutY="205.0" opacity="0.93" prefHeight="287.0" prefWidth="419.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);">
+         <children>
+            <Text layoutX="73.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C L I C K  a">
+               <font>
+                  <Font name="Manjari Thin" size="55.0" />
+               </font>
+            </Text>
+            <Text layoutX="74.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C R E A T I O N">
+               <font>
+                  <Font name="Manjari Regular" size="42.0" />
+               </font>
+            </Text>
+            <Text layoutX="73.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to get started">
+               <font>
+                  <Font name="Manjari Thin" size="45.0" />
                </font>
             </Text>
          </children>
