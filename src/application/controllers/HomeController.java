@@ -94,6 +94,10 @@ public class HomeController {
     private MediaPlayer player;
 
     public void initialize() {
+
+        btnCreate.setVisible(false);
+        btnCreate.setDisable(true);
+
         updateListTree();
         btnBackward.setVisible(false);
         btnForward.setVisible(false);
