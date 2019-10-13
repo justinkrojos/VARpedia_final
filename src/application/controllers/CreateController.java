@@ -87,6 +87,7 @@ public class CreateController {
 
     private Stage _currentStage;
     private HomeController _homeController;
+    private WelcomeController _welcomeController;
 
     @FXML
     private CheckBox step1;
@@ -113,9 +114,10 @@ public class CreateController {
      * @param stage
      * @param homeController
      */
-    public void setUp(Stage stage, HomeController homeController){
+    public void setUp(Stage stage){
         _currentStage = stage;
-        _homeController = homeController;
+        //_welcomeController = welcomeController;
+        //_homeController = homeController;
     }
 
     public void initialize(){
@@ -303,13 +305,13 @@ public class CreateController {
                 btnCreate.setText("Success!");
             }
         });
-        _homeController.updateListTree();
+        //_homeController.updateListTree();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Creation Complete");
         alert.setHeaderText(null);
         alert.setContentText("Creation complete, please refresh list of creations.");
         alert.showAndWait();
-        _homeController.updateListTree();
+        //_homeController.updateListTree();
     }
 
     /**

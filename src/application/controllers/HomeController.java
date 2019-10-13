@@ -264,7 +264,7 @@ public class HomeController {
 
         Scene scene = new Scene(layout);
         Stage creationStage = new Stage();
-        controller.setUp(creationStage, this);
+        controller.setUp(creationStage);
         creationStage.setScene(scene);
         creationStage.show();
     }

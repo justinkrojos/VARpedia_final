@@ -115,11 +115,11 @@ public class WelcomeController {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("resources/Create.fxml"));
         Parent layout = loader.load();
-        //CreateController controller = (CreateController) loader.getController();
+        CreateController controller = (CreateController) loader.getController();
 
         Scene scene = new Scene(layout);
         Stage creationStage = new Stage();
-        //controller.setUp(creationStage, this);
+        controller.setUp(creationStage);
         creationStage.setScene(scene);
         creationStage.show();
     }
