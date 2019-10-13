@@ -58,7 +58,7 @@ public class SelectImageController {
             }
 
 
-            _grid.add(new ImageView((Image) _images.get(0)),1,1);
+            _grid.getChildren().add(new ImageView((Image) _images.get(0)));
         }
 
     }
