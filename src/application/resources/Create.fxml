@@ -99,5 +99,6 @@
       <CheckBox fx:id="step2" disable="true" layoutX="340.0" layoutY="143.0" mnemonicParsing="false" style="-fx-opacity: 1.0;" />
       <CheckBox fx:id="step3" disable="true" layoutX="340.0" layoutY="310.0" mnemonicParsing="false" style="-fx-opacity: 1.0;" />
       <CheckBox fx:id="step4" disable="true" layoutX="340.0" layoutY="555.0" mnemonicParsing="false" style="-fx-opacity: 1.0;" />
+      <Button fx:id="_btnSelectImages" layoutX="47.0" layoutY="680.0" mnemonicParsing="false" onAction="#handleBtnSelectImages" text="Select Images" />
    </children>
 </AnchorPane>

@@ -1,3 +1,4 @@
+/*
 package application;
 
 import javafx.concurrent.Task;
@@ -19,3 +20,4 @@ public class MakeSlideShow extends Task<Void> {
         return null;
     }
 }
+*/
