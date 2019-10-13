@@ -33,7 +33,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         //System.out.println(this.getClass().getResource("resources/Home.fxml"));
 
-        MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/src/application/resources/bgmusic.wav").toURI().toString()));
+        // MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/src/application/resources/bgmusic.wav").toURI().toString()));
+        MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/bgmusic.wav").toURI().toString()));
         _primaryStage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
