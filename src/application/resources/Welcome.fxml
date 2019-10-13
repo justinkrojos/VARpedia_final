@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="507.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.WelcomeController">
+<AnchorPane prefHeight="438.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.WelcomeController">
    <children>
-      <ImageView fitHeight="771.0" fitWidth="753.0" layoutX="-6.0" layoutY="-233.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
+      <ImageView fitHeight="738.0" fitWidth="690.0" layoutY="-252.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
             <Image url="@woodtexture.jpg" />
          </image>
@@ -19,7 +19,7 @@
          <Image fx:id="playImage" url="@playimage.jpg" />
       </fx:define>
 
-      <Button contentDisplay="BOTTOM" layoutX="61.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 30; -fx-background-color: white;" text="WATCH" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="playBtn" contentDisplay="BOTTOM" layoutX="37.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: blue; -fx-border-width: 5;" text="WATCH" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Manjari Thin" size="24.0" />
          </font>
@@ -34,7 +34,7 @@
       <fx:define>
       <Image fx:id="createImage" url="@createimage.jpg" />
    </fx:define>
-      <Button contentDisplay="BOTTOM" layoutX="286.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 30; -fx-background-color: white;" text="CREATE">
+      <Button fx:id="createBtn" contentDisplay="BOTTOM" layoutX="262.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: red; -fx-border-width: 5;" text="CREATE">
          <font>
             <Font name="Manjari Thin" size="24.0" />
          </font>
@@ -49,12 +49,12 @@
       <fx:define>
          <Image fx:id="learnImage" url="@learnimage.jpg" />
       </fx:define>
-      <Text layoutX="158.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VARpedia">
+      <Text layoutX="191.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VARpedia">
          <font>
             <Font name="Manjari Regular" size="70.0" />
          </font>
       </Text>
-      <Button contentDisplay="BOTTOM" layoutX="510.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleBtnQuiz" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 30; -fx-background-color: white;" text="LEARN">
+      <Button fx:id="learnBtn" contentDisplay="BOTTOM" layoutX="486.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleBtnQuiz" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 30; -fx-background-color: white;" text="LEARN">
          <font>
             <Font name="Manjari Thin" size="24.0" />
          </font>
@@ -66,12 +66,11 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="225.0" layoutY="463.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="78.0" text="???" visible="false">
+      <Text layoutX="433.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kids">
          <font>
-            <Font size="24.0" />
+            <Font name="Navilu" size="32.0" />
          </font>
-
-      </Button>
-      <ToggleButton fx:id="music" layoutX="600.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
+      </Text>
+      <ToggleButton fx:id="music" layoutX="576.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
    </children>
 </AnchorPane>

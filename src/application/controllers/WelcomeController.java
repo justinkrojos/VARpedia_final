@@ -1,11 +1,14 @@
 package application.controllers;
 
 import application.Main;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -22,7 +25,58 @@ public class WelcomeController {
 
     FXMLLoader loader;
 
+    @FXML
+    Button playBtn;
+
+    @FXML
+    Button createBtn;
+
+    @FXML
+    Button learnBtn;
+
     public void initialize() {
+
+        playBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                playBtn.setOpacity(0.7);
+            }
+        });
+
+        playBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                playBtn.setOpacity(1.0);
+            }
+        });
+
+        createBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                createBtn.setOpacity(0.7);
+            }
+        });
+
+        createBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                createBtn.setOpacity(1.0);
+            }
+        });
+
+        learnBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                learnBtn.setOpacity(0.7);
+            }
+        });
+
+        learnBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                learnBtn.setOpacity(1.0);
+            }
+        });
     }
 
     @FXML
