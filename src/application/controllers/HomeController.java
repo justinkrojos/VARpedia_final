@@ -88,6 +88,9 @@ public class HomeController {
     @FXML
     private Pane startUp;
 
+    @FXML
+    private Button homeHelpBtn;
+
 
     private MediaPlayer bgmusic;
 
@@ -390,6 +393,17 @@ public class HomeController {
         this.bgmusic = bgmusic;
         music.setSelected(toggle);
         music.setText(text);
+    }
+
+    @FXML
+    private void handleHomeHelp() {
+        if (_player.isVisible()) {
+            player.stop();
+        }
+        buttonPane.setVisible(false);
+        _player.setVisible(false);
+        startUp.setVisible(true);
+
     }
 
 }
