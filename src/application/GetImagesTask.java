@@ -132,10 +132,10 @@ public class GetImagesTask extends Task<Void> {
 
             Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
             String query = _term;
-            int resultsPerPage = _numImages;
+            int resultsPerPage = 10;
             int page = 0;
 
-
+            new File(Main.getCreationDir()+"/"+_creationName+"/"+"images").mkdirs();
 
             PhotosInterface photos = flickr.getPhotosInterface();
             SearchParameters params = new SearchParameters();
@@ -151,7 +151,7 @@ public class GetImagesTask extends Task<Void> {
                     BufferedImage image = photos.getImage(photo, Size.LARGE);
                     //String filename = query.trim().replace(' ', '-')+"-"+System.currentTimeMillis()+"-"+photo.getId()+".jpg";
                     String filename = "image"+count+".jpg";
-                    File outputfile = new File(Main.getCreationDir()+"/"+_creationName,filename);
+                    File outputfile = new File(Main.getCreationDir()+"/"+_creationName+"/"+"images",filename);
                     ImageIO.write(image, "jpg", outputfile);
                     //System.out.println("Downloaded "+filename);
                     count++;

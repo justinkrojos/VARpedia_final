@@ -8,7 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -29,6 +32,9 @@ import java.util.concurrent.Executors;
 public class CreateController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();
+
+    @FXML
+    private Button _btnSelectImages;
 
     @FXML
     private AnchorPane _ap;
@@ -101,6 +107,9 @@ public class CreateController {
     @FXML
     private CheckBox step4;
 
+
+
+
     /**
      * Check if creation name is taken, and if so let the user pick if they want to overwrite
      */
@@ -125,6 +134,48 @@ public class CreateController {
         btnCreate.setDisable(true);
 
         // _currentStage = (Stage) _ap.getScene().getWindow();
+    }
+
+
+    @FXML
+    private void handleBtnSelectImages() throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("resources/SelectImage.fxml"));
+        Parent layout = null;
+        try {
+            layout = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SelectImageController controller = loader.getController();
+        Scene scene = new Scene(layout);
+        Stage imageStage = new Stage();
+        controller.setUp(_creationNameField.getText(),_termField.getText(), this, imageStage);
+        imageStage.setScene(scene);
+        imageStage.show();
+
+/*        DownloadImages dl = new DownloadImages(_creationNameField.getText(), _termField.getText());
+        team.submit(dl);
+        dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("resources/SelectImage.fxml"));
+                Parent layout = null;
+                try {
+                    layout = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                SelectImageController controller = loader.getController();
+                controller.setUp(_creationNameField.getText(),_termField.getText());
+                Scene scene = new Scene(layout);
+                Stage imageStage = new Stage();
+                imageStage.setScene(scene);
+                imageStage.show();
+            }
+        });*/
+
     }
 
     /**
@@ -270,6 +321,7 @@ public class CreateController {
         int numImages = Integer.parseInt(_numImageField.getText());
         String creationName = _creationNameField.getText();
         getImages(term,creationName,numImages);
+
         _numImageField.setDisable(true);
         btnImage.setDisable(true);
 
@@ -321,7 +373,8 @@ public class CreateController {
      * @param numImages
      */
     private void getImages(String term, String creationName, int numImages) {
-        GetImagesTask task = new GetImagesTask(term, creationName, numImages);
+        //GetImagesTask task = new GetImagesTask(term, creationName, numImages);
+        MakeSlideShow task = new MakeSlideShow(term, creationName);
         team.submit(task);
         _currentStage.close();
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {

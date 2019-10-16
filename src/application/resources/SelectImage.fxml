@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SelectImageController">
+   <children>
+      <Text layoutX="69.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SelectImage" />
+      <Button layoutX="37.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleBtnSubmit" text="Submit" />
+      <CheckBox fx:id="_cb0" layoutX="29.0" layoutY="102.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv0" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb1" layoutX="309.0" layoutY="102.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb3" layoutX="37.0" layoutY="252.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb4" layoutX="309.0" layoutY="252.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb2" layoutX="627.0" layoutY="126.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb5" layoutX="645.0" layoutY="268.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb6" layoutX="37.0" layoutY="360.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb7" layoutX="309.0" layoutY="374.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv7" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb8" layoutX="659.0" layoutY="394.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv8" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <CheckBox fx:id="_cb9" layoutX="418.0" layoutY="524.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+         <graphic>
+            <ImageView fx:id="_iv9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </CheckBox>
+      <Button fx:id="_btnDownload" layoutX="230.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleBtnDownload" text="Download" />
+   </children>
+</AnchorPane>
