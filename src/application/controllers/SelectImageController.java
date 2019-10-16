@@ -10,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -57,7 +58,7 @@ public class SelectImageController {
     @FXML private CheckBox _cb9;
 
     private ArrayList<ImageView> _imageViews;
-    private ArrayList<CheckBox> _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
+    private ArrayList<CheckBox> _checkBoxs;
 
     private List<Image> _images = new ArrayList<Image>();
 
@@ -69,8 +70,11 @@ public class SelectImageController {
     private static File dir;
 
     private CreateController _createController;
+    private SelectImageController _selectImageController;
+    private Stage _imageStage;
 
-    public void setUp(String creationName, String term, CreateController createController) {
+    public void setUp(String creationName, String term, CreateController createController, Stage imageStage) {
+        _imageStage = imageStage;
         _createController = createController;
         _creationName = creationName;
         _term = term;
@@ -106,14 +110,32 @@ public class SelectImageController {
     }
 
     @FXML
-    private void handleBtnSubmit() {
+    private void handleBtnSubmit() throws IOException, InterruptedException {
+
+        int count = 0;
+        for (CheckBox c: _checkBoxs) {
+            String path = Main.getCreationDir()+"/"+_creationName+"/"+"images/";
+            String newPath = Main.getCreationDir()+"/"+_creationName+"/";
+            if (c.isSelected()) {
+                path += "image" + count + ".jpg";
+                newPath += "image" + count + ".jpg";
+                String cmd = "cp " + path + " " + newPath;
+                ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+                Process p = pb.start();
+                p.waitFor();
+                //System.out.println(cmd);
+
+            }
+            count++;
+        }
+        _imageStage.close();
 
     }
 
 
     public void initialize() {
         _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
-
+        _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
 
     }
 }
