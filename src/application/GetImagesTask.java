@@ -132,7 +132,7 @@ public class GetImagesTask extends Task<Void> {
 
             Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
             String query = _term;
-            int resultsPerPage = 12;
+            int resultsPerPage = 10;
             int page = 0;
 
             new File(Main.getCreationDir()+"/"+_creationName+"/"+"images").mkdirs();

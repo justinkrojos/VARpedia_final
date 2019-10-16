@@ -5,6 +5,7 @@ import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.photos.*;
 import javafx.concurrent.Task;
+import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -12,15 +13,23 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DownloadImages extends Task<Void> {
 
     private String _creationName;
     private String _term;
 
+    private List<Image> _images = new ArrayList<Image>();
+
     public DownloadImages(String creationName, String term) {
         _creationName = creationName;
         _term = term;
+    }
+
+    public List<Image> getImages() {
+        return _images;
     }
 
     @Override
@@ -47,7 +56,7 @@ public class DownloadImages extends Task<Void> {
 
             Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
             String query = _term;
-            int resultsPerPage = 12;
+            int resultsPerPage = 10;
             int page = 0;
 
             new File(Main.getCreationDir()+"/"+_creationName+"/"+"images").mkdirs();
@@ -69,6 +78,8 @@ public class DownloadImages extends Task<Void> {
                     File outputfile = new File(Main.getCreationDir()+"/"+_creationName+"/"+"images",filename);
                     ImageIO.write(image, "jpg", outputfile);
                     //System.out.println("Downloaded "+filename);
+
+                    _images.add(new Image(Main.getCreationDir()+"/"+_creationName+"/"+"images/"+filename,50,50,false,false));
                     count++;
                 } catch (FlickrException | IOException fe) {
                     // System.err.println("Ignoring image " +photo.getId() +": "+ fe.getMessage());

@@ -2,7 +2,10 @@ package application.controllers;
 
 import application.DownloadImages;
 import application.Main;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -10,56 +13,80 @@ import javafx.scene.layout.GridPane;
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SelectImageController {
+
+    private ExecutorService team = Executors.newSingleThreadExecutor();
     private static String _creationName;
+    private static String _term;
 
-    private static final File dir = new File(Main.getCreationDir()+"/"+_creationName+"/"+"images");
+    @FXML private ImageView _iv0;
+    @FXML private ImageView _iv1;
+    @FXML private ImageView _iv2;
+    @FXML private ImageView _iv3;
+    @FXML private ImageView _iv4;
+    @FXML private ImageView _iv5;
+    @FXML private ImageView _iv6;
+    @FXML private ImageView _iv7;
+    @FXML private ImageView _iv8;
+    @FXML private ImageView _iv9;
 
-    private static final FilenameFilter _imageNameFiler = new FilenameFilter() {
-        @Override
-        public boolean accept(final File dir, final String name) {
+    @FXML private CheckBox _cb0;
+    @FXML private CheckBox _cb1;
+    @FXML private CheckBox _cb2;
+    @FXML private CheckBox _cb3;
+    @FXML private CheckBox _cb4;
+    @FXML private CheckBox _cb5;
+    @FXML private CheckBox _cb6;
+    @FXML private CheckBox _cb7;
+    @FXML private CheckBox _cb8;
+    @FXML private CheckBox _cb9;
 
-            if (name.endsWith(".jpg")) {
-                return (true);
-            }
-            return false;
-        }
+    private ArrayList<ImageView> _imageViews =  new ArrayList<ImageView>(Arrays.asList());
+    private ArrayList<CheckBox> _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList());
 
-    };
-
-    @FXML
-    private GridPane _grid;
-
-    private List _images = new ArrayList<Image>();
+    private List<Image> _images = new ArrayList<Image>();
 
     private final int _numRows = 2;
     private final int _numCols = 5;
 
-    public void setUp(String creationName) {
+    private List<Image> _image;
+
+    private static File dir;
+
+    public void setUp(String creationName, String term) {
         _creationName = creationName;
+        _term = term;
     }
 
     public void initialize() {
-        int i = 0;
 
-        if (dir.isDirectory()) {
-            for (final File f : dir.listFiles(_imageNameFiler)) {
-                Image img = null;
-                System.out.println(f.getAbsolutePath());
-                img = new Image(f.getAbsolutePath());
-                _images.add(img);
+        //dir = new File(Main.getCreationDir()+"/"+_creationName+"/"+"images/");
+        System.out.println(_creationName);
+
+        DownloadImages dl = new DownloadImages(_creationName,_term);
+        team.submit(dl);
+        dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                File[] files = dir.listFiles();
+                for (File file: files) {
+                    //_images.add();
+                    System.out.println(file.getAbsolutePath());
+                }
 
             }
+        });
 
-
-            _grid.getChildren().add(new ImageView((Image) _images.get(0)));
-        }
 
     }
 }

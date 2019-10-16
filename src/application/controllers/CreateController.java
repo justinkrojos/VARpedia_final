@@ -154,7 +154,7 @@ public class CreateController {
                     e.printStackTrace();
                 }
                 SelectImageController controller = loader.getController();
-                controller.setUp(_creationNameField.getText());
+                controller.setUp(_creationNameField.getText(),_termField.getText());
                 Scene scene = new Scene(layout);
                 Stage imageStage = new Stage();
                 imageStage.setScene(scene);
