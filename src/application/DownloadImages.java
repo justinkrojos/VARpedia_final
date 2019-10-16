@@ -79,7 +79,7 @@ public class DownloadImages extends Task<Void> {
                     ImageIO.write(image, "jpg", outputfile);
                     //System.out.println("Downloaded "+filename);
 
-                    _images.add(new Image(Main.getCreationDir()+"/"+_creationName+"/"+"images/"+filename,50,50,false,false));
+                    //_images.add(new Image(Main.getCreationDir()+"/"+_creationName+"/"+"images/"+filename,50,50,false,false));
                     count++;
                 } catch (FlickrException | IOException fe) {
                     // System.err.println("Ignoring image " +photo.getId() +": "+ fe.getMessage());

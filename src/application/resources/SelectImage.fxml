@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SelectImageController">
    <children>
       <Text layoutX="69.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SelectImage" />
-      <Button layoutX="37.0" layoutY="640.0" mnemonicParsing="false" text="Submit" />
+      <Button layoutX="37.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleBtnSubmit" text="Submit" />
       <CheckBox fx:id="_cb0" layoutX="29.0" layoutY="102.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
          <graphic>
             <ImageView fx:id="_iv0" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
@@ -60,5 +60,6 @@
             <ImageView fx:id="_iv9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </CheckBox>
+      <Button fx:id="_btnDownload" layoutX="230.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleBtnDownload" text="Download" />
    </children>
 </AnchorPane>

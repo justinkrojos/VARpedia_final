@@ -139,8 +139,22 @@ public class CreateController {
 
     @FXML
     private void handleBtnSelectImages() throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("resources/SelectImage.fxml"));
+        Parent layout = null;
+        try {
+            layout = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SelectImageController controller = loader.getController();
+        controller.setUp(_creationNameField.getText(),_termField.getText(), this);
+        Scene scene = new Scene(layout);
+        Stage imageStage = new Stage();
+        imageStage.setScene(scene);
+        imageStage.show();
 
-        DownloadImages dl = new DownloadImages(_creationNameField.getText(), _termField.getText());
+/*        DownloadImages dl = new DownloadImages(_creationNameField.getText(), _termField.getText());
         team.submit(dl);
         dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
@@ -160,7 +174,7 @@ public class CreateController {
                 imageStage.setScene(scene);
                 imageStage.show();
             }
-        });
+        });*/
 
     }
 
