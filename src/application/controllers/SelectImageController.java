@@ -97,9 +97,8 @@ public class SelectImageController {
                     _images.add(new Image(file.toURI().toString()));
                 }
                 int count = 0;
-
                 for (ImageView i: _imageViews) {
-                    System.out.println(_images.get(count));;
+                    System.out.println(_images.get(count));
                     i.setImage(_images.get(count));
 
                     count++;
@@ -113,18 +112,19 @@ public class SelectImageController {
     private void handleBtnSubmit() throws IOException, InterruptedException {
 
         int count = 0;
+        int imageNum = 0;
         for (CheckBox c: _checkBoxs) {
             String path = Main.getCreationDir()+"/"+_creationName+"/"+"images/";
             String newPath = Main.getCreationDir()+"/"+_creationName+"/";
             if (c.isSelected()) {
                 path += "image" + count + ".jpg";
-                newPath += "image" + count + ".jpg";
+                newPath += "image" + imageNum + ".jpg";
                 String cmd = "cp " + path + " " + newPath;
                 ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
                 Process p = pb.start();
                 p.waitFor();
                 //System.out.println(cmd);
-
+                imageNum++;
             }
             count++;
         }

@@ -321,6 +321,7 @@ public class CreateController {
         int numImages = Integer.parseInt(_numImageField.getText());
         String creationName = _creationNameField.getText();
         getImages(term,creationName,numImages);
+
         _numImageField.setDisable(true);
         btnImage.setDisable(true);
 
@@ -372,7 +373,8 @@ public class CreateController {
      * @param numImages
      */
     private void getImages(String term, String creationName, int numImages) {
-        GetImagesTask task = new GetImagesTask(term, creationName, numImages);
+        //GetImagesTask task = new GetImagesTask(term, creationName, numImages);
+        MakeSlideShow task = new MakeSlideShow(term, creationName);
         team.submit(task);
         _currentStage.close();
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
