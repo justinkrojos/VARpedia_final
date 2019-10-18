@@ -4,6 +4,7 @@ import application.*;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -73,6 +74,8 @@ public class SelectImageController {
    // private List<Image> _image;
 
     private static File dir;
+
+    FXMLLoader loader;
 
     @FXML
     private void handleBtnDownload() {
@@ -188,12 +191,20 @@ public class SelectImageController {
                     @Override
                     public void handle(WorkerStateEvent workerStateEvent) {
 
+
+
                         System.out.println("REACHED");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Creation Complete");
                         alert.setHeaderText(null);
                         alert.setContentText("Creation complete, please refresh list of creations.");
                         alert.showAndWait();
+
+                        try {
+                            loader = Main.changeScene("resources/Welcome.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 });
