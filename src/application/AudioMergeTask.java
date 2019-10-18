@@ -30,7 +30,7 @@ public class AudioMergeTask extends Task<Void> {
 
             cmd = cmd + " '" + Main.getCreationDir() + "/" + term + "/" + term + ".wav'";
 
-
+System.out.println(cmd);
 
         ProcessBuilder playFullAudiopb = new ProcessBuilder("bash", "-c", cmd);
         playAudioProcess = playFullAudiopb.start();

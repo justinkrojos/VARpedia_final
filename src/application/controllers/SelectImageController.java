@@ -166,9 +166,11 @@ public class SelectImageController {
             count++;
         }
 
-        Voices voice = Voices.Default;
         CreateAudioTask audioTask = new CreateAudioTask(creationName.getText(), savedText);
         team.submit(audioTask);
+
+        AudioMergeTask audioMergeTask = new AudioMergeTask(creationName.getText(), savedText.length);
+        team.submit(audioMergeTask);
 
         MakeSlideShow task = new MakeSlideShow(_term, creationName.getText());
         team.submit(task);

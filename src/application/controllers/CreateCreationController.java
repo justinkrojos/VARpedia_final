@@ -218,15 +218,15 @@ public class CreateCreationController {
     /**
      * Previews the entire audio queue.
      */
-
+/*
     @FXML
     public void handlePreviewBtn() {
 
         btnPreviewAudio.setDisable(true);
         btnStopAudio.setDisable(false);
 
-        AudioMergeTask audioMergeTask = new AudioMergeTask(_creationNameField.getText(), _audioList, btnPreviewAudio.isDisabled());
-        team.submit(audioMergeTask);
+        //AudioMergeTask audioMergeTask = new AudioMergeTask(_creationNameField.getText(), _audioList, btnPreviewAudio.isDisabled());
+        //team.submit(audioMergeTask);
 
         audioMergeTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
@@ -261,6 +261,7 @@ public class CreateCreationController {
     /**
      * Saves the audio queue into a wav file.
      */
+/*
     @FXML
     public void handleSaveFinalAudioBtn() {
         AudioMergeTask audioMergeTask = new AudioMergeTask(_creationNameField.getText(), _audioList, btnPreviewAudio.isDisabled());
@@ -268,7 +269,7 @@ public class CreateCreationController {
         btnSaveAudioFile.setText("Save and Overwrite");
         step3.setSelected(true);
     }
-
+*/
     /**
      * Method to get Voice object based on choicebox.
      * @param voiceCode

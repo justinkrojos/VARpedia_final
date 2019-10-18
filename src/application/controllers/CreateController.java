@@ -590,7 +590,7 @@ public class CreateController {
     /**
      * Previews the entire audio queue.
      */
-
+/*
     @FXML
     public void handlePreviewBtn() {
 
@@ -629,10 +629,11 @@ public class CreateController {
         });
 
     }
-
+*/
     /**
      * Saves the audio queue into a wav file.
      */
+    /*
     @FXML
     public void handleSaveFinalAudioBtn() {
         AudioMergeTask audioMergeTask = new AudioMergeTask(_creationNameField.getText(), _audioList, btnPreviewAudio.isDisabled());
@@ -640,12 +641,13 @@ public class CreateController {
         btnSaveAudioFile.setText("Save and Overwrite");
         step3.setSelected(true);
     }
-
+*/
     /**
      * Method to get Voice object based on choicebox.
      * @param voiceCode
      * @return
      */
+
 
     public Voices getVoicesObject(String voiceCode) {
         if (voiceCode.equals("Default")) {
