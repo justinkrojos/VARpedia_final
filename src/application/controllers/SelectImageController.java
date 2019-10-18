@@ -1,12 +1,10 @@
 package application.controllers;
 
-import application.DownloadImages;
-import application.Main;
+import application.*;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -23,6 +21,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,9 +30,13 @@ public class SelectImageController {
     private ExecutorService team = Executors.newSingleThreadExecutor();
     private static String _creationName;
     private static String _term;
+    public int count = 0;
 
     @FXML
     private Button _btnDownload;
+
+    @FXML
+    private TextField creationName;
 
     @FXML private ImageView _iv0;
     @FXML private ImageView _iv1;
@@ -73,22 +76,67 @@ public class SelectImageController {
     private SelectImageController _selectImageController;
     private Stage _imageStage;
 
-    public void setUp(String creationName, String term, CreateController createController, Stage imageStage) {
+    public void setUp(String __creationName, String term, CreateController createController, Stage imageStage) {
         _imageStage = imageStage;
         _createController = createController;
-        _creationName = creationName;
+        _creationName = __creationName;
         _term = term;
-        dir = new File(Main.getCreationDir()+"/"+_creationName+"/"+"images/");
+        dir = new File(Main.getCreationDir()+"/"+ creationName.getText() +"/"+"images/");
     }
 
     @FXML
     private void handleBtnDownload() {
-        DownloadImages dl = new DownloadImages(_creationName,_term);
+        if(!creationName.getText().matches("[a-zA-Z0-9_-]*") || creationName.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText("Invalid Creation name");
+            alert.setContentText("Please enter a valid non-empty creation name, allowed characters: a-z A-Z 0-9 _ -");
+            alert.showAndWait();
+            return;
+        }
+        String creationDir = Main.getCreationDir();
+        String creationFile = creationDir + "/" + creationName.getText();
+        //String cmd = "[ -e " + creationFile + " ]";
+        String cmd = "[ -e " + creationFile+".mp4" + " ] || [ -e " + creationFile + " ]";
+        ProcessBuilder checkName = new ProcessBuilder("bash", "-c", cmd);
+
+        Process checkNamep = null;
+        try {
+            checkNamep = checkName.start();
+            int exitStatus = checkNamep.waitFor();
+            if (exitStatus == 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Creation Name Error");
+                alert.setHeaderText("Creation Name already in use, enter another name or overwrite the existing creation");
+                alert.setContentText("WARNING: By selecting overwrite the old creation will be deleted!!!");
+                ButtonType btnCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                ButtonType btnOverwrite = new ButtonType("Overwrite");
+                alert.getButtonTypes().setAll(btnCancel,btnOverwrite);
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.get() == btnOverwrite) {
+                    String cmdOverwrite = "rm -r " + creationFile + " " + creationFile + ".mp4";
+                    ProcessBuilder overwritePB = new ProcessBuilder("bash", "-c", cmdOverwrite);
+                    Process overwriteP = overwritePB.start();
+                    overwriteP.waitFor();
+                    createNewDir(creationFile);
+                }
+                return;
+            }
+            createNewDir(creationFile);
+
+
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        DownloadImages dl = new DownloadImages(creationName.getText(),_term);
         team.submit(dl);
         dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
                 _btnDownload.setDisable(true);
+                dir = new File(Main.getCreationDir()+"/"+creationName.getText()+"/"+"images/");
 
                 File[] files = dir.listFiles();
                 for (File file: files) {
@@ -111,11 +159,10 @@ public class SelectImageController {
     @FXML
     private void handleBtnSubmit() throws IOException, InterruptedException {
 
-        int count = 0;
         int imageNum = 0;
         for (CheckBox c: _checkBoxs) {
-            String path = Main.getCreationDir()+"/"+_creationName+"/"+"images/";
-            String newPath = Main.getCreationDir()+"/"+_creationName+"/";
+            String path = Main.getCreationDir()+"/"+creationName.getText()+"/"+"images/";
+            String newPath = Main.getCreationDir()+"/"+creationName.getText()+"/";
             if (c.isSelected()) {
                 path += "image" + count + ".jpg";
                 newPath += "image" + imageNum + ".jpg";
@@ -128,7 +175,46 @@ public class SelectImageController {
             }
             count++;
         }
-        _imageStage.close();
+
+        Voices voice = Voices.Default;
+        CreateAudioTask audioTask = new CreateAudioTask(creationName.getText(), "hello there", null, voice);
+        team.submit(audioTask);
+
+        MakeSlideShow task = new MakeSlideShow(_term, creationName.getText());
+        team.submit(task);
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+
+                MergeTask task = new MergeTask(creationName.getText());
+                team.submit(task);
+
+                QuizTask quizTask = new QuizTask(_term, creationName.getText());
+                team.submit(quizTask);
+
+                task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Creation Complete");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Creation complete, please refresh list of creations.");
+                        alert.showAndWait();
+
+                    }
+                });
+                //_homeController.updateListTree();
+
+
+            }
+        });
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Creation is being created.");
+        alert.setHeaderText(null);
+        alert.setContentText("Creation is being created, you will get a popup when its done.");
+        alert.show();
+
 
     }
 
@@ -137,5 +223,19 @@ public class SelectImageController {
         _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
         _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
 
+    }
+
+    public void transferInfo(String text) {
+        _term = text;
+    }
+
+    private void createNewDir(String creationFile) {
+        ProcessBuilder overwritePB = new ProcessBuilder("bash", "-c", "mkdir -p " + creationFile);
+        try {
+            Process overwriteP = overwritePB.start();
+            overwriteP.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

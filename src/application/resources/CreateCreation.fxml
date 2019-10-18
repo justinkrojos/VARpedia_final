@@ -20,7 +20,7 @@
             <Image url="@woodtexture.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="searchPane" layoutY="0.0" prefHeight="810.0" prefWidth="1154.0" visible="false">
+      <AnchorPane fx:id="searchPane" layoutY="0.0" prefHeight="810.0" prefWidth="1154.0" visible="true">
          <children>
              <TextField fx:id="_termField" layoutX="195.0" layoutY="323.0" prefHeight="74.0" prefWidth="384.0" promptText="Enter search term here..." style="-fx-background-color: white; -fx-background-radius: 20 0 0 20;">
                <font>
@@ -44,7 +44,7 @@
              </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="saveAudioPane" layoutY="-1.0" prefHeight="810.0" prefWidth="1154.0">
+      <AnchorPane fx:id="saveAudioPane" layoutY="-1.0" prefHeight="810.0" prefWidth="1154.0" visible="false">
          <children>
             <Label fx:id="searchConfirmation" alignment="CENTER" layoutX="310.0" layoutY="20.0" prefHeight="48.0" prefWidth="534.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: red;" text="Term:" textAlignment="CENTER">
                <font>
@@ -90,7 +90,7 @@
                   <Font name="Manjari Regular" size="20.0" />
                </font>
             </TextArea>
-            <Button fx:id="btnSaveAudioFile1" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleSaveAudioBtn" prefHeight="54.0" prefWidth="449.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: blue; -fx-border-width: 5;" text="Next Step">
+            <Button fx:id="btnNext" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleBtnNext" prefHeight="54.0" prefWidth="449.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: blue; -fx-border-width: 5;" text="Next Step">
                <font>
                   <Font name="Manjari Regular" size="20.0" />
                </font>

@@ -73,6 +73,9 @@ public class CreateCreationController {
     private ListView<Label> savedText;
 
     @FXML
+    private Button btnNext;
+
+    @FXML
     private AnchorPane textActions;
 
     @FXML
@@ -127,6 +130,7 @@ public class CreateCreationController {
 
 
 
+    FXMLLoader loader;
 
     /**
      * Check if creation name is taken, and if so let the user pick if they want to overwrite
@@ -153,6 +157,12 @@ public class CreateCreationController {
         // _currentStage = (Stage) _ap.getScene().getWindow();
     }
 
+    @FXML
+    private void handleBtnNext() throws IOException {
+        loader = Main.changeScene("resources/SelectImage.fxml");
+        SelectImageController selectImageController = loader.<SelectImageController>getController();
+        selectImageController.transferInfo(_termField.getText());
+    }
 
     @FXML
     private void handleBtnSelectImages() throws IOException, InterruptedException {
@@ -198,61 +208,7 @@ public class CreateCreationController {
     /**
      * Checks the creation name and handles overwriting creation name.
      */
-    @FXML
-    public void handleCreationName() {
-        if(!_creationNameField.getText().matches("[a-zA-Z0-9_-]*") || _creationNameField.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Invalid Creation name");
-            alert.setContentText("Please enter a valid non-empty creation name, allowed characters: a-z A-Z 0-9 _ -");
-            alert.showAndWait();
-            return;
-        }
-        String creationDir = Main.getCreationDir();
-        String creationFile = creationDir + "/" +_creationNameField.getText();
-        //String cmd = "[ -e " + creationFile + " ]";
-        String cmd = "[ -e " + creationFile+".mp4" + " ] || [ -e " + creationFile + " ]";
-        ProcessBuilder checkName = new ProcessBuilder("bash", "-c", cmd);
 
-        Process checkNamep = null;
-        try {
-            checkNamep = checkName.start();
-            int exitStatus = checkNamep.waitFor();
-            if (exitStatus == 0) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Creation Name Error");
-                alert.setHeaderText("Creation Name already in use, enter another name or overwrite the existing creation");
-                alert.setContentText("WARNING: By selecting overwrite the old creation will be deleted!!!");
-                ButtonType btnCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-                ButtonType btnOverwrite = new ButtonType("Overwrite");
-                alert.getButtonTypes().setAll(btnCancel,btnOverwrite);
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if(result.get() == btnOverwrite) {
-                    String cmdOverwrite = "rm -r " + creationFile + " " + creationFile + ".mp4";
-                    ProcessBuilder overwritePB = new ProcessBuilder("bash", "-c", cmdOverwrite);
-                    Process overwriteP = overwritePB.start();
-                    overwriteP.waitFor();
-                    createNewDir(creationFile);
-                    _creationNameField.setDisable(true);
-                    btnCheckCreationName.setText("Success!");
-                    btnCheckCreationName.setDisable(true);
-                    step1.setSelected(true);
-                }
-                return;
-            }
-            createNewDir(creationFile);
-            _creationNameField.setDisable(true);
-            btnCheckCreationName.setText("Success!");
-            btnCheckCreationName.setDisable(true);
-            step1.setSelected(true);
-
-
-
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Create new direction with name of creation.

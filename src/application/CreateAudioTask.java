@@ -23,9 +23,9 @@ public class CreateAudioTask extends Task<Void> {
     @Override
     protected Void call() throws Exception {
 
-        String cmd = "mkdir -p '" + Main.getCreationDir() + "/" + _creationNameField + "/audio' && " +
-                "echo \"" + _textArea + "\" | text2wave -o '" + Main.getCreationDir() + "/" + _creationNameField + "/audio/" + _audioName + ".wav' -eval \"" +
-                voicePackage.getVoicePackage() + "\" 2> '" + Main.getCreationDir() + "/" + _creationNameField + "/audio/error.txt'";
+        String cmd =
+                "echo \"" + _textArea + "\" | text2wave -o '" + Main.getCreationDir() + "/" + _creationNameField + "/" + _creationNameField + ".wav' -eval \"" +
+                voicePackage.getVoicePackage() + "\" 2> '" + Main.getCreationDir() + "/" + _creationNameField + "/error.txt'";
 
         ProcessBuilder saveAudiopb = new ProcessBuilder("bash", "-c", cmd);
         Process process1 = saveAudiopb.start();
