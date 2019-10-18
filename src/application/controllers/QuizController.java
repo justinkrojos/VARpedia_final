@@ -121,7 +121,7 @@ public class QuizController {
 
     @FXML
     private void handleBtnCheck() {
-        if (_answerField.getText() == null){
+        if (_answerField.getText().equals("")){
             return;
         }
         String term = _term.toLowerCase();
