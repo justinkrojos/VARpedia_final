@@ -31,6 +31,22 @@ public class CreateAudioTask extends Task<Void> {
 
 
         }
+
+        String cmd = "sox";
+
+        for (int i = 0; i < _savedText.length; i++) {
+
+            cmd = cmd + " '" + Main.getCreationDir() + "/" + _creationNameField + "/audio/" + i + ".wav'";
+        }
+
+        cmd = cmd + " '" + Main.getCreationDir() + "/" + _creationNameField + "/" + _creationNameField + ".wav'";
+
+        System.out.println(cmd);
+
+        ProcessBuilder playFullAudiopb = new ProcessBuilder("bash", "-c", cmd);
+        Process playAudioProcess = playFullAudiopb.start();
+        playAudioProcess.waitFor();
+
         return null;
     }
 
