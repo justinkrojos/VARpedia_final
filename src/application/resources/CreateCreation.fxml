@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="_ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="_ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.CreateCreationController">
    <children>
       <ImageView fitHeight="1845.0" fitWidth="951.0" layoutX="-3.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
@@ -27,7 +27,7 @@
                   <Font name="Manjari Thin" size="20.0" />
                </font>
             </TextField>
-             <Button fx:id="btnSearch" layoutX="411.0" layoutY="80.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="135.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Search">
+             <Button fx:id="btnSearch" layoutX="411.0" layoutY="80.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="135.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" onAction="#handleSearch" text="Search">
                <font>
                   <Font name="Manjari Regular" size="20.0" />
                </font>

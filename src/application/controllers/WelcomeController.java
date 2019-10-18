@@ -112,8 +112,10 @@ public class WelcomeController {
      */
     @FXML
     private void handleBtnCreate() throws IOException {
+        /*
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("resources/Create.fxml"));
+
         Parent layout = loader.load();
         CreateController controller = (CreateController) loader.getController();
 
@@ -122,6 +124,8 @@ public class WelcomeController {
         controller.setUp(creationStage);
         creationStage.setScene(scene);
         creationStage.show();
+        */
+        loader = Main.changeScene("resources/CreateCreation.fxml");
     }
 
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {

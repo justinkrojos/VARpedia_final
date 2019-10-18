@@ -128,14 +128,14 @@ public class CreateCreationController {
         //_welcomeController = welcomeController;
         //_homeController = homeController;
     }
-
+/*
     public void initialize(){
         btnCreate.setVisible(false);
         btnCreate.setDisable(true);
 
         // _currentStage = (Stage) _ap.getScene().getWindow();
     }
-
+*/
 
     @FXML
     private void handleBtnSelectImages() throws IOException, InterruptedException {
@@ -261,6 +261,7 @@ public class CreateCreationController {
         WikitSearchTask task = new WikitSearchTask(_termField.getText());
         team.submit(task);
         btnSearch.setDisable(true);
+        btnSearch.setText("Searching...");
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
@@ -272,17 +273,17 @@ public class CreateCreationController {
                     alert.setContentText("Enter a valid search term and try again.");
                     alert.showAndWait();
                     btnSearch.setDisable(false);
+                    btnSearch.setText("Search");
                     return;
                 }
                 else {
-                    _textArea.setText(task.getOutput());
+                    // _textArea.setText(task.getOutput());
                     btnSearch.setDisable(true);
-                    btnSearch.setText("Success!");
                     _termField.setDisable(true);
+                    System.out.println(task.getOutput());
                 }
             }
         });
-
     }
 
     /**
