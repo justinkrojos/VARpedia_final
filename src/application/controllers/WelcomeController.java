@@ -125,7 +125,7 @@ public class WelcomeController {
         creationStage.setScene(scene);
         creationStage.show();
         */
-        loader = Main.changeScene("resources/CreateCreation.fxml");
+        loader = Main.changeScene("resources/WikitSearch.fxml");
     }
 
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {

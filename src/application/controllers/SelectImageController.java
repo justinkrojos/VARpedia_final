@@ -65,24 +65,14 @@ public class SelectImageController {
 
     private List<Image> _images = new ArrayList<Image>();
 
+    private String[][] savedText;
+
     private final int _numRows = 2;
     private final int _numCols = 5;
 
    // private List<Image> _image;
 
     private static File dir;
-
-    private CreateController _createController;
-    private SelectImageController _selectImageController;
-    private Stage _imageStage;
-
-    public void setUp(String __creationName, String term, CreateController createController, Stage imageStage) {
-        _imageStage = imageStage;
-        _createController = createController;
-        _creationName = __creationName;
-        _term = term;
-        dir = new File(Main.getCreationDir()+"/"+ creationName.getText() +"/"+"images/");
-    }
 
     @FXML
     private void handleBtnDownload() {
@@ -177,7 +167,7 @@ public class SelectImageController {
         }
 
         Voices voice = Voices.Default;
-        CreateAudioTask audioTask = new CreateAudioTask(creationName.getText(), "hello there", null, voice);
+        CreateAudioTask audioTask = new CreateAudioTask(creationName.getText(), "hello there", voice);
         team.submit(audioTask);
 
         MakeSlideShow task = new MakeSlideShow(_term, creationName.getText());
@@ -225,8 +215,9 @@ public class SelectImageController {
 
     }
 
-    public void transferInfo(String text) {
+    public void transferInfo(String text, String[][] savedText) {
         _term = text;
+        this.savedText = savedText;
     }
 
     private void createNewDir(String creationFile) {

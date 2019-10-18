@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,31 +19,7 @@
             <Image url="@woodtexture.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="searchPane" layoutY="0.0" prefHeight="810.0" prefWidth="1154.0" visible="true">
-         <children>
-             <TextField fx:id="_termField" layoutX="195.0" layoutY="323.0" prefHeight="74.0" prefWidth="384.0" promptText="Enter search term here..." style="-fx-background-color: white; -fx-background-radius: 20 0 0 20;">
-               <font>
-                  <Font name="Manjari Thin" size="30.0" />
-               </font>
-            </TextField>
-             <Button fx:id="btnSearch" layoutX="579.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="74.0" prefWidth="162.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Search">
-               <font>
-                  <Font name="Manjari Thin" size="20.0" />
-               </font>
-            </Button>
-            <Label alignment="CENTER" layoutX="195.0" layoutY="243.0" prefHeight="72.0" prefWidth="546.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 5;" text="What would you like to search for:" textAlignment="CENTER">
-               <font>
-                  <Font name="Manjari Regular" size="25.0" />
-               </font>
-            </Label>
-             <Label alignment="CENTER" layoutX="185.0" layoutY="23.0" prefHeight="72.0" prefWidth="565.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: red; -fx-border-width: 5;" text="CREATE A CREATION" textAlignment="CENTER">
-                 <font>
-                     <Font name="Manjari Regular" size="50.0" />
-                 </font>
-             </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="saveAudioPane" layoutY="-1.0" prefHeight="810.0" prefWidth="1154.0" visible="false">
+      <AnchorPane fx:id="saveAudioPane" layoutY="-1.0" prefHeight="810.0" prefWidth="1154.0">
          <children>
             <Label fx:id="searchConfirmation" alignment="CENTER" layoutX="310.0" layoutY="20.0" prefHeight="48.0" prefWidth="534.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: red;" text="Term:" textAlignment="CENTER">
                <font>

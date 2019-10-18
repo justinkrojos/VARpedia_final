@@ -8,15 +8,13 @@ import java.util.Scanner;
 public class CreateAudioTask extends Task<Void> {
 
    private String _creationNameField;
-   private String _audioName;
-   private String _textArea;
+   private String _savedText;
    private Voices voicePackage;
 
 
-    public CreateAudioTask(String _creationNameField, String _textArea, String _audioName, Voices voicePackage) {
+    public CreateAudioTask(String _creationNameField, String savedText, Voices voicePackage) {
         this._creationNameField = _creationNameField;
-        this._textArea = _textArea;
-        this._audioName = _audioName;
+        this._savedText = savedText;
         this.voicePackage = voicePackage;
     }
 
@@ -24,7 +22,7 @@ public class CreateAudioTask extends Task<Void> {
     protected Void call() throws Exception {
 
         String cmd =
-                "echo \"" + _textArea + "\" | text2wave -o '" + Main.getCreationDir() + "/" + _creationNameField + "/" + _creationNameField + ".wav' -eval \"" +
+                "echo \"" + _savedText + "\" | text2wave -o '" + Main.getCreationDir() + "/" + _creationNameField + "/" + _creationNameField + ".wav' -eval \"" +
                 voicePackage.getVoicePackage() + "\" 2> '" + Main.getCreationDir() + "/" + _creationNameField + "/error.txt'";
 
         ProcessBuilder saveAudiopb = new ProcessBuilder("bash", "-c", cmd);

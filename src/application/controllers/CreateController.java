@@ -150,7 +150,7 @@ public class CreateController {
         SelectImageController controller = loader.getController();
         Scene scene = new Scene(layout);
         Stage imageStage = new Stage();
-        controller.setUp(_creationNameField.getText(),_termField.getText(), this, imageStage);
+        // controller.setUp(_creationNameField.getText(),_termField.getText(), this, imageStage);
         imageStage.setScene(scene);
         imageStage.show();
 
@@ -479,7 +479,7 @@ public class CreateController {
             alert.showAndWait();
         }
         else {
-
+/*
             CreateAudioTask createAudioTask = new CreateAudioTask(_creationNameField.getText(), _textArea.getSelectedText(), _audioName.getText(), getVoicesObject(voicesChoiceBox.getSelectionModel().getSelectedItem()));
             team.submit(createAudioTask);
             ;
@@ -581,8 +581,10 @@ public class CreateController {
                     // Add success?
                     _audioName.setPromptText("Name Selected Audio");
                 }
-            });
+            });*/
         }
+
+
     }
 
     /**
