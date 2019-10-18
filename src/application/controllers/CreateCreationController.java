@@ -58,6 +58,15 @@ public class CreateCreationController {
     private Button btnSearch;
 
     @FXML
+    private AnchorPane searchPane;
+
+    @FXML
+    private AnchorPane saveAudioPane;
+
+    @FXML
+    private Label searchConfirmation;
+
+    @FXML
     private TextField _creationNameField;
 
     @FXML
@@ -261,6 +270,7 @@ public class CreateCreationController {
         WikitSearchTask task = new WikitSearchTask(_termField.getText());
         team.submit(task);
         btnSearch.setDisable(true);
+        _termField.setDisable(true);
         btnSearch.setText("Searching...");
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
@@ -277,10 +287,10 @@ public class CreateCreationController {
                     return;
                 }
                 else {
-                    // _textArea.setText(task.getOutput());
-                    btnSearch.setDisable(true);
-                    _termField.setDisable(true);
-                    System.out.println(task.getOutput());
+                    _textArea.setText(task.getOutput());
+                    searchPane.setVisible(false);
+                    saveAudioPane.setVisible(true);
+                    searchConfirmation.setText(searchConfirmation.getText() + " " + _termField.getText());
                 }
             }
         });
