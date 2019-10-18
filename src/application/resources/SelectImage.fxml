@@ -71,6 +71,11 @@
             <Font name="Manjari Regular" size="30.0" />
          </font>
       </Label>
+      <Button layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleBtnDownload" prefHeight="74.0" prefWidth="162.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Download">
+         <font>
+            <Font name="Manjari Thin" size="20.0" />
+         </font>
+      </Button>
       <AnchorPane layoutX="301.0" layoutY="14.0" prefHeight="211.0" prefWidth="597.0">
          <children>
             <TextField fx:id="creationName" layoutX="27.0" layoutY="94.0" prefHeight="74.0" prefWidth="384.0" promptText="Enter name here..." style="-fx-background-color: white; -fx-background-radius: 20 0 0 20;">

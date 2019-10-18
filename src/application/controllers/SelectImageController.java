@@ -128,7 +128,6 @@ public class SelectImageController {
         dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                _btnDownload.setDisable(true);
                 dir = new File(Main.getCreationDir()+"/"+creationName.getText()+"/"+"images/");
 
                 File[] files = dir.listFiles();
