@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -32,6 +33,8 @@ import java.util.concurrent.Executors;
 public class CreateCreationController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();
+
+    private ArrayList<String> voicesList = new ArrayList<String>();
 
     @FXML
     private Button _btnSelectImages;
@@ -67,7 +70,7 @@ public class CreateCreationController {
     private Label searchConfirmation;
 
     @FXML
-    private ListView<String> savedText;
+    private ListView<Label> savedText;
 
     @FXML
     private AnchorPane textActions;
@@ -143,14 +146,13 @@ public class CreateCreationController {
         //_welcomeController = welcomeController;
         //_homeController = homeController;
     }
-/*
+
     public void initialize(){
-        btnCreate.setVisible(false);
-        btnCreate.setDisable(true);
+        voicesList.clear();
 
         // _currentStage = (Stage) _ap.getScene().getWindow();
     }
-*/
+
 
     @FXML
     private void handleBtnSelectImages() throws IOException, InterruptedException {
@@ -458,7 +460,13 @@ public class CreateCreationController {
         }
 
         else {
-            savedText.getItems().add(_textArea.getSelectedText());
+            Label selection = new Label(_textArea.getSelectedText());
+            selection.setMaxWidth(savedText.getWidth() - 20.0);
+            selection.setWrapText(true);
+            selection.setFont(new Font("Manjari Thin", 20));
+            savedText.getItems().add(selection);
+            voicesList.add(voicesChoiceBox.getValue());
+            System.out.println(voicesList);
         }
 
             /*
