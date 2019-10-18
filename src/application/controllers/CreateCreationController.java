@@ -67,6 +67,12 @@ public class CreateCreationController {
     private Label searchConfirmation;
 
     @FXML
+    private ListView<String> savedText;
+
+    @FXML
+    private AnchorPane textActions;
+
+    @FXML
     private TextField _creationNameField;
 
     @FXML
@@ -291,6 +297,7 @@ public class CreateCreationController {
                     searchPane.setVisible(false);
                     saveAudioPane.setVisible(true);
                     searchConfirmation.setText(searchConfirmation.getText() + " " + _termField.getText());
+
                 }
             }
         });
@@ -412,22 +419,13 @@ public class CreateCreationController {
     @FXML
     public void handleAudioPreview() throws IOException {
 
-        PreviewAudioTask previewAudioTask = new PreviewAudioTask(_textArea.getSelectedText(), getVoicesObject(voicesChoiceBox1.getSelectionModel().getSelectedItem()).getVoicePackage());
+        PreviewAudioTask previewAudioTask = new PreviewAudioTask(_textArea.getSelectedText(), getVoicesObject(voicesChoiceBox.getSelectionModel().getSelectedItem()).getVoicePackage());
 
-        if (_textArea.getSelectedText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Wikit Search");
-            alert.setHeaderText("No words were highlighted");
-            alert.setContentText("Please highlight a maximum of 20 words and try again.");
-            alert.showAndWait();
-        }
-        else {
-            String[] words = _textArea.getSelectedText().split("\\s+");
-            if (words.length > 20) {
+            if (_textArea.getSelectedText().split("\\s+").length > 30) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Wikit Search");
                 alert.setHeaderText("Word Maximum Exceeded");
-                alert.setContentText("Please highlight a maximum of 20 words and try again.");
+                alert.setContentText("Please highlight a maximum of 30 words and try again.");
                 alert.showAndWait();
             }
             else {
@@ -436,7 +434,7 @@ public class CreateCreationController {
 
             }
         }
-    }
+
 
     /**
      * Saves the chunk of text as a wav file
@@ -445,52 +443,25 @@ public class CreateCreationController {
     @FXML
     public void handleSaveAudioBtn() {
 
-
-        if (!btnSearch.getText().equals("Success!")) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Wikit Search");
-            alert.setHeaderText("No words were highlighted");
-            alert.setContentText("Please wikit search a term and try again.");
-            alert.showAndWait();
-        } else if (_termField.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Wikit Search");
-            alert.setHeaderText("No words were highlighted");
-            alert.setContentText("Please wikit search a term and try again.");
-            alert.showAndWait();
-        } else if (_textArea.getSelectedText().isEmpty()) {
+        if (_textArea.getSelectedText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Wikit Search");
             alert.setHeaderText("No words were highlighted");
             alert.setContentText("Please highlight a maximum of 20 words and try again.");
             alert.showAndWait();
-        } else  if (!_audioName.getText().matches("[a-zA-Z0-9_-]*") || _audioName.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Wikit Search");
-            alert.setHeaderText("Audio file is unnamed");
-            alert.setContentText("Please enter a valid name for the audio file and try again.");
-            alert.showAndWait();
-        } else if (!btnCheckCreationName.isDisabled()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Wikit Search");
-            alert.setHeaderText("Creation is unnamed");
-            alert.setContentText("Please name your creation and try again.");
-            alert.showAndWait();
-        } else if (_textArea.getSelectedText().split("\\s+").length > 20) {
+        }  else if (_textArea.getSelectedText().split("\\s+").length > 30) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Wikit Search");
             alert.setHeaderText("Word Maximum Exceeded");
-            alert.setContentText("Please highlight a maximum of 20 words and try again.");
-            alert.showAndWait();
-        } else if (existingAudio.contains(_audioName.getText())) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Wikit Search");
-            alert.setHeaderText("Audio name taken");
-            alert.setContentText("Please rename your audio and try again.");
+            alert.setContentText("Please highlight a maximum of 30 words and try again.");
             alert.showAndWait();
         }
-        else {
 
+        else {
+            savedText.getItems().add(_textArea.getSelectedText());
+        }
+
+            /*
             CreateAudioTask createAudioTask = new CreateAudioTask(_creationNameField.getText(), _textArea.getSelectedText(), _audioName.getText(), getVoicesObject(voicesChoiceBox.getSelectionModel().getSelectedItem()));
             team.submit(createAudioTask);
             ;
@@ -594,6 +565,8 @@ public class CreateCreationController {
                 }
             });
         }
+
+             */
     }
 
     /**
