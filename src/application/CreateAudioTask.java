@@ -8,31 +8,43 @@ import java.util.Scanner;
 public class CreateAudioTask extends Task<Void> {
 
    private String _creationNameField;
-   private String _savedText;
-   private Voices voicePackage;
+   private String[][] _savedText;
 
 
-    public CreateAudioTask(String _creationNameField, String savedText, Voices voicePackage) {
+    public CreateAudioTask(String _creationNameField, String[][] savedText) {
         this._creationNameField = _creationNameField;
         this._savedText = savedText;
-        this.voicePackage = voicePackage;
     }
 
     @Override
     protected Void call() throws Exception {
 
-        String cmd =
-                "echo \"" + _savedText + "\" | text2wave -o '" + Main.getCreationDir() + "/" + _creationNameField + "/" + _creationNameField + ".wav' -eval \"" +
-                voicePackage.getVoicePackage() + "\" 2> '" + Main.getCreationDir() + "/" + _creationNameField + "/error.txt'";
+        for (int i = 0; i < _savedText.length; i++) {
 
-        ProcessBuilder saveAudiopb = new ProcessBuilder("bash", "-c", cmd);
-        Process process1 = saveAudiopb.start();
-        process1.waitFor();
+            String cmd = "mkdir -p '" + Main.getCreationDir() + "/" + _creationNameField + "/audio' && " +
+                    "echo \"" + _savedText[i][0] + "\" | text2wave -o '" + Main.getCreationDir() + "/" + _creationNameField + "/audio/" + i + ".wav' -eval \"" +
+                    getVoicesObject(_savedText[i][1]).getVoicePackage() + "\" 2> '" + Main.getCreationDir() + "/" + _creationNameField + "/error.txt'";
 
+            ProcessBuilder saveAudiopb = new ProcessBuilder("bash", "-c", cmd);
+            Process process1 = saveAudiopb.start();
+            process1.waitFor();
+
+
+        }
         return null;
-
     }
 
+    public Voices getVoicesObject(String voiceCode) {
+        if (voiceCode.equals("Default")) {
+            return Voices.Default;
+        }
+        else if (voiceCode.equals("Kiwi Male")) {
+            return Voices.Kiwi_Male;
+        }
+        else {
+            return Voices.Kiwi_Female;
+        }
+    }
 
     public boolean getError() throws FileNotFoundException {
 

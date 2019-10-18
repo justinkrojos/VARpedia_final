@@ -10,34 +10,26 @@ import java.io.IOException;
 public class AudioMergeTask extends Task<Void> {
 
     private String term;
-    private ListView _audioList;
+    private int count;
     private Process playAudioProcess;
     private String cmd;
-    private Boolean preview;
 
-    public AudioMergeTask(String term, ListView _audioList, Boolean preview) {
+    public AudioMergeTask(String term, int count) {
         this.term = term;
-        this._audioList = _audioList;
-        this.preview = preview;
+        this.count = count;
     }
 
     @Override
     protected Void call() throws Exception {
         cmd = "sox";
 
-        for (int i = 0; i < _audioList.getItems().size(); i++) {
-            HBox audioListhb = (HBox)_audioList.getItems().get(i);
-            Text audioListLabel = (Text)audioListhb.getChildren().get(0);
+        for (int i = 0; i < count; i++) {
 
-            cmd = cmd + " '" + Main.getCreationDir() + "/" + term + "/audio/" + audioListLabel.getText() + ".wav'";
+            cmd = cmd + " '" + Main.getCreationDir() + "/" + term + "/audio/" + count + ".wav'";
         }
 
-        if (preview) {
-            cmd = cmd + " '" + Main.getCreationDir() + "/" + term + "/" + term + "preview.wav' && ffplay -autoexit -nodisp '" + Main.getCreationDir() + "/" + term + "/" + term + "preview.wav'";
-        }
-        else {
             cmd = cmd + " '" + Main.getCreationDir() + "/" + term + "/" + term + ".wav'";
-        }
+
 
 
         ProcessBuilder playFullAudiopb = new ProcessBuilder("bash", "-c", cmd);

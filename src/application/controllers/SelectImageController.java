@@ -167,7 +167,7 @@ public class SelectImageController {
         }
 
         Voices voice = Voices.Default;
-        CreateAudioTask audioTask = new CreateAudioTask(creationName.getText(), "hello there", voice);
+        CreateAudioTask audioTask = new CreateAudioTask(creationName.getText(), savedText);
         team.submit(audioTask);
 
         MakeSlideShow task = new MakeSlideShow(_term, creationName.getText());
@@ -186,6 +186,7 @@ public class SelectImageController {
                     @Override
                     public void handle(WorkerStateEvent workerStateEvent) {
 
+                        System.out.println("REACHED");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Creation Complete");
                         alert.setHeaderText(null);
