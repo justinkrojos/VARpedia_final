@@ -22,15 +22,13 @@
             <Image url="@woodtexture.jpg" />
          </image>
       </ImageView>
+       
       <Label alignment="CENTER" layoutX="25.0" layoutY="126.0" prefHeight="54.0" prefWidth="431.0" style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="C R E A T I O N   L I S T" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </Label>
-      <Pane fx:id="_player" layoutX="484.0" layoutY="126.0" prefHeight="374.0" prefWidth="650.0" style="-fx-background-color: black;">
-         <children>
-            <Slider layoutX="7.0" layoutY="352.0" prefHeight="15.0" prefWidth="638.0" />
-         </children></Pane>
+      <Pane fx:id="_player" layoutX="484.0" layoutY="126.0" prefHeight="374.0" prefWidth="650.0" style="-fx-background-color: black;" />
       <Button fx:id="btnCreate" layoutX="26.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="44.0" prefWidth="431.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-color: white; -fx-border-width: 5;" text="Create More Creations">
          <font>
             <Font name="Manjari Regular" size="20.0" />
@@ -101,5 +99,6 @@
             <Image url="@../../../../buildingblock.jpg" />
          </image>
       </ImageView>
+            <Slider fx:id="timeSlider" layoutX="474.0" layoutY="500.0" prefHeight="16.0" prefWidth="671.0" />
    </children>
 </AnchorPane>

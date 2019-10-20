@@ -1,6 +1,9 @@
 package application.controllers;
 
 import application.Main;
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -10,13 +13,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,6 +95,9 @@ public class HomeController {
     private MediaPlayer bgmusic;
 
     private MediaPlayer player;
+
+    @FXML
+    private Slider timeSlider;
 
     public void initialize() {
 
@@ -257,6 +266,8 @@ public class HomeController {
         else {
 
 
+
+
             btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.8); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
             btnPlay.setText("S T O P   P L A Y I N G");
 
@@ -273,6 +284,9 @@ public class HomeController {
             mediaView.fitWidthProperty().bind(_player.widthProperty());
             mediaView.fitHeightProperty().bind(_player.heightProperty());
             mediaView.setPreserveRatio(false);
+
+
+
             player.setOnReady(new Runnable() {
                 @Override
                 public void run() {
@@ -296,8 +310,41 @@ public class HomeController {
 
 
             _player.getChildren().add(mediaView);
+
+
+            player.currentTimeProperty().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    if (btnPlay.getText().equals("S T O P   P L A Y I N G")){
+                        updateValues();
+                    }
+
+                }
+            });
+
+            timeSlider.valueProperty().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    if (timeSlider.isPressed()) {
+                        player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue()/100));
+                    }
+                }
+            });
+
+
+
+
         }
     }
+
+    protected void updateValues() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                timeSlider.setValue(player.getCurrentTime().toMillis()/player.getTotalDuration().toMillis() * 100);
+            }
+        });
+    }
+
 
     /**
      * Delete a creation.
