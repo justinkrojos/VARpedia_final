@@ -112,20 +112,9 @@ public class WelcomeController {
      */
     @FXML
     private void handleBtnCreate() throws IOException {
-        /*
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("resources/Create.fxml"));
-
-        Parent layout = loader.load();
-        CreateController controller = (CreateController) loader.getController();
-
-        Scene scene = new Scene(layout);
-        Stage creationStage = new Stage();
-        controller.setUp(creationStage);
-        creationStage.setScene(scene);
-        creationStage.show();
-        */
         loader = Main.changeScene("resources/WikitSearch.fxml");
+        WikitSearchController wikitController = loader.<WikitSearchController>getController();
+        wikitController.transferMusic(player, music.isSelected(), music.getText());
     }
 
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {

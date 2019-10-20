@@ -9,6 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.media.MediaPlayer;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,6 +20,11 @@ import java.io.IOException;
 public class WikitSearchController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();
+
+    MediaPlayer bgmusic;
+
+    @FXML
+    private ToggleButton music;
 
     @FXML
     private Button btnSearch;
@@ -61,8 +69,23 @@ public class WikitSearchController {
                 }
             }
         });
-
-
     }
 
+    @FXML
+    private void handleMusic() {
+        if (music.isSelected()) {
+            music.setText("Music: OFF");
+            bgmusic.pause();
+        }
+        else {
+            music.setText("Music: ON");
+            bgmusic.play();
+        }
+    }
+
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
+        this.bgmusic = bgmusic;
+        music.setSelected(toggle);
+        music.setText(text);
+    }
 }

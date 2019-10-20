@@ -335,8 +335,8 @@ public class HomeController {
             player.stop();
         }
         FXMLLoader loader = Main.changeScene("resources/WikitSearch.fxml");
-        //CreateCreationController createController = loader.<CreateCreationController>getController();
-        //createController.transferMusic(bgmusic, music.isSelected(), music.getText());
+        WikitSearchController wikitController = loader.<WikitSearchController>getController();
+        wikitController.transferMusic(player, music.isSelected(), music.getText());
     }
 
     /**
