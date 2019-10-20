@@ -91,7 +91,6 @@ public class HomeController {
     @FXML
     private Button homeHelpBtn;
 
-
     private MediaPlayer bgmusic;
 
     private MediaPlayer player;
@@ -102,10 +101,6 @@ public class HomeController {
         btnCreate.setDisable(true);
 
         updateListTree();
-        btnBackward.setVisible(false);
-        btnForward.setVisible(false);
-        btnMute.setVisible(false);
-        btnPause.setVisible(false);
 
         startUp.setVisible(true);
 
