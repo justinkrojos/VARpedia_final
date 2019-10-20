@@ -83,12 +83,6 @@ public class HomeController {
     private ToggleButton music;
 
     @FXML
-    private Pane buttonPane;
-
-    @FXML
-    private Pane startUp;
-
-    @FXML
     private Button homeHelpBtn;
 
     private MediaPlayer bgmusic;
@@ -97,46 +91,77 @@ public class HomeController {
 
     public void initialize() {
 
-        btnCreate.setVisible(false);
-        btnCreate.setDisable(true);
-
         updateListTree();
-
-        startUp.setVisible(true);
 
         _creationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (!_player.isVisible()) {
-                    buttonPane.setVisible(true);
-                    selectItem();
-                    startUp.setVisible(false);
-                }
-                if (btnFavourite.isSelected()) {
-                    btnFavourite.setText("U N\nF A V O U R I T E");
-                }
-                else {
-                    btnFavourite.setText("F A V O U R I T E");
+
+                selectItem();
+
+                if (_favouriteList.getItems().size() > 2) {
+                    try {
+                        sortFavourites();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
 
+                if (_selectedItem != null) {
+                    if (player != null) {
+                        btnPlay.setDisable(true);
+                        btnDel.setDisable(true);
+                    }
+                    else {
+                        btnPlay.setDisable(false);
+                        btnDel.setDisable(false);
+                        btnFavourite.setDisable(false);
+                    }
+                    if (_favouriteList.getItems().contains(_selectedItem)) {
+                        btnFavourite.setText("U N F A V O U R I T E");
+                        btnFavourite.setSelected(true);
+                    }
+                    else {
+                        btnFavourite.setText("F A V O U R I T E");
+                        btnFavourite.setSelected(false);
+                    }
+                }
             }
         });
 
         _favouriteList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (!_player.isVisible()) {
-                    buttonPane.setVisible(true);
-                    selectItem();
-                    startUp.setVisible(false);
-                }
-                if (btnFavourite.isSelected()) {
-                    btnFavourite.setText("U N\nF A V O U R I T E");
-                }
-                else {
-                    btnFavourite.setText("F A V O U R I T E");
+
+                selectItem();
+
+                if (_favouriteList.getItems().size() > 2) {
+                    try {
+                        sortFavourites();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
 
+                if (_selectedItem != null) {
+                    if (player != null) {
+                        btnPlay.setDisable(true);
+                        btnDel.setDisable(true);
+                    }
+                    else {
+                        btnPlay.setDisable(false);
+                        btnDel.setDisable(false);
+                        btnFavourite.setDisable(false);
+                    }
+                    if (_favouriteList.getItems().contains(_selectedItem)) {
+                        btnFavourite.setText("U N F A V O U R I T E");
+                        btnFavourite.setSelected(true);
+                    }
+                    else {
+                        btnFavourite.setText("F A V O U R I T E");
+                        btnFavourite.setSelected(false);
+                    }
+                }
             }
         });
 
@@ -163,7 +188,7 @@ public class HomeController {
 
     @FXML
     private void handleBtnBack() throws IOException {
-        if (_player.isVisible()) {
+        if (player != null) {
             player.stop();
         }
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
@@ -176,19 +201,12 @@ public class HomeController {
      */
     @FXML
     private void handleBtnPlay() {
-        buttonPane.setVisible(false);
-        _player.setVisible(true);
+
+        btnPlay.setDisable(true);
+        btnDel.setDisable(true);
 
         _player.getChildren().removeAll();
         _player.getChildren().clear();
-        // btnPlay.setDisable(true);
-        //System.out.println("Playing");//TODO Play/pause stop not done yet
-        if (_selectedItem == null) {
-            alertNullSelection();
-            return;
-        }
-        //System.out.println(Main.getCreationDir()+"/"+_selectedItem+"/"+_selectedItem+".mp4");
-        //File fileUrl = new File(Main.getCreationDir()+"/"+_selectedItem+"/"+_selectedItem+".mp4");
         File fileUrl = new File(Main.getCreationDir()+"/"+_selectedItem+".mp4");
         Media video = new Media(fileUrl.toURI().toString());
         player = new MediaPlayer(video);
@@ -207,10 +225,10 @@ public class HomeController {
             @Override
             public void run() {
                 _player.getChildren().removeAll();
-                buttonPane.setVisible(true);
-                _player.setVisible(false);
-                // btnPlay.setDisable(false);
-                //mediaView = null;
+                _player.getChildren().clear();
+                player = null;
+                btnPlay.setDisable(false);
+                btnDel.setDisable(false);
             }
         });
 
@@ -225,10 +243,6 @@ public class HomeController {
     @FXML
     private void handleBtnDel() {
         //System.out.println("Deleting");
-        if (_selectedItem == null) {
-            alertNullSelection();
-            return;
-        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Deleting...");
@@ -258,17 +272,12 @@ public class HomeController {
      */
     @FXML
     private void handleBtnCreate() throws IOException {
-        //System.out.println("Creating");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("resources/Create.fxml"));
-        Parent layout = loader.load();
-        CreateController controller = (CreateController) loader.getController();
-
-        Scene scene = new Scene(layout);
-        Stage creationStage = new Stage();
-        controller.setUp(creationStage);
-        creationStage.setScene(scene);
-        creationStage.show();
+        if (player != null) {
+            player.stop();
+        }
+        FXMLLoader loader = Main.changeScene("resources/WikitSearch.fxml");
+        //CreateCreationController createController = loader.<CreateCreationController>getController();
+        //createController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
 
     /**
@@ -287,7 +296,7 @@ public class HomeController {
         }
         else if (btnFavourite.isSelected()) {
             _favouriteList.getItems().add(_selectedItem);
-            btnFavourite.setText("U N\nF A V O U R I T E");
+            btnFavourite.setText("U N F A V O U R I T E");
 
 
         } else {
@@ -350,14 +359,6 @@ public class HomeController {
         else {
             _selectedItem = (String) _favouriteList.getSelectionModel().getSelectedItem();
         }
-
-        if (_favouriteList.getItems().contains(_selectedItem)) {
-            btnFavourite.setSelected(true);
-        }
-        else {
-            btnFavourite.setSelected(false);
-        }
-
         //System.out.println(_selectedItem);
     }
 
@@ -392,13 +393,5 @@ public class HomeController {
 
     @FXML
     private void handleHomeHelp() {
-        if (_player.isVisible()) {
-            player.stop();
-        }
-        buttonPane.setVisible(false);
-        _player.setVisible(false);
-        startUp.setVisible(true);
-
     }
-
 }

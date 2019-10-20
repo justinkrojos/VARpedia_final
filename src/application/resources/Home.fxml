@@ -37,7 +37,7 @@
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font></Button>
-      <TabPane fx:id="creationCategories" layoutX="26.0" layoutY="174.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="554.0" prefWidth="431.0" style="-fx-background-radius: 20;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="creationCategories" layoutX="26.0" layoutY="174.0" prefHeight="554.0" prefWidth="431.0" style="-fx-background-radius: 20;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab style="-fx-font: 20px &quot;Manjari Thin&quot;" text="All Creations">
             <content>
@@ -73,7 +73,7 @@
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font></Button>
-      <Button fx:id="btnPlay" layoutX="484.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="71.0" prefWidth="448.0" style="-fx-background-radius: 20 0 0 0; -fx-border-radius: 20 0 0 0; -fx-border-color: green; -fx-border-width: 5; -fx-background-color: rgba(0, 255, 0, 0.7);" text="P L A Y" textFill="WHITE">
+      <Button fx:id="btnPlay" disable="true" layoutX="484.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="71.0" prefWidth="448.0" style="-fx-background-radius: 20 0 0 0; -fx-border-radius: 20 0 0 0; -fx-border-color: green; -fx-border-width: 5; -fx-background-color: rgba(0, 255, 0, 0.7);" text="P L A Y" textFill="WHITE">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -81,12 +81,12 @@
             <Font name="Manjari Regular" size="28.0" />
          </font>
       </Button>
-      <Button fx:id="btnDel" layoutX="931.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="71.0" prefWidth="203.0" style="-fx-background-radius: 0 20 0 0; -fx-border-radius: 0 20 0 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.5);" text="D E L E T E" textFill="WHITE">
+      <Button fx:id="btnDel" disable="true" layoutX="931.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="71.0" prefWidth="203.0" style="-fx-background-radius: 0 20 0 0; -fx-border-radius: 0 20 0 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.5);" text="D E L E T E" textFill="WHITE">
          <font>
             <Font name="Manjari Regular" size="28.0" />
          </font>
       </Button>
-      <ToggleButton fx:id="btnFavourite" layoutX="484.0" layoutY="709.0" mnemonicParsing="false" onAction="#handleBtnFavourite" prefHeight="71.0" prefWidth="650.0" style="-fx-background-radius: 0 0 20 20; -fx-border-color: yellow; -fx-border-width: 5; -fx-border-radius: 0 0 20 20; -fx-background-color: rgba(255, 255, 0, 0.5);" text="F A V O U R I T E" textFill="WHITE" wrapText="true">
+      <ToggleButton fx:id="btnFavourite" disable="true" layoutX="484.0" layoutY="709.0" mnemonicParsing="false" onAction="#handleBtnFavourite" prefHeight="71.0" prefWidth="650.0" style="-fx-background-radius: 0 0 20 20; -fx-border-color: yellow; -fx-border-width: 5; -fx-border-radius: 0 0 20 20; -fx-background-color: rgba(255, 255, 0, 0.5);" text="F A V O U R I T E" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Manjari Regular" size="28.0" />
          </font>
