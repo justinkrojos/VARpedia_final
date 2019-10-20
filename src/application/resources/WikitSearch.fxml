@@ -38,9 +38,14 @@
                         <Font name="Manjari Regular" size="40.0" />
                     </font>
                 </Label>
-            <Label alignment="CENTER" layoutX="73.0" layoutY="132.0" prefHeight="72.0" prefWidth="546.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-width: 5;" text="Step 1: Search for a term" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="73.0" layoutY="132.0" prefHeight="72.0" prefWidth="546.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-width: 5;" text="Step 1: Search for a term!" textAlignment="CENTER">
                <font>
                   <Font name="Manjari Regular" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="74.0" layoutY="346.0" prefHeight="72.0" prefWidth="339.0" text="Invalid search term. Please try again :(" textAlignment="CENTER" textFill="RED" visible="false">
+               <font>
+                  <Font name="Manjari Thin" size="20.0" />
                </font>
             </Label>
             </children>

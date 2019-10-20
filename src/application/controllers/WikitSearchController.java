@@ -6,10 +6,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.media.MediaPlayer;
 
 import java.util.concurrent.ExecutorService;
@@ -33,6 +30,9 @@ public class WikitSearchController {
     private TextField _termField;
 
     @FXML
+    private Label errorLabel;
+
+    @FXML
     private void handleBtnSearch() throws IOException {
 
         WikitSearchTask task = new WikitSearchTask(_termField.getText());
@@ -42,18 +42,16 @@ public class WikitSearchController {
         btnSearch.setDisable(true);
         _termField.setDisable(true);
         btnSearch.setText("Searching...");
+        errorLabel.setVisible(false);
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
                 //TODO What happens when wikit search fails?? invalid wikie searches not handled.
                 if (_termField.getText().isEmpty() | task.getExit() != 0 | task.getOutput().equals( _termField.getText()+" not found :^(")) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Wikit Search");
-                    alert.setHeaderText("Please enter a valid search term");
-                    alert.setContentText("Enter a valid search term and try again.");
-                    alert.showAndWait();
+                    errorLabel.setVisible(true);
                     btnSearch.setDisable(false);
                     btnSearch.setText("Search");
+                    _termField.setDisable(false);
                     return;
                 }
                 else {
