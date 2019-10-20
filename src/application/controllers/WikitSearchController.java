@@ -40,14 +40,21 @@ public class WikitSearchController {
 
 
         btnSearch.setDisable(true);
+        errorLabel.setVisible(false);
         _termField.setDisable(true);
         btnSearch.setText("Searching...");
-        errorLabel.setVisible(false);
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
                 //TODO What happens when wikit search fails?? invalid wikie searches not handled.
                 if (_termField.getText().isEmpty() | task.getExit() != 0 | task.getOutput().equals( _termField.getText()+" not found :^(")) {
+                   /* Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Wikit Search");
+                    alert.setHeaderText("Please enter a valid search term");
+                    alert.setContentText("Enter a valid search term and try again.");
+                    alert.showAndWait();
+
+                    */
                     errorLabel.setVisible(true);
                     btnSearch.setDisable(false);
                     btnSearch.setText("Search");
