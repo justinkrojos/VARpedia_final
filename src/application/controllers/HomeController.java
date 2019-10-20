@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -98,19 +99,18 @@ public class HomeController {
             public void handle(MouseEvent mouseEvent) {
 
                 selectItem();
-
-                if (_favouriteList.getItems().size() > 2) {
                     try {
                         sortFavourites();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                }
+
 
                 if (_selectedItem != null) {
                     if (player != null) {
                         btnPlay.setDisable(true);
                         btnDel.setDisable(true);
+                        btnFavourite.setDisable(true);
                     }
                     else {
                         btnPlay.setDisable(false);
@@ -120,6 +120,7 @@ public class HomeController {
                     if (_favouriteList.getItems().contains(_selectedItem)) {
                         btnFavourite.setText("U N F A V O U R I T E");
                         btnFavourite.setSelected(true);
+                        btnFavourite.setOpacity(0.7);
                     }
                     else {
                         btnFavourite.setText("F A V O U R I T E");
@@ -135,18 +136,18 @@ public class HomeController {
 
                 selectItem();
 
-                if (_favouriteList.getItems().size() > 2) {
                     try {
                         sortFavourites();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                }
+
 
                 if (_selectedItem != null) {
                     if (player != null) {
                         btnPlay.setDisable(true);
                         btnDel.setDisable(true);
+                        btnFavourite.setDisable(true);
                     }
                     else {
                         btnPlay.setDisable(false);
@@ -156,6 +157,7 @@ public class HomeController {
                     if (_favouriteList.getItems().contains(_selectedItem)) {
                         btnFavourite.setText("U N F A V O U R I T E");
                         btnFavourite.setSelected(true);
+                        btnFavourite.setOpacity(0.7);
                     }
                     else {
                         btnFavourite.setText("F A V O U R I T E");
@@ -165,24 +167,64 @@ public class HomeController {
             }
         });
 
-        try {
-            sortFavourites();
-        } catch (FileNotFoundException e) {
-            // do nothing
-        }
+        btnPlay.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnPlay.setOpacity(0.7);
+            }
+        });
+
+        btnPlay.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnPlay.setOpacity(1.0);
+            }
+        });
+
+        btnDel.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnDel.setOpacity(0.7);
+            }
+        });
+
+        btnDel.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnDel.setOpacity(1.0);
+            }
+        });
+
+        btnFavourite.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnFavourite.setOpacity(0.7);
+            }
+        });
+
+        btnFavourite.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnFavourite.setOpacity(1.0);
+            }
+        });
+
     }
 
     public void sortFavourites() throws FileNotFoundException {
 
-        String allFavourites = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A").next();
+        if (_favouriteList.getItems().size() > 2) {
 
-        String[] favouriteArray = allFavourites.split(".mp4 ");
+            String allFavourites = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A").next();
 
-        Arrays.sort(favouriteArray);
+            String[] favouriteArray = allFavourites.split(".mp4 ");
 
-        _favouriteList.getItems().clear();
-        for (int i = 1; i < favouriteArray.length; i++) {
-            _favouriteList.getItems().add(favouriteArray[i]);
+            Arrays.sort(favouriteArray);
+
+            _favouriteList.getItems().clear();
+            for (int i = 1; i < favouriteArray.length; i++) {
+                _favouriteList.getItems().add(favouriteArray[i]);
+            }
         }
     }
 
@@ -202,39 +244,56 @@ public class HomeController {
     @FXML
     private void handleBtnPlay() {
 
-        btnPlay.setDisable(true);
-        btnDel.setDisable(true);
+        if (btnPlay.getText().equals("S T O P   P L A Y I N G")) {
+            btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
+            btnPlay.setText("P L A Y   C R E A T I O N");
+            btnDel.setDisable(false);
+            btnFavourite.setDisable(false);
+            player.stop();
+            player = null;
+            _player.getChildren().clear();
+        }
 
-        _player.getChildren().removeAll();
-        _player.getChildren().clear();
-        File fileUrl = new File(Main.getCreationDir()+"/"+_selectedItem+".mp4");
-        Media video = new Media(fileUrl.toURI().toString());
-        player = new MediaPlayer(video);
-        player.setAutoPlay(true);
-        MediaView mediaView = new MediaView(player);
-        mediaView.setFitWidth(_player.getWidth());
-        mediaView.setFitHeight(_player.getHeight());
-        player.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                //Some observable map thing goes here.
-
-            }
-        });
-        player.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                _player.getChildren().removeAll();
-                _player.getChildren().clear();
-                player = null;
-                btnPlay.setDisable(false);
-                btnDel.setDisable(false);
-            }
-        });
+        else {
 
 
+            btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.5); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
+            btnPlay.setText("S T O P   P L A Y I N G");
 
-        _player.getChildren().add(mediaView);
+            btnFavourite.setDisable(true);
+            btnDel.setDisable(true);
+
+            _player.getChildren().removeAll();
+            _player.getChildren().clear();
+            File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
+            Media video = new Media(fileUrl.toURI().toString());
+            player = new MediaPlayer(video);
+            player.setAutoPlay(true);
+            MediaView mediaView = new MediaView(player);
+            mediaView.setFitWidth(_player.getWidth());
+            mediaView.setFitHeight(_player.getHeight());
+            player.setOnReady(new Runnable() {
+                @Override
+                public void run() {
+                    //Some observable map thing goes here.
+
+                }
+            });
+            player.setOnEndOfMedia(new Runnable() {
+                @Override
+                public void run() {
+                    _player.getChildren().removeAll();
+                    _player.getChildren().clear();
+                    player = null;
+                    btnPlay.setDisable(false);
+                    btnDel.setDisable(false);
+                    btnFavourite.setDisable(false);
+                }
+            });
+
+
+            _player.getChildren().add(mediaView);
+        }
     }
 
     /**
@@ -291,10 +350,7 @@ public class HomeController {
 
     @FXML
     public void handleBtnFavourite() throws IOException, InterruptedException {
-        if (_selectedItem == null) {
-            alertNullSelection();
-        }
-        else if (btnFavourite.isSelected()) {
+        if (btnFavourite.isSelected()) {
             _favouriteList.getItems().add(_selectedItem);
             btnFavourite.setText("U N F A V O U R I T E");
 
@@ -360,17 +416,6 @@ public class HomeController {
             _selectedItem = (String) _favouriteList.getSelectionModel().getSelectedItem();
         }
         //System.out.println(_selectedItem);
-    }
-
-    /**
-     * A alert for when no collection is selected.
-     */
-    private void alertNullSelection() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Please Select A Creation");
-        alert.setHeaderText("No item has been selected.");
-        alert.setContentText("Please select a creation");
-        alert.showAndWait();
     }
 
     @FXML
