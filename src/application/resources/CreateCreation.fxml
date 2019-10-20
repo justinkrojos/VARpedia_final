@@ -28,7 +28,7 @@
                   <Font name="Manjari Regular" size="30.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="textActions" layoutX="652.0" layoutY="131.0" prefHeight="587.0" prefWidth="479.0" style="-fx-border-color: white; -fx-border-width: 5; -fx-background-color: rgba(255, 255, 255, 0.5);" visible="false">
+            <AnchorPane fx:id="textActions" layoutX="652.0" layoutY="131.0" prefHeight="587.0" prefWidth="479.0" style="-fx-border-color: white; -fx-border-width: 5; -fx-background-color: rgba(255, 255, 255, 0.5);">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="16.0" prefHeight="54.0" prefWidth="203.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select a voice" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -62,12 +62,12 @@
                   <Font name="Manjari Regular" size="20.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" layoutX="652.0" layoutY="89.0" prefHeight="42.0" prefWidth="479.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Step 2: Save Some Audio" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="652.0" layoutY="89.0" prefHeight="42.0" prefWidth="479.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Step 2: Save Some Audio!" textAlignment="CENTER">
                <font>
                   <Font name="Manjari Regular" size="25.0" />
                </font>
             </Label>
-            <Pane layoutX="27.0" layoutY="89.0" prefHeight="686.0" prefWidth="609.0" visible="false">
+            <Pane fx:id="textPane" layoutX="27.0" layoutY="89.0" prefHeight="686.0" prefWidth="609.0">
                <children>
                   <Label alignment="CENTER" prefHeight="48.0" prefWidth="417.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select some text to get started:" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -81,15 +81,15 @@
                   </TextArea>
                </children>
             </Pane>
-            <Pane layoutX="26.0" layoutY="135.0" prefHeight="587.0" prefWidth="1107.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);">
+            <Pane fx:id="editorPane" layoutX="26.0" layoutY="129.0" prefHeight="593.0" prefWidth="1107.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" visible="false">
                <children>
-                  <ListView fx:id="savedText1" editable="true" layoutX="31.0" layoutY="65.0" prefHeight="485.0" prefWidth="596.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
+                  <ListView fx:id="savedTextEdit" editable="true" layoutX="31.0" layoutY="65.0" prefHeight="485.0" prefWidth="596.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
                   <Label alignment="CENTER" layoutX="31.0" layoutY="25.0" prefHeight="42.0" prefWidth="479.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Click on the text to edit it!" textAlignment="CENTER">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="voicesChoiceBox1" layoutX="847.0" layoutY="274.0" prefHeight="54.0" prefWidth="246.0" style="-fx-background-color: white; -fx-font: 20px &quot;Manjari Thin&quot;; -fx-background-radius: 0 20 20 0;" value="Default">
+                  <ChoiceBox fx:id="voicesChoiceBoxEdit" layoutX="847.0" layoutY="197.0" prefHeight="54.0" prefWidth="246.0" style="-fx-background-color: white; -fx-font: 20px &quot;Manjari Thin&quot;; -fx-background-radius: 0 20 20 0;" value="Default">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Default" />
@@ -98,42 +98,50 @@
                         </FXCollections>
                      </items>
                   </ChoiceBox>
-                  <Label alignment="CENTER" layoutX="644.0" layoutY="274.0" prefHeight="54.0" prefWidth="203.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Change voice" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="644.0" layoutY="197.0" prefHeight="54.0" prefWidth="203.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Change voice" textAlignment="CENTER">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnPreviewAudio1" layoutX="642.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="449.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="Preview Selected Text">
+                  <Button fx:id="btnPreviewAudioEdit" layoutX="642.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="449.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="Preview New Changes">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <TextArea layoutX="644.0" layoutY="340.0" prefHeight="146.0" prefWidth="449.0" />
-                  <Label alignment="CENTER" layoutX="644.0" layoutY="219.0" prefHeight="42.0" prefWidth="449.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Edit Voice and Text" textAlignment="CENTER">
+                  <TextArea fx:id="editTextArea" layoutX="644.0" layoutY="266.0" prefHeight="146.0" prefWidth="449.0" promptText="Edit your text here..." wrapText="true">
+                     <font>
+                        <Font name="Manjari Thin" size="20.0" />
+                     </font></TextArea>
+                  <Label alignment="CENTER" layoutX="644.0" layoutY="142.0" prefHeight="42.0" prefWidth="449.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Edit Voice and Text" textAlignment="CENTER">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnPreviewAudio11" layoutX="806.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="287.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: yellow; -fx-border-width: 5;" text="Save New Changes">
+                  <Button fx:id="btnSaveChanges" layoutX="806.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="287.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: yellow; -fx-border-width: 5;" text="Save New Changes">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnPreviewAudio12" layoutX="642.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="221.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20 0 0 20; -fx-border-color: white; -fx-border-width: 5;" text="Move Down">
+                  <Button fx:id="btnMoveDown" layoutX="642.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleMoveDown" prefHeight="54.0" prefWidth="227.0" style="-fx-background-radius: 0 0 0 20; -fx-border-radius: 0 0 0 20; -fx-border-color: white; -fx-border-width: 5;" text="Move Down">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnPreviewAudio121" layoutX="863.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="221.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Move Up">
+                  <Button fx:id="btnMoveUp" layoutX="863.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleMoveUp" prefHeight="54.0" prefWidth="227.0" style="-fx-background-radius: 0 0 20 0; -fx-border-radius: 0 0 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Move Up">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnPreviewAudio13" layoutX="642.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="144.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: red; -fx-border-width: 5;" text="Exit Editor">
+                  <Button fx:id="btnExitEditor" layoutX="642.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="144.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: red; -fx-border-width: 5;" text="Exit Editor">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
+                  <Label alignment="CENTER" layoutX="641.0" layoutY="25.0" prefHeight="42.0" prefWidth="449.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Edit Position" textAlignment="CENTER">
+                     <font>
+                        <Font name="Manjari Regular" size="25.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>

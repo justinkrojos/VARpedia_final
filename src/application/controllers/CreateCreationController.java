@@ -14,10 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -26,6 +23,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -38,34 +36,9 @@ public class CreateCreationController {
     private ArrayList<String> voicesList = new ArrayList<String>();
 
     @FXML
-    private Button _btnSelectImages;
-
-    @FXML
-    private AnchorPane _ap;
-
-    @FXML
-    private TextField _numImageField;
-
-    @FXML
-    private Button btnImage;
-
-    @FXML
-    private Button btnCheckCreationName;
-
-    @FXML
     private TextArea _textArea;
 
-
     public String _termField;
-
-    @FXML
-    private Button btnSearch;
-
-    @FXML
-    private AnchorPane searchPane;
-
-    @FXML
-    private AnchorPane saveAudioPane;
 
     @FXML
     private Label searchConfirmation;
@@ -77,50 +50,15 @@ public class CreateCreationController {
     private Button btnNext;
 
     @FXML
-    private AnchorPane textActions;
-
-    @FXML
-    private TextField _creationNameField;
-
-    @FXML
-    private Button btnPlay;
-
-    @FXML
-    private Button btnSave;
-
-
-    @FXML
-    private Button btnCreate;
-
-
-    @FXML
-    private TextField _audioName;
-
-    @FXML
-    private ListView<HBox> _audioList;
-
-    @FXML
     private ChoiceBox<String> voicesChoiceBox;
 
     @FXML
-    private ChoiceBox<String> voicesChoiceBox1;
-
-    @FXML
-    private Button btnPreviewAudio;
-
-    @FXML
-    private Button btnStopAudio;
-
-    private Button btnDeleteAudio; // dynamically added
-
-    private Stage _currentStage;
-    private HomeController _homeController;
-    private WelcomeController _welcomeController;
+            private ChoiceBox<String> voicesChoiceBoxEdit;
 
     MediaPlayer bgmusic;
 
     @FXML
-            private ToggleButton music;
+    private ToggleButton music;
 
     FXMLLoader loader;
 
@@ -128,15 +66,100 @@ public class CreateCreationController {
      * Check if creation name is taken, and if so let the user pick if they want to overwrite
      */
     @FXML
-    private Button btnSaveAudioFile;
+    private Button btnPreviewAudioEdit;
 
-    ArrayList<String> existingAudio = new ArrayList<String>();
+    @FXML
+            private TextArea editTextArea;
+
+    @FXML
+            private ListView<Label> savedTextEdit;
+
+    @FXML
+            private Button btnSaveChanges;
+
+    @FXML
+            private Button btnMoveDown;
+
+    @FXML
+            private Button btnMoveUp;
+
+    @FXML
+            private Button btnExitEditor;
+
+    @FXML
+            private Pane textActions;
+
+    @FXML
+            private Pane textPane;
+
+    @FXML
+            private Pane editorPane;
+
 
     public void initialize(){
         voicesList.clear();
         btnNext.setDisable(true);
 
+        savedText.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                editorPane.setVisible(true);
+                btnNext.setVisible(false);
+                textPane.setVisible(false);
+                textActions.setVisible(false);
+                updateListViews();
+            }
+        });
+
+        savedTextEdit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (savedTextEdit.getSelectionModel().getSelectedItem() != null) {
+                    editTextArea.setText(savedTextEdit.getSelectionModel().getSelectedItem().getText());
+                        voicesChoiceBoxEdit.setValue(voicesList.get(savedTextEdit.getSelectionModel().getSelectedIndex()));
+                }
+            }
+        });
         // _currentStage = (Stage) _ap.getScene().getWindow();
+    }
+
+    @FXML
+    private void handleMoveUp() {
+        Label l = savedTextEdit.getSelectionModel().getSelectedItem();
+        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
+        if (i == 0) {
+
+        }
+        else {
+            savedTextEdit.getItems().remove(i);
+            savedTextEdit.getItems().add(i - 1, l);
+            Collections.swap(voicesList, i, i - 1);
+            savedTextEdit.getSelectionModel().select(i - 1);
+        }
+
+
+    }
+
+    @FXML
+    private void handleMoveDown() {
+        Label l = savedTextEdit.getSelectionModel().getSelectedItem();
+        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
+        if (i == savedTextEdit.getItems().size() - 1) {
+
+        }
+        else {
+            savedTextEdit.getItems().remove(i);
+            savedTextEdit.getItems().add(i + 1, l);
+            Collections.swap(voicesList, i, i + 1);
+            savedTextEdit.getSelectionModel().select(i + 1);
+        }
+
+    }
+
+    public void updateListViews() {
+        for (int i = 0; i < savedText.getItems().size(); i++) {
+            savedTextEdit.getItems().add(savedText.getItems().get(i));
+        }
     }
 
     @FXML
@@ -159,7 +182,11 @@ public class CreateCreationController {
     @FXML
     public void handleAudioPreview() throws IOException {
 
-        PreviewAudioTask previewAudioTask = new PreviewAudioTask(_textArea.getSelectedText(), getVoicesObject(voicesChoiceBox.getSelectionModel().getSelectedItem()).getVoicePackage());
+        if (editorPane.isVisible()) {
+            PreviewAudioTask previewAudioTask = new PreviewAudioTask(editTextArea.getText(), getVoicesObject(voicesChoiceBoxEdit.getSelectionModel().getSelectedItem()).getVoicePackage());
+            team.submit(previewAudioTask);
+        } else {
+            PreviewAudioTask previewAudioTask = new PreviewAudioTask(_textArea.getSelectedText(), getVoicesObject(voicesChoiceBox.getSelectionModel().getSelectedItem()).getVoicePackage());
 
             if (_textArea.getSelectedText().split("\\s+").length > 30) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -167,13 +194,13 @@ public class CreateCreationController {
                 alert.setHeaderText("Word Maximum Exceeded");
                 alert.setContentText("Please highlight a maximum of 30 words and try again.");
                 alert.showAndWait();
-            }
-            else {
+            } else {
 
                 team.submit(previewAudioTask);
 
             }
         }
+    }
 
 
     /**
