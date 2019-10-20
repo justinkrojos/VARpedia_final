@@ -132,15 +132,11 @@ public class SelectImageController {
 
                 File[] files = dir.listFiles();
                 for (File file: files) {
-                    //_images.add();
-                    System.out.println(file.getAbsolutePath());
-                    _images.add(new Image(file.toURI().toString()));
+                    _images.add(new Image(file.toURI().toString(), 200, 150, false, false));
                 }
                 int count = 0;
                 for (ImageView i: _imageViews) {
-                    System.out.println(_images.get(count));
                     i.setImage(_images.get(count));
-
                     count++;
                 }
 
