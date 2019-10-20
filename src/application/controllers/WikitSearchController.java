@@ -61,6 +61,7 @@ public class WikitSearchController {
                         FXMLLoader loader = Main.changeScene("resources/CreateCreation.fxml");
                         CreateCreationController createCreationController = loader.<CreateCreationController>getController();
                         createCreationController.transferTerm(_termField.getText(), task.getOutput());
+                        createCreationController.transferMusic(bgmusic, music.isSelected(), music.getText());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
