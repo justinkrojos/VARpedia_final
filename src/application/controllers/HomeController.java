@@ -257,7 +257,7 @@ public class HomeController {
         else {
 
 
-            btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.5); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
+            btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.8); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
             btnPlay.setText("S T O P   P L A Y I N G");
 
             btnFavourite.setDisable(true);
@@ -270,8 +270,9 @@ public class HomeController {
             player = new MediaPlayer(video);
             player.setAutoPlay(true);
             MediaView mediaView = new MediaView(player);
-            mediaView.setFitWidth(_player.getWidth());
-            mediaView.setFitHeight(_player.getHeight());
+            mediaView.fitWidthProperty().bind(_player.widthProperty());
+            mediaView.fitHeightProperty().bind(_player.heightProperty());
+            mediaView.setPreserveRatio(false);
             player.setOnReady(new Runnable() {
                 @Override
                 public void run() {
@@ -288,6 +289,8 @@ public class HomeController {
                     btnPlay.setDisable(false);
                     btnDel.setDisable(false);
                     btnFavourite.setDisable(false);
+                    btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
+                    btnPlay.setText("P L A Y   C R E A T I O N");
                 }
             });
 

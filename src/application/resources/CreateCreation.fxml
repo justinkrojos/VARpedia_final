@@ -87,9 +87,9 @@
                   </TextArea>
                </children>
             </Pane>
-            <Pane fx:id="editorPane" layoutX="26.0" layoutY="129.0" prefHeight="593.0" prefWidth="1107.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" visible="false">
+            <Pane fx:id="editorPane" visible="false" layoutX="26.0" layoutY="129.0" prefHeight="593.0" prefWidth="1104.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="512.0" layoutX="633.0" layoutY="51.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="461.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="593.0" layoutX="627.0" stroke="WHITE" strokeType="INSIDE" width="479.0" />
                   <ListView fx:id="savedTextEdit" editable="true" layoutX="31.0" layoutY="65.0" prefHeight="497.0" prefWidth="534.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
                   <Label alignment="CENTER" layoutX="31.0" layoutY="25.0" prefHeight="42.0" prefWidth="534.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Click on the text to edit it!" textAlignment="CENTER">
                      <font>
@@ -105,7 +105,7 @@
                         </FXCollections>
                      </items>
                   </ChoiceBox>
-                  <Label alignment="CENTER" layoutX="644.0" layoutY="197.0" prefHeight="54.0" prefWidth="203.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Change voice" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="644.0" layoutY="197.0" prefHeight="54.0" prefWidth="203.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Change voice" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
