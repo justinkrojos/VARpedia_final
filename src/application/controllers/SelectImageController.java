@@ -8,7 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
@@ -61,6 +63,17 @@ public class SelectImageController {
     @FXML private CheckBox _cb8;
     @FXML private CheckBox _cb9;
 
+    @FXML
+    private ToggleButton music;
+
+    MediaPlayer bgmusic;
+
+    @FXML
+    private AnchorPane imagePane;
+
+    @FXML
+    private Button downloadImgBtn;
+
     private ArrayList<ImageView> _imageViews;
     private ArrayList<CheckBox> _checkBoxs;
 
@@ -87,6 +100,7 @@ public class SelectImageController {
             alert.showAndWait();
             return;
         }
+
         String creationDir = Main.getCreationDir();
         String creationFile = creationDir + "/" + creationName.getText();
         //String cmd = "[ -e " + creationFile + " ]";
@@ -112,10 +126,14 @@ public class SelectImageController {
                     ProcessBuilder overwritePB = new ProcessBuilder("bash", "-c", cmdOverwrite);
                     Process overwriteP = overwritePB.start();
                     overwriteP.waitFor();
-                    createNewDir(creationFile);
                 }
-                return;
+                else {
+                    return;
+                }
             }
+            downloadImgBtn.setDisable(true);
+            downloadImgBtn.setText("Loading...");
+            creationName.setDisable(true);
             createNewDir(creationFile);
 
 
@@ -128,6 +146,8 @@ public class SelectImageController {
         dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
+                imagePane.setVisible(true);
+                downloadImgBtn.setText("Done");
                 dir = new File(Main.getCreationDir()+"/"+creationName.getText()+"/"+"images/");
 
                 File[] files = dir.listFiles();
@@ -237,5 +257,30 @@ public class SelectImageController {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleBtnBack() throws IOException {
+        FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
+        WelcomeController welcomeController = loader.<WelcomeController>getController();
+        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
+    }
+
+    @FXML
+    private void handleMusic() {
+        if (music.isSelected()) {
+            music.setText("Music: OFF");
+            bgmusic.pause();
+        }
+        else {
+            music.setText("Music: ON");
+            bgmusic.play();
+        }
+    }
+
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
+        this.bgmusic = bgmusic;
+        music.setSelected(toggle);
+        music.setText(text);
     }
 }

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,88 +17,97 @@
             <Image url="@woodtexture.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="20.0" layoutY="178.0" prefHeight="632.0" prefWidth="1124.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: yellow;">
+      <AnchorPane fx:id="imagePane" layoutX="89.0" layoutY="214.0" prefHeight="570.0" prefWidth="987.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: yellow;" visible="false">
          <children>
-            <Label alignment="CENTER" layoutX="103.0" layoutY="-49.0" prefHeight="48.0" prefWidth="920.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select up to 10 images to include in your video" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Manjari Regular" size="30.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="_cb0" ellipsisString="" layoutX="207.0" layoutY="36.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb0" ellipsisString="" layoutX="136.0" layoutY="15.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv0" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb1" ellipsisString="" layoutX="450.0" layoutY="36.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb1" ellipsisString="" layoutX="379.0" layoutY="15.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb3" ellipsisString="" layoutX="693.0" layoutY="36.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb3" ellipsisString="" layoutX="622.0" layoutY="15.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb4" ellipsisString="" layoutX="85.0" layoutY="188.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb4" ellipsisString="" layoutX="14.0" layoutY="167.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb2" ellipsisString="" layoutX="328.0" layoutY="188.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb2" ellipsisString="" layoutX="257.0" layoutY="167.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb5" ellipsisString="" layoutX="571.0" layoutY="188.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb5" ellipsisString="" layoutX="500.0" layoutY="167.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb6" ellipsisString="" layoutX="814.0" layoutY="188.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb6" ellipsisString="" layoutX="743.0" layoutY="167.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb7" ellipsisString="" layoutX="206.0" layoutY="340.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb7" ellipsisString="" layoutX="135.0" layoutY="319.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv7" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb8" ellipsisString="" layoutX="449.0" layoutY="340.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb8" ellipsisString="" layoutX="378.0" layoutY="319.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv8" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb9" ellipsisString="" layoutX="692.0" layoutY="340.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
+            <CheckBox fx:id="_cb9" ellipsisString="" layoutX="621.0" layoutY="319.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <Button layoutX="274.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleBtnSubmit" prefHeight="74.0" prefWidth="564.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="C R E A T E   Y O U R   C R E A T I O N">
+            <Button layoutX="210.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleBtnSubmit" prefHeight="74.0" prefWidth="564.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="C R E A T E   Y O U R   C R E A T I O N">
                <font>
                   <Font name="Manjari Regular" size="30.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="188.0" layoutY="14.0" prefHeight="121.0" prefWidth="789.0">
+      <AnchorPane layoutX="154.0" layoutY="87.0" prefHeight="121.0" prefWidth="870.0">
          <children>
-            <TextField fx:id="creationName" layoutX="306.0" layoutY="13.0" prefHeight="72.0" prefWidth="357.0" promptText="Enter name here..." style="-fx-background-color: white; -fx-background-radius: 0;">
+            <TextField fx:id="creationName" layoutX="276.0" layoutY="13.0" prefHeight="72.0" prefWidth="408.0" promptText="Enter name here..." style="-fx-background-color: white; -fx-background-radius: 0;">
                <font>
                   <Font name="Manjari Thin" size="30.0" />
                </font>
             </TextField>
-            <Label alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="72.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 20 0 0 20; -fx-opacity: 0.8; -fx-border-radius: 20 0 0 20; -fx-border-color: red; -fx-border-width: 5;" text="Name your creation:" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="72.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 20 0 0 20; -fx-opacity: 0.8; -fx-border-radius: 20 0 0 20; -fx-border-color: red; -fx-border-width: 5;" text="Name your creation:" textAlignment="CENTER">
                <font>
                   <Font name="Manjari Regular" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="663.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleBtnDownload" prefHeight="72.0" prefWidth="108.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Okay">
+            <Button fx:id="downloadImgBtn" layoutX="684.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleBtnDownload" prefHeight="72.0" prefWidth="162.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Okay">
                <font>
                   <Font name="Manjari Thin" size="20.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
+      <Label alignment="CENTER" layoutX="213.0" layoutY="23.0" prefHeight="54.0" prefWidth="752.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Step 3: Name your creation! Make your slideshow!" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Manjari Regular" size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="162.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10; -fx-border-radius: 10;" text="Back to Menu">
+         <font>
+            <Font name="Manjari Thin" size="20.0" />
+         </font></Button>
+      <ToggleButton fx:id="music" layoutX="990.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 5;" text="Music: ON">
+      <font>
+         <Font name="Manjari Thin" size="20.0" />
+      </font>
+   </ToggleButton>
    </children>
 </AnchorPane>

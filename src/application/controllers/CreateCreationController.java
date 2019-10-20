@@ -152,6 +152,7 @@ public class CreateCreationController {
         loader = Main.changeScene("resources/SelectImage.fxml");
         SelectImageController selectImageController = loader.<SelectImageController>getController();
         selectImageController.transferInfo(_termField, finalText);
+        selectImageController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
 
 
@@ -285,8 +286,6 @@ public class CreateCreationController {
         this._textArea.setText(_textArea);
         searchConfirmation.setText(searchConfirmation.getText() + " " + _termField);
     }
-
-
 
     @FXML
     private void handleBtnBack() throws IOException {
