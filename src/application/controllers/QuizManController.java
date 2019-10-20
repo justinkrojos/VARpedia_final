@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This class manages the quiz manager scene. Manages deleting a quiz video.
+ */
 public class QuizManController {
 
     private final File _folder = new File(Main.getQuizDir());
@@ -26,13 +29,16 @@ public class QuizManController {
         updateListTree();
     }
 
+    /**
+     * Deleted selected mp4 in quiz folder.
+     */
     @FXML
     private void handleBtnDelete() {
         if (_selectedItem == null) {
             return;
         }
         File file = new File(Main.getQuizDir()+System.getProperty("file.separator") + _selectedItem + ".mp4");
-        System.out.println(file.getAbsolutePath());
+        //System.out.println(file.getAbsolutePath());
         file.delete();
 
         updateListTree();
@@ -45,6 +51,9 @@ public class QuizManController {
 
     /**
      * Get the creations in the folder into an arrylist sorted.
+     *
+     * Code copied from:
+     * https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
      * @param folder
      * @return
      */
@@ -61,6 +70,9 @@ public class QuizManController {
         return list;
     }
 
+    /**
+     * Get the selected item from list view.
+     */
     @FXML
     private void selectItem() {
         _selectedItem = (String) _listView.getSelectionModel().getSelectedItem();
