@@ -110,7 +110,7 @@ public class HomeController {
                 selectItem();
                     try {
                         sortFavourites();
-                    } catch (FileNotFoundException e) {
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
 
@@ -147,7 +147,7 @@ public class HomeController {
 
                     try {
                         sortFavourites();
-                    } catch (FileNotFoundException e) {
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
 
@@ -220,11 +220,24 @@ public class HomeController {
 
     }
 
-    public void sortFavourites() throws FileNotFoundException {
+    public void sortFavourites() throws IOException, InterruptedException {
+
+        String listOfFavourites = " ";
+
+        for (int i = 0; i < _favouriteList.getItems().size(); i++) {
+            listOfFavourites += _favouriteList.getItems().get(i) + ".mp4 ";
+        }
+
+        String cmd = "echo -e '" + listOfFavourites + "' > " + Main.getFavouriteDir() + "/favourites.txt";
+
+        ProcessBuilder getFavouritespb = new ProcessBuilder("bash", "-c", cmd);
+        Process getFavouritesprocess = getFavouritespb.start();
+        getFavouritesprocess.waitFor();
 
         if (_favouriteList.getItems().size() > 2) {
 
             String allFavourites = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A").next();
+            allFavourites.trim();
 
             String[] favouriteArray = allFavourites.split(".mp4 ");
 
@@ -350,7 +363,7 @@ public class HomeController {
      * Delete a creation.
      */
     @FXML
-    private void handleBtnDel() {
+    private void handleBtnDel() throws IOException, InterruptedException {
         //System.out.println("Deleting");
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -360,6 +373,7 @@ public class HomeController {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
+            _favouriteList.getItems().remove(_selectedItem);
             //String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem;
             String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4";
             ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
@@ -372,6 +386,7 @@ public class HomeController {
                 e.printStackTrace();
             }
             updateListTree();
+            sortFavourites();
         }
     }
 
@@ -409,18 +424,6 @@ public class HomeController {
             _favouriteList.getItems().remove(_selectedItem);
             btnFavourite.setText("F A V O U R I T E");
         }
-
-        String listOfFavourites = new String();
-
-        for (int i = 0; i < _favouriteList.getItems().size(); i++) {
-            listOfFavourites += _favouriteList.getItems().get(i) + ".mp4 ";
-        }
-
-        String cmd = "echo -e '" + listOfFavourites + "' > " + Main.getFavouriteDir() + "/favourites.txt";
-
-        ProcessBuilder getFavouritespb = new ProcessBuilder("bash", "-c", cmd);
-        Process getFavouritesprocess = getFavouritespb.start();
-        getFavouritesprocess.waitFor();
 
         try {
             sortFavourites();
