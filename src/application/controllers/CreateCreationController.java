@@ -95,6 +95,9 @@ public class CreateCreationController {
     @FXML
             private Pane editorPane;
 
+    @FXML
+    private Button btnDelEditor;
+
 
     public void initialize(){
         voicesList.clear();
@@ -117,10 +120,57 @@ public class CreateCreationController {
                 if (savedTextEdit.getSelectionModel().getSelectedItem() != null) {
                     editTextArea.setText(savedTextEdit.getSelectionModel().getSelectedItem().getText());
                         voicesChoiceBoxEdit.setValue(voicesList.get(savedTextEdit.getSelectionModel().getSelectedIndex()));
+                        btnDelEditor.setDisable(false);
+                        btnMoveDown.setDisable(false);
+                        btnMoveUp.setDisable(false);
+                        btnPreviewAudioEdit.setDisable(false);
+                        btnSaveChanges.setDisable(false);
+                        editTextArea.setDisable(false);
+                        voicesChoiceBoxEdit.setDisable(false);
                 }
             }
         });
-        // _currentStage = (Stage) _ap.getScene().getWindow();
+
+        savedText.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                savedText.setOpacity(0.7);
+            }
+        });
+
+        savedText.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                savedText.setOpacity(1.0);
+            }
+        });
+
+        btnNext.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnNext.setOpacity(0.7);
+            }
+        });
+
+        btnNext.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnNext.setOpacity(1.0);
+            }
+        });
+
+    }
+
+    @FXML
+    private void handleDelEditor() {
+        savedTextEdit.getItems().remove(savedTextEdit.getSelectionModel().getSelectedIndex());
+        btnDelEditor.setDisable(true);
+        btnMoveDown.setDisable(true);
+        btnMoveUp.setDisable(true);
+        btnPreviewAudioEdit.setDisable(true);
+        btnSaveChanges.setDisable(true);
+        editTextArea.setDisable(true);
+        voicesChoiceBoxEdit.setDisable(false);
     }
 
     @FXML
