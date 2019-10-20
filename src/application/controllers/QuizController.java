@@ -76,6 +76,9 @@ public class QuizController {
         _btnCheck.setDisable(true);
     }
 
+    /**
+     * Randomly pick a mp4 video from the quiz folder and play it in loop. 
+     */
     @FXML
     private void handleBtnStart() {
         _correctText.setText("" +_numCorrect);
@@ -119,6 +122,10 @@ public class QuizController {
 
     }
 
+    /**
+     * Check if the term enetered by the user is correct or incorrect.
+     * And increment the score as well.
+     */
     @FXML
     private void handleBtnCheck() {
         if (_answerField.getText().equals("")){
