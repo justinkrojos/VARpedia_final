@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,24 +22,24 @@
       </ImageView>
       <AnchorPane fx:id="saveAudioPane" layoutY="-1.0" prefHeight="810.0" prefWidth="1154.0">
          <children>
-            <Label fx:id="searchConfirmation" alignment="CENTER" layoutX="310.0" layoutY="20.0" prefHeight="48.0" prefWidth="534.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: red;" text="Term:" textAlignment="CENTER">
+            <Label fx:id="searchConfirmation" alignment="CENTER" layoutX="310.0" layoutY="24.0" prefHeight="48.0" prefWidth="534.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: red;" text="Term:" textAlignment="CENTER">
                <font>
                   <Font name="Manjari Regular" size="30.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="49.0" layoutY="89.0" prefHeight="48.0" prefWidth="395.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select some text to get started:" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="27.0" layoutY="89.0" prefHeight="48.0" prefWidth="417.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select some text to get started:" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Manjari Regular" size="25.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="textActions" layoutX="652.0" layoutY="89.0" prefHeight="629.0" prefWidth="449.0" style="-fx-background-radius: 30 30 0 0; -fx-border-color: white; -fx-border-radius: 30 30 0 0; -fx-border-width: 5; -fx-background-color: rgba(255, 255, 255, 0.5);">
+            <AnchorPane fx:id="textActions" layoutX="652.0" layoutY="98.0" prefHeight="620.0" prefWidth="479.0" style="-fx-background-radius: 30 30 0 0; -fx-border-color: white; -fx-border-radius: 30 30 0 0; -fx-border-width: 5; -fx-background-color: rgba(255, 255, 255, 0.5);">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="54.0" prefWidth="203.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select a voice" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="voicesChoiceBox" layoutX="217.0" layoutY="14.0" prefHeight="54.0" prefWidth="216.0" style="-fx-background-color: white; -fx-font: 20px &quot;Manjari Thin&quot;; -fx-background-radius: 0 20 20 0;" value="Default">
+                  <ChoiceBox fx:id="voicesChoiceBox" layoutX="217.0" layoutY="14.0" prefHeight="54.0" prefWidth="246.0" style="-fx-background-color: white; -fx-font: 20px &quot;Manjari Thin&quot;; -fx-background-radius: 0 20 20 0;" value="Default">
                    <items>
                        <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Default" />
@@ -47,30 +48,39 @@
                        </FXCollections>
                    </items>
                   </ChoiceBox>
-                  <Button fx:id="btnPreviewAudio" layoutX="14.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="417.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="Preview Selected Text">
+                  <Button fx:id="btnPreviewAudio" layoutX="14.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="449.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="Preview Selected Text">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSaveAudioFile" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleSaveAudioBtn" prefHeight="54.0" prefWidth="417.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 20 20 0 0; -fx-border-color: yellow; -fx-border-width: 5;" text="Save Selected Text &amp; Voice">
+                  <Button fx:id="btnSaveAudioFile" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleSaveAudioBtn" prefHeight="54.0" prefWidth="449.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 20 20 0 0; -fx-border-color: yellow; -fx-border-width: 5;" text="Save Selected Text &amp; Voice">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <ListView fx:id="savedText" editable="true" layoutX="15.0" layoutY="240.0" prefHeight="371.0" prefWidth="417.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
+                  <ListView fx:id="savedText" editable="true" layoutX="15.0" layoutY="240.0" prefHeight="365.0" prefWidth="449.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
                </children>
             </AnchorPane>
-            <TextArea fx:id="_textArea" layoutX="49.0" layoutY="133.0" prefHeight="641.0" prefWidth="588.0" style="-fx-background-color: white;" wrapText="true">
+            <TextArea fx:id="_textArea" layoutX="28.0" layoutY="133.0" prefHeight="641.0" prefWidth="609.0" style="-fx-background-color: white;" wrapText="true">
                <font>
                   <Font name="Manjari Regular" size="20.0" />
                </font>
             </TextArea>
-            <Button fx:id="btnNext" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleBtnNext" prefHeight="54.0" prefWidth="449.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: blue; -fx-border-width: 5;" text="Next Step">
+            <Button fx:id="btnNext" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleBtnNext" prefHeight="54.0" prefWidth="479.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: blue; -fx-border-width: 5;" text="Next Step">
                <font>
                   <Font name="Manjari Regular" size="20.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
+      <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="162.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10; -fx-border-radius: 10;" text="Back to Menu">
+         <font>
+            <Font name="Manjari Thin" size="20.0" />
+         </font></Button>
+      <ToggleButton fx:id="music" layoutX="990.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 5;" text="Music: ON">
+      <font>
+         <Font name="Manjari Thin" size="20.0" />
+      </font>
+   </ToggleButton>
    </children>
 </AnchorPane>

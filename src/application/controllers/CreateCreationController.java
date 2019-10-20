@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -116,19 +117,10 @@ public class CreateCreationController {
     private HomeController _homeController;
     private WelcomeController _welcomeController;
 
-    @FXML
-    private CheckBox step1;
+    MediaPlayer bgmusic;
 
     @FXML
-    private CheckBox step2;
-
-    @FXML
-    private CheckBox step3;
-
-    @FXML
-    private CheckBox step4;
-
-
+            private ToggleButton music;
 
     FXMLLoader loader;
 
@@ -293,4 +285,32 @@ public class CreateCreationController {
         this._textArea.setText(_textArea);
         searchConfirmation.setText(searchConfirmation.getText() + " " + _termField);
     }
+
+
+
+    @FXML
+    private void handleBtnBack() throws IOException {
+        FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
+        WelcomeController welcomeController = loader.<WelcomeController>getController();
+        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
+    }
+
+    @FXML
+    private void handleMusic() {
+        if (music.isSelected()) {
+            music.setText("Music: OFF");
+            bgmusic.pause();
+        }
+        else {
+            music.setText("Music: ON");
+            bgmusic.play();
+        }
+    }
+
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
+        this.bgmusic = bgmusic;
+        music.setSelected(toggle);
+        music.setText(text);
+    }
+
 }
