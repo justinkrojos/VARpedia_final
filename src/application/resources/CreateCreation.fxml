@@ -117,7 +117,7 @@
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnSaveChanges" layoutX="806.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="287.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: yellow; -fx-border-width: 5;" text="Save New Changes">
+                  <Button fx:id="btnSaveChanges" layoutX="806.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleSaveEdit" prefHeight="54.0" prefWidth="287.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: yellow; -fx-border-width: 5;" text="Save New Changes">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
@@ -132,7 +132,7 @@
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnExitEditor" layoutX="642.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleAudioPreview" prefHeight="54.0" prefWidth="144.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: red; -fx-border-width: 5;" text="Exit Editor">
+                  <Button fx:id="btnExitEditor" onAction="#handleExitEditor" layoutX="642.0" layoutY="496.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="144.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: red; -fx-border-width: 5;" text="Exit Editor">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>

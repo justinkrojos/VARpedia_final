@@ -157,9 +157,19 @@ public class CreateCreationController {
     }
 
     public void updateListViews() {
-        for (int i = 0; i < savedText.getItems().size(); i++) {
-            savedTextEdit.getItems().add(savedText.getItems().get(i));
+        if (editorPane.isVisible()) {
+            savedTextEdit.getItems().clear();
+            for (int i = 0; i < savedText.getItems().size(); i++) {
+                savedTextEdit.getItems().add(savedText.getItems().get(i));
+            }
         }
+        else {
+            savedText.getItems().clear();
+            for (int i = 0; i < savedTextEdit.getItems().size(); i++) {
+                savedText.getItems().add(savedTextEdit.getItems().get(i));
+            }
+        }
+
     }
 
     @FXML
@@ -200,6 +210,31 @@ public class CreateCreationController {
 
             }
         }
+    }
+
+    @FXML
+    public void handleSaveEdit() {
+        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
+
+        voicesList.add(i, voicesChoiceBoxEdit.getValue());
+        voicesList.remove(i + 1);
+        savedTextEdit.getItems().add(i, new Label(editTextArea.getText()));
+        savedTextEdit.getItems().remove(i + 1);
+
+    }
+
+    @FXML
+    public void handleExitEditor() {
+        editorPane.setVisible(false);
+        textPane.setVisible(true);
+        textActions.setVisible(true);
+        if (savedText.getItems().size() == 0) {
+
+        }
+        else {
+            btnNext.setVisible(true);
+        }
+        updateListViews();
     }
 
 
