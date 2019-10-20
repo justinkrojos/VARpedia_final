@@ -72,6 +72,13 @@ public class WikitSearchController {
     }
 
     @FXML
+    private void handleBtnBack() throws IOException {
+        FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
+        WelcomeController welcomeController = loader.<WelcomeController>getController();
+        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
+    }
+
+    @FXML
     private void handleMusic() {
         if (music.isSelected()) {
             music.setText("Music: OFF");

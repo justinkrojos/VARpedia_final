@@ -28,7 +28,7 @@
                         <Font name="Manjari Thin" size="20.0" />
                     </font>
                 </Button>
-                <Label alignment="CENTER" layoutX="73.0" layoutY="175.0" prefHeight="72.0" prefWidth="546.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 5;" text="What would you like to search for:" textAlignment="CENTER">
+                <Label alignment="CENTER" layoutX="73.0" layoutY="175.0" prefHeight="72.0" prefWidth="546.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: yellow; -fx-border-width: 5;" text="What would you like to search for:" textAlignment="CENTER">
                     <font>
                         <Font name="Manjari Regular" size="25.0" />
                     </font>
@@ -45,5 +45,9 @@
                 <Font name="Manjari Thin" size="20.0" />
             </font>
         </ToggleButton>
+        <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="81.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10; -fx-border-radius: 10 0 0 10;" text="Back">
+            <font>
+                <Font name="Manjari Thin" size="20.0" />
+            </font></Button>
     </children>
 </AnchorPane>
