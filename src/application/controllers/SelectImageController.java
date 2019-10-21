@@ -92,6 +92,9 @@ public class SelectImageController {
 
     FXMLLoader loader;
 
+    /**
+     * Download 10 images from flikr associated with the term.
+     */
     @FXML
     private void handleBtnDownload() {
         if(!creationName.getText().matches("[a-zA-Z0-9_-]*") || creationName.getText().isEmpty()) {
@@ -180,6 +183,11 @@ public class SelectImageController {
         return false;
     }
 
+    /**
+     * Download the selected images, in the check boxes.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @FXML
     private void handleBtnSubmit() throws IOException, InterruptedException {
 
@@ -278,6 +286,10 @@ public class SelectImageController {
         this.savedText = savedText;
     }
 
+    /**
+     * Create new directory to store images.
+     * @param creationFile
+     */
     private void createNewDir(String creationFile) {
         ProcessBuilder overwritePB = new ProcessBuilder("bash", "-c", "mkdir -p " + creationFile);
         try {
@@ -288,6 +300,10 @@ public class SelectImageController {
         }
     }
 
+    /**
+     * Go back to welcome screen
+     * @throws IOException
+     */
     @FXML
     private void handleBtnBack() throws IOException {
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");

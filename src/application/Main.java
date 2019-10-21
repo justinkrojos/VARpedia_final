@@ -81,6 +81,8 @@ public class Main extends Application {
 
     /**
      * Gets the creation directory.
+     * Code written with the help of:
+     * https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file
      * @return
      */
     public static String getCreationDir() {
@@ -98,6 +100,10 @@ public class Main extends Application {
         return creationsDir;
     }
 
+    /**
+     * Directory for all favourite creations.
+     * @return
+     */
     public static String getFavouriteDir() {
         String creationsDir = null;
         try {
@@ -132,6 +138,12 @@ public class Main extends Application {
         return creationsDir;
     }
 
+    /**
+     * Directory for all creations.
+     * @param dir
+     * @throws InterruptedException
+     * @throws IOException
+     */
     private static void createDirectory(String dir) throws InterruptedException, IOException {
         //String creationsDir = dir;
         String cmd = "[ ! -d " + dir + " ]";

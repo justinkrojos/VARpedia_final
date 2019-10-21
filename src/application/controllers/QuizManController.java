@@ -52,7 +52,7 @@ public class QuizManController {
     /**
      * Get the creations in the folder into an arrylist sorted.
      *
-     * Code copied from:
+     * Code created with help from:
      * https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
      * @param folder
      * @return

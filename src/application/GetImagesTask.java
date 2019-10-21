@@ -113,6 +113,8 @@ public class GetImagesTask extends Task<Void> {
 
     /**
      * Download pictures from flikr.
+     * Code written with the help of
+     * ACP 206_FlickrExample
      */
     private void flickr() {
 
@@ -168,6 +170,8 @@ public class GetImagesTask extends Task<Void> {
 
     /**
      * Get the api keys from a txt file.
+     * Code written with the help of :
+     * ACP 206_FlickrExample
      * @param key
      * @return
      * @throws Exception

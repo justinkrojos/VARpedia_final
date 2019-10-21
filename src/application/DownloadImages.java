@@ -38,6 +38,11 @@ public class DownloadImages extends Task<Void> {
         return null;
     }
 
+    /**
+     * Download images from flickr
+     * Code written with the help of:
+     * ACP 206_FlickrExample
+     */
     private void flickr() {
 
         String apiKey = "e37d6b63e1b4bceb47a42a3a37f316e3";
@@ -94,6 +99,8 @@ public class DownloadImages extends Task<Void> {
 
     /**
      * Get the api keys from a txt file.
+     * Code written with the help of
+     * ACP 206_FlickrExample
      * @param key
      * @return
      * @throws Exception

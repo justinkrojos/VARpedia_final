@@ -250,6 +250,10 @@ public class HomeController {
         }
     }
 
+    /**
+     * Go back to welcome screen
+     * @throws IOException
+     */
     @FXML
     private void handleBtnBack() throws IOException {
         if (player != null) {
@@ -443,6 +447,9 @@ public class HomeController {
 
     /**
      * Get the creations in the folder into an arrylist sorted.
+     *
+     * Code created with help from:
+     * https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
      * @param folder
      * @return
      */
@@ -459,6 +466,9 @@ public class HomeController {
         return list;
     }
 
+    /**
+     * Get the selected item in list view
+     */
     @FXML
     private void selectItem() {
         if (creationCategories.getSelectionModel().getSelectedIndex() == 0) {
