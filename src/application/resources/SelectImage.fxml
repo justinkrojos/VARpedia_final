@@ -69,7 +69,7 @@
                   <ImageView fx:id="_iv9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <Button layoutX="210.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleBtnSubmit" prefHeight="74.0" prefWidth="564.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="C R E A T E   Y O U R   C R E A T I O N">
+            <Button fx:id="_btnCreateCreation" layoutX="210.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleBtnSubmit" prefHeight="74.0" prefWidth="564.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="C R E A T E   Y O U R   C R E A T I O N">
                <font>
                   <Font name="Manjari Regular" size="30.0" />
                </font>

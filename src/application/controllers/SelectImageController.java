@@ -41,6 +41,8 @@ public class SelectImageController {
     @FXML
     private TextField creationName;
 
+    @FXML Button _btnCreateCreation;
+
     @FXML private ImageView _iv0;
     @FXML private ImageView _iv1;
     @FXML private ImageView _iv2;
@@ -164,8 +166,34 @@ public class SelectImageController {
         });
     }
 
+    /**
+     * This method checks if there is atleast one checkbox selected.
+     * @return
+     */
+    private boolean checkedBoxes() {
+        int counter = 0;
+        for (CheckBox c: _checkBoxs) {
+            if (c.isSelected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @FXML
     private void handleBtnSubmit() throws IOException, InterruptedException {
+
+        if (!checkedBoxes()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("You selected no images D:");
+            alert.setHeaderText(null);
+            alert.setContentText("Please Select at least one image");
+            alert.showAndWait();
+            return;
+        }
+
+        _btnCreateCreation.setText("Creating creation...");
+        _btnCreateCreation.setDisable(true);
 
         int imageNum = 0;
         for (CheckBox c: _checkBoxs) {
@@ -210,10 +238,11 @@ public class SelectImageController {
 
                         System.out.println("REACHED");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Creation Complete");
+                        alert.setTitle("Creation Complete!");
                         alert.setHeaderText(null);
-                        alert.setContentText("Creation complete, please refresh list of creations.");
+                        alert.setContentText("Creation complete! You can now watch your new creation!");
                         alert.showAndWait();
+
 
                         try {
                             loader = Main.changeScene("resources/Welcome.fxml");
@@ -228,11 +257,11 @@ public class SelectImageController {
 
             }
         });
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+/*        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Creation is being created.");
         alert.setHeaderText(null);
         alert.setContentText("Creation is being created, you will get a popup when its done.");
-        alert.show();
+        //alert.show();*/
 
 
     }

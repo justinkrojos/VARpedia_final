@@ -182,6 +182,10 @@ public class QuizController {
 
     @FXML
     private void handleManageQuiz() throws IOException {
+        if (player != null) {
+            player.stop();
+            player = null;
+        }
         Main.changeScene("resources/QuizMan.fxml");
     }
 }
