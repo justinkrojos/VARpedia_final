@@ -23,56 +23,62 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="_btnStart" layoutX="274.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleBtnStart" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: orange;" text="Start">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
       <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: green;" text="Back">
          <font>
             <Font size="18.0" />
          </font></Button>
       <Pane fx:id="_player" layoutX="466.0" layoutY="45.0" prefHeight="600.0" prefWidth="800.0" />
-      <Button layoutX="359.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleBtnStart" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: orange;" text="Skip">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
       <ToggleButton fx:id="music" layoutX="311.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
-      <Button layoutX="21.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleManageQuiz" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: red;" text="Manage Quiz">
+      <Button layoutX="184.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleManageQuiz" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: red;" text="Manage Quiz">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Text fx:id="_correctText" layoutX="157.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="Text">
+      <Text fx:id="_correctText" layoutX="140.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="Text">
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Text fx:id="_questionsText" layoutX="157.0" layoutY="589.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="Text">
+      <Text fx:id="_questionsText" layoutX="140.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="Text">
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Label layoutX="138.0" layoutY="70.0" style="-fx-border-color: blue; -fx-border-width: 5; -fx-border-radius: 30; -fx-background-radius: 30;" text="Quiz" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="138.0" layoutY="18.0" style="-fx-border-color: blue; -fx-border-width: 5; -fx-border-radius: 30; -fx-background-radius: 30;" text="Quiz" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="164.0" prefHeight="92.0" prefWidth="385.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5; -fx-background-color: white;" text="Guess the term! What term is the video playing?" wrapText="true">
+      <Label layoutX="18.0" layoutY="98.0" prefHeight="132.0" prefWidth="379.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5; -fx-background-color: white;" text="Guess the term! What term is the video playing? Start by pressing Start!" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="340.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5; -fx-background-color: white;" text="Type your answer here: ">
+      <Label layoutX="14.0" layoutY="248.0" prefHeight="132.0" prefWidth="379.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5; -fx-background-color: white;" text="Type your answer here: and Click Check! or click Skip to move on!" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="487.0" prefHeight="56.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: purple; -fx-border-width: 5;" text="Score:">
+      <Label layoutX="21.0" layoutY="524.0" prefHeight="56.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: purple; -fx-border-width: 5;" text="Score:">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="554.0" prefHeight="54.0" prefWidth="84.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: purple; -fx-border-width: 5;" text="Total:">
+      <Label layoutX="21.0" layoutY="591.0" prefHeight="54.0" prefWidth="84.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: purple; -fx-border-width: 5;" text="Total:">
          <font>
             <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="184.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleBtnStart" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: orange;" text="Skip">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="_btnStart" layoutX="223.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleBtnStart" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: orange;" text="Start">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Label fx:id="_answerLabel" layoutX="35.0" layoutY="457.0" prefHeight="54.0" prefWidth="212.0">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
    </children>

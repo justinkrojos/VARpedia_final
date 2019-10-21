@@ -5,10 +5,7 @@ import application.Quiz;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -29,6 +26,9 @@ public class QuizController {
     private int _numQuestions = 0;
 
     private String _term;
+
+    @FXML
+    private Label _answerLabel;
 
     @FXML
     private Text _correctText;
@@ -81,6 +81,7 @@ public class QuizController {
      */
     @FXML
     private void handleBtnStart() {
+        //_answerLabel.setText("");
         _correctText.setText("" +_numCorrect);
         _questionsText.setText("" + _numQuestions);
         _btnCheck.setDisable(false);
@@ -138,21 +139,23 @@ public class QuizController {
             System.out.println("Correct");
             _numCorrect++;
             _numQuestions++;
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            _answerLabel.setText("Correct!!! Keep Going!");
+/*            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correct");
             alert.setContentText("Correct!!!");
             alert.setHeaderText(null);
-            alert.showAndWait();
+            alert.showAndWait();*/
             handleBtnStart();
             _correctText.setText("" +_numCorrect);
             _questionsText.setText("" + _numQuestions);
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            _answerLabel.setText("HINT: " +_term);
+/*            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Wrong");
             alert.setContentText("WRONG!!!!" + System.getProperty("line.separator")+"Correct Answer is : " + _term);
             alert.setHeaderText(null);
-            alert.showAndWait();
+            alert.showAndWait();*/
             _numQuestions++;
             _correctText.setText("" +_numCorrect);
             _questionsText.setText("" + _numQuestions);
