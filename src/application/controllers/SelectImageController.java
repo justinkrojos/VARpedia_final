@@ -236,22 +236,18 @@ public class SelectImageController {
                 team.submit(task);
 
                 QuizTask quizTask = new QuizTask(_term, creationName.getText());
-                team.submit(quizTask);
+//                team.submit(quizTask);
 
                 task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                     @Override
                     public void handle(WorkerStateEvent workerStateEvent) {
-
-
-
+                        team.submit(quizTask);
                         System.out.println("REACHED");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Creation Complete!");
                         alert.setHeaderText(null);
                         alert.setContentText("Creation complete! You can now watch your new creation!");
                         alert.showAndWait();
-
-
                         try {
                             loader = Main.changeScene("resources/Welcome.fxml");
                         } catch (IOException e) {
@@ -260,17 +256,29 @@ public class SelectImageController {
 
                     }
                 });
+
+                quizTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        delCreationDir();
+                    }
+                });
                 //_homeController.updateListTree();
 
 
             }
         });
-/*        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Creation is being created.");
-        alert.setHeaderText(null);
-        alert.setContentText("Creation is being created, you will get a popup when its done.");
-        //alert.show();*/
+    }
 
+    private void delCreationDir(){
+        System.out.println("Deleteing creation folder");
+        String cmd = "rm -r " + Main.getCreationDir()+ System.getProperty("file.separator") +  creationName.getText();
+        ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+        try {
+            Process p = pb.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -306,6 +314,7 @@ public class SelectImageController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
+        delCreationDir();
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
