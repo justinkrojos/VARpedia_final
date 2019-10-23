@@ -317,7 +317,10 @@ public class SelectImageController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
-        delCreationDir();
+        if (downloadImgBtn.isDisabled()) {
+            delCreationDir();
+        }
+
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
