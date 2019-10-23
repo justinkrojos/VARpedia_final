@@ -15,9 +15,6 @@
             <Image url="@woodtexture.jpg" />
          </image>
       </ImageView>
-      <fx:define>
-         <Image fx:id="playImage" url="@playimage.jpg" />
-      </fx:define>
 
       <Button fx:id="playBtn" contentDisplay="BOTTOM" layoutX="37.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: blue; -fx-border-width: 5;" text="WATCH" textAlignment="CENTER" wrapText="true">
          <font>
@@ -31,9 +28,6 @@
             </ImageView>
       </graphic>
       </Button>
-      <fx:define>
-      <Image fx:id="createImage" url="@createimage.jpg" />
-   </fx:define>
       <Button fx:id="createBtn" contentDisplay="BOTTOM" layoutX="262.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: red; -fx-border-width: 5;" text="CREATE">
          <font>
             <Font name="Manjari Thin" size="24.0" />
@@ -46,9 +40,6 @@
          </ImageView>
          </graphic>
       </Button>
-      <fx:define>
-         <Image fx:id="learnImage" url="@learnimage.jpg" />
-      </fx:define>
       <Text layoutX="191.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VARpedia">
          <font>
             <Font name="Manjari Regular" size="70.0" />
