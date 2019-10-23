@@ -270,6 +270,9 @@ public class SelectImageController {
         });
     }
 
+    /**
+     * Deletes the creation folder of the current creation.
+     */
     private void delCreationDir(){
         System.out.println("Deleteing creation folder");
         String cmd = "rm -r " + Main.getCreationDir()+ System.getProperty("file.separator") +  creationName.getText();
