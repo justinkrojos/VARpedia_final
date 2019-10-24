@@ -1,0 +1,24 @@
+.dialog-pane {
+    -fx-background-color: #7DDCF0;
+}
+
+.dialog-pane:header .header-panel {
+    -fx-background-color: #32CFF0;
+}
+
+.dialog-pane:header .header-panel .label{
+    -fx-text-fill: #000000;
+}
+
+.dialog-pane .content {
+    -fx-text-fill: #000000;
+}
+
+.dialog-pane .button {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 25;
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: #CEE9EE;
+}

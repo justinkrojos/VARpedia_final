@@ -11,8 +11,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +41,8 @@ public class SelectImageController {
 
     @FXML
     private TextField creationName;
+
+    @FXML private ImageView _loadingImage;
 
     @FXML Button _btnCreateCreation;
 
@@ -97,6 +102,7 @@ public class SelectImageController {
     private void handleBtnDownload() {
         if(!creationName.getText().matches("[a-zA-Z0-9_-]*") || creationName.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.getDialogPane().getStylesheets().add(("Alert.css"));
             alert.setTitle("Warning Dialog");
             alert.setHeaderText("Invalid Creation name");
             alert.setContentText("Please enter a valid non-empty creation name, allowed characters: a-z A-Z 0-9 _ -");
@@ -116,6 +122,7 @@ public class SelectImageController {
             int exitStatus = checkNamep.waitFor();
             if (exitStatus == 0) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.getDialogPane().getStylesheets().add(("Alert.css"));
                 alert.setTitle("Creation Name Error");
                 alert.setHeaderText("Creation Name already in use, enter another name or overwrite the existing creation");
                 alert.setContentText("WARNING: By selecting overwrite the old creation will be deleted!!!");
@@ -134,6 +141,7 @@ public class SelectImageController {
                     return;
                 }
             }
+            _loadingImage.setVisible(true);
             downloadImgBtn.setDisable(true);
             downloadImgBtn.setText("Loading...");
             creationName.setDisable(true);
@@ -149,6 +157,7 @@ public class SelectImageController {
         dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
+                _loadingImage.setVisible(false);
                 imagePane.setVisible(true);
                 downloadImgBtn.setText("Done");
                 dir = new File(Main.getCreationDir()+"/"+creationName.getText()+"/"+"images/");
@@ -191,6 +200,7 @@ public class SelectImageController {
 
         if (!checkedBoxes()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getDialogPane().getStylesheets().add(("Alert.css"));
             alert.setTitle("You selected no images D:");
             alert.setHeaderText(null);
             alert.setContentText("Please Select at least one image");
@@ -198,6 +208,7 @@ public class SelectImageController {
             return;
         }
 
+        _loadingImage.setVisible(true);
         _btnCreateCreation.setText("Creating creation...");
         _btnCreateCreation.setDisable(true);
 
@@ -241,16 +252,21 @@ public class SelectImageController {
                     public void handle(WorkerStateEvent workerStateEvent) {
                         team.submit(quizTask);
                         System.out.println("REACHED");
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Creation Complete!");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Creation complete! You can now watch your new creation!");
-                        alert.showAndWait();
+
                         try {
                             loader = Main.changeScene("resources/Welcome.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
+
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.getDialogPane().getStylesheets().add(("Alert.css"));
+                        alert.setTitle("Creation Complete!");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Creation complete! You can now watch your new creation!");
+                        alert.showAndWait();
 
                     }
                 });
@@ -267,6 +283,22 @@ public class SelectImageController {
             }
         });
     }
+
+/*    private Popup createPopup(String message) {
+        Popup popup = new Popup();
+        popup.setAutoFix(true);
+        popup.setAutoHide(true);
+        popup.setHideOnEscape(true);
+        Label label = new Label(message);
+        label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                popup.hide();
+            }
+        });
+        popup.getContent().add(label);
+        return popup;
+    }*/
 
     /**
      * Deletes the creation folder of the current creation.
@@ -285,6 +317,8 @@ public class SelectImageController {
 
 
     public void initialize() {
+        _loadingImage.setVisible(false);
+
         _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
         _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
 
@@ -323,6 +357,7 @@ public class SelectImageController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
+
         if (downloadImgBtn.isDisabled()) {
             delCreationDir();
         }

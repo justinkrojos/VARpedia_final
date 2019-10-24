@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SelectImageController">
    <children>
-      <ImageView fitHeight="1197.0" fitWidth="1212.0" layoutX="-40.0" layoutY="-271.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
+      <ImageView fitHeight="1197.0" fitWidth="1212.0" layoutY="-251.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
             <Image url="@woodtexture.jpg" />
          </image>
@@ -109,5 +109,10 @@
          <Font name="Manjari Thin" size="20.0" />
       </font>
    </ToggleButton>
+      <ImageView fx:id="_loadingImage" fitHeight="341.0" fitWidth="1197.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@loading2.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
