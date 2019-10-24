@@ -7,8 +7,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 
 import java.util.concurrent.ExecutorService;
@@ -33,6 +35,12 @@ public class WikitSearchController {
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private ImageView loadingGif;
+
+    @FXML
+    private AnchorPane searchPane;
 
     public void initialize() {
         _termField.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -59,11 +67,13 @@ public class WikitSearchController {
         WikitSearchTask task = new WikitSearchTask(_termField.getText());
         team.submit(task);
 
-
+        searchPane.setVisible(false);
+        loadingGif.setVisible(true);
         btnSearch.setDisable(true);
         errorLabel.setVisible(false);
         _termField.setDisable(true);
         btnSearch.setText("Searching...");
+
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
@@ -76,6 +86,8 @@ public class WikitSearchController {
                     alert.showAndWait();
 
                     */
+                   searchPane.setVisible(true);
+                   loadingGif.setVisible(false);
                     errorLabel.setVisible(true);
                     btnSearch.setDisable(false);
                     btnSearch.setText("Search");

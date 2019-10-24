@@ -103,7 +103,7 @@ public class CreateCreationController {
 
 
     public void initialize(){
-        voicesList.clear();
+        //voicesList.clear();
         btnNext.setDisable(true);
 
         savedText.setOnMouseClicked(new EventHandler<MouseEvent>() {
