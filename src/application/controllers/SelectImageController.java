@@ -28,6 +28,9 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This controller manages the select image scene. Downloads the images related to the search term and creates the creation.
+ */
 public class SelectImageController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();

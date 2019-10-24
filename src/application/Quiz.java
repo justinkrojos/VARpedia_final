@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * This class manages the quiz.
+ */
 public class Quiz {
     private final File _folder = new File(Main.getQuizDir());
     private String _term;
@@ -23,6 +26,10 @@ public class Quiz {
         _term = string;
     }
 
+    /**
+     * Get a random quiz creation from the quiz folder.
+     * @return
+     */
     public String play() {
         ArrayList<String> list = listFilesOfFolder(_folder);
         Random rand = new Random();

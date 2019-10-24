@@ -1,3 +1,4 @@
+/*
 package application;
 
 import com.flickr4java.flickr.Flickr;
@@ -41,9 +42,11 @@ public class GetImagesTask extends Task<Void> {
         return null;
     }
 
-    /**
+    */
+/**
      * This method create the slideshow and adds sub titles.
-     */
+     *//*
+
     private void makeVideo() {
         double length = getAudioLength();
 
@@ -91,10 +94,12 @@ public class GetImagesTask extends Task<Void> {
 
     }
 
-    /**
+    */
+/**
      * Gets the integer value length of the audio file, rounded up.
      * @return
-     */
+     *//*
+
     private int getAudioLength() {
         String command = "soxi -D "+Main.getCreationDir()+"/"+_creationName+"/"+_creationName+".wav";
         ProcessBuilder audioLenBuilder = new ProcessBuilder("bash","-c",command);
@@ -111,11 +116,13 @@ public class GetImagesTask extends Task<Void> {
         return -1;
     }
 
-    /**
+    */
+/**
      * Download pictures from flikr.
      * Code written with the help of
      * ACP 206_FlickrExample
-     */
+     *//*
+
     private void flickr() {
 
         String apiKey = "e37d6b63e1b4bceb47a42a3a37f316e3";
@@ -168,19 +175,23 @@ public class GetImagesTask extends Task<Void> {
        // System.out.println("\nDone");
     }
 
-    /**
+    */
+/**
      * Get the api keys from a txt file.
      * Code written with the help of :
      * ACP 206_FlickrExample
      * @param key
      * @return
      * @throws Exception
-     */
+     *//*
+
     public static String getAPIKey(String key) throws Exception {
         // TODO fix the following based on where you will have your config file stored
 
+*/
 /*        String config = System.getProperty("user.dir")
-                + System.getProperty("file.separator")+ "flickr-api-keys.txt";*/
+                + System.getProperty("file.separator")+ "flickr-api-keys.txt";*//*
+
         String creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
         creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
         String config = creationsDir+ "/flickr-api-keys.txt";
@@ -202,3 +213,4 @@ public class GetImagesTask extends Task<Void> {
         throw new RuntimeException("Couldn't find " + key +" in config file "+file.getName());
     }
 }
+*/

@@ -17,6 +17,9 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class manages the quiz scene. Plays the quiz videos and checks if the user input is correct, matches the term and also keeps track of the .
+ */
 public class QuizController {
 
     MediaPlayer player;
@@ -54,6 +57,10 @@ public class QuizController {
     @FXML
     private Button _btnCheck;
 
+    /**
+     * Go back to main screen. Check if the player is still playing before going back.
+     * @throws IOException
+     */
     @FXML
     private void handleBtnBack() throws IOException {
         if (player != null) {
@@ -99,6 +106,7 @@ public class QuizController {
         MediaView mediaView = new MediaView(player);
         mediaView.setFitWidth(800);
         mediaView.setFitHeight(600);
+
         player.setOnReady(new Runnable() {
             @Override
             public void run() {
@@ -106,6 +114,7 @@ public class QuizController {
 
             }
         });
+
         player.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
@@ -183,6 +192,10 @@ public class QuizController {
         music.setText(text);
     }
 
+    /**
+     * Stop the current media player and change to manage quiz scene.
+     * @throws IOException
+     */
     @FXML
     private void handleManageQuiz() throws IOException {
         if (player != null) {

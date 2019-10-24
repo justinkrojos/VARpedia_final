@@ -60,7 +60,7 @@ public class Main extends Application {
     }
 
     /**
-     * This method changes the scene, for the main menu window.
+     * This method changes the scene, of the main window and returns the fxml loader.
      * @param fxml
      * @throws IOException
      */
@@ -78,6 +78,7 @@ public class Main extends Application {
 /*    public Stage getPrimaryStage() {
         return _primaryStage;
     }*/
+
 
     /**
      * Gets the creation directory.

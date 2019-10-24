@@ -4,6 +4,9 @@ import javafx.concurrent.Task;
 
 import java.io.*;
 
+/**
+ * This class creates a slideshow of images downloaded from flickr.
+ */
 public class MakeSlideShow extends Task<Void> {
     private String _term;
     private String _creationName;
@@ -46,6 +49,10 @@ public class MakeSlideShow extends Task<Void> {
         return -1;
     }
 
+    /**
+     * Get number of images in the directory.
+     * @return
+     */
     private int getNumImages() {
         System.out.println(dir);
         File[] files = dir.listFiles();
