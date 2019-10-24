@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaPlayer;
 
 import java.util.concurrent.ExecutorService;
@@ -32,6 +34,25 @@ public class WikitSearchController {
     @FXML
     private Label errorLabel;
 
+    public void initialize() {
+        _termField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    try {
+                        handleBtnSearch();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                }
+        });
+    }
+
+    /**
+     * This method searches the wiki with the inputted term.
+     * @throws IOException
+     */
     @FXML
     private void handleBtnSearch() throws IOException {
 
