@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaPlayer;
@@ -28,6 +30,9 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This controller manages the select image scene. Downloads the images related to the search term and creates the creation.
+ */
 public class SelectImageController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();
@@ -236,22 +241,18 @@ public class SelectImageController {
                 team.submit(task);
 
                 QuizTask quizTask = new QuizTask(_term, creationName.getText());
-                team.submit(quizTask);
+//                team.submit(quizTask);
 
                 task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                     @Override
                     public void handle(WorkerStateEvent workerStateEvent) {
-
-
-
+                        team.submit(quizTask);
                         System.out.println("REACHED");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Creation Complete!");
                         alert.setHeaderText(null);
                         alert.setContentText("Creation complete! You can now watch your new creation!");
                         alert.showAndWait();
-
-
                         try {
                             loader = Main.changeScene("resources/Welcome.fxml");
                         } catch (IOException e) {
@@ -260,17 +261,32 @@ public class SelectImageController {
 
                     }
                 });
+
+                quizTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        delCreationDir();
+                    }
+                });
                 //_homeController.updateListTree();
 
 
             }
         });
-/*        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Creation is being created.");
-        alert.setHeaderText(null);
-        alert.setContentText("Creation is being created, you will get a popup when its done.");
-        //alert.show();*/
+    }
 
+    /**
+     * Deletes the creation folder of the current creation.
+     */
+    private void delCreationDir(){
+        System.out.println("Deleteing creation folder");
+        String cmd = "rm -r " + Main.getCreationDir()+ System.getProperty("file.separator") +  creationName.getText();
+        ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+        try {
+            Process p = pb.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -279,6 +295,14 @@ public class SelectImageController {
         _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
         _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
 
+        creationName.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    handleBtnDownload();
+                }
+            }
+        });
     }
 
     public void transferInfo(String text, String[][] savedText) {
@@ -306,6 +330,10 @@ public class SelectImageController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
+        if (downloadImgBtn.isDisabled()) {
+            delCreationDir();
+        }
+
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());

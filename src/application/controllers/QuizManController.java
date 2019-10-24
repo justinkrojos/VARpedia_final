@@ -44,13 +44,16 @@ public class QuizManController {
         updateListTree();
     }
 
+    /**
+     * Populate list view with array list of sorted quiz creations.
+     */
     public void updateListTree() {
         _items = FXCollections.observableArrayList(listFilesOfFolder(_folder));
         _listView.setItems(_items);
     }
 
     /**
-     * Get the creations in the folder into an arrylist sorted.
+     * Get the creations in the quiz folder into a sorted array list.
      *
      * Code created with help from:
      * https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
@@ -78,6 +81,10 @@ public class QuizManController {
         _selectedItem = (String) _listView.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Change back to quiz scene
+     * @throws IOException
+     */
     @FXML
     private void handleBtnBack() throws IOException {
         Main.changeScene("resources/Quiz.fxml");

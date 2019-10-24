@@ -29,6 +29,9 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This class manages the creation scene.
+ */
 public class CreateCreationController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();

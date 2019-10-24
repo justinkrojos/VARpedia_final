@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class downloads 10 images from flickr associated with the searched term, using the flickr api.
+ */
 public class DownloadImages extends Task<Void> {
 
     private String _creationName;
