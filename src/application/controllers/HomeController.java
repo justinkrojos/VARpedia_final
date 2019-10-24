@@ -127,12 +127,12 @@ public class HomeController {
                         btnFavourite.setDisable(false);
                     }
                     if (_favouriteList.getItems().contains(_selectedItem)) {
-                        btnFavourite.setText("U N F A V O U R I T E");
+                        btnFavourite.setText("Unlike ★");
                         btnFavourite.setSelected(true);
                         btnFavourite.setOpacity(0.7);
                     }
                     else {
-                        btnFavourite.setText("F A V O U R I T E");
+                        btnFavourite.setText("Like ★");
                         btnFavourite.setSelected(false);
                     }
                 }
@@ -164,12 +164,12 @@ public class HomeController {
                         btnFavourite.setDisable(false);
                     }
                     if (_favouriteList.getItems().contains(_selectedItem)) {
-                        btnFavourite.setText("U N F A V O U R I T E");
+                        btnFavourite.setText("Unlike ★");
                         btnFavourite.setSelected(true);
                         btnFavourite.setOpacity(0.7);
                     }
                     else {
-                        btnFavourite.setText("F A V O U R I T E");
+                        btnFavourite.setText("Like ★");
                         btnFavourite.setSelected(false);
                     }
                 }
@@ -421,12 +421,12 @@ public class HomeController {
     public void handleBtnFavourite() throws IOException, InterruptedException {
         if (btnFavourite.isSelected()) {
             _favouriteList.getItems().add(_selectedItem);
-            btnFavourite.setText("U N F A V O U R I T E");
+            btnFavourite.setText("Unlike ★");
 
 
         } else {
             _favouriteList.getItems().remove(_selectedItem);
-            btnFavourite.setText("F A V O U R I T E");
+            btnFavourite.setText("Like ★");
         }
 
         try {

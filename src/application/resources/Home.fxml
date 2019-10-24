@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
@@ -26,12 +27,11 @@
          <children>
                   <Slider fx:id="timeSlider" layoutX="14.0" layoutY="473.0" prefHeight="54.0" prefWidth="623.0" style="-fx-background-radius: 0;" />
          </children></Pane>
-      <Button fx:id="btnCreate" layoutX="26.0" layoutY="656.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="44.0" prefWidth="431.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-color: white; -fx-border-width: 5;" text="CREATE MORE CREATIONS">
+      <Button fx:id="btnCreate" layoutX="26.0" layoutY="656.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="44.0" prefWidth="431.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-color: white; -fx-border-width: 5;" text="Create More Creations">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnRefresh" layoutX="864.0" layoutY="92.0" mnemonicParsing="false" onAction="#handleBtnRefresh" text="Refresh" />
       <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="81.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10 0 0 10; -fx-border-radius: 10 0 0 10;" text="Back">
          <font>
             <Font name="Manjari Thin" size="20.0" />
@@ -58,7 +58,7 @@
           </Tab>
         </tabs>
       </TabPane>
-       <ToggleButton fx:id="music" layoutX="990.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 5;" text="Music: ON">
+       <ToggleButton fx:id="music" layoutX="990.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: ON">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font>
@@ -69,11 +69,7 @@
             <Font name="Manjari Regular" size="50.0" />
          </font>
       </Label>
-      <Button fx:id="homeHelpBtn" layoutX="102.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleHomeHelp" prefHeight="54.0" prefWidth="75.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0;" text="Help">
-         <font>
-            <Font name="Manjari Thin" size="20.0" />
-         </font></Button>
-      <Button fx:id="btnPlay" layoutX="484.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="54.0" prefWidth="134.0" style="-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: green; -fx-border-width: 5; -fx-background-color: rgba(0, 255, 20, 0.6);" text="Play  ▶" textFill="WHITE">
+      <Button fx:id="btnPlay" layoutX="809.0" layoutY="727.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="56.0" prefWidth="164.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20 0 0 20; -fx-border-color: green; -fx-border-width: 5.5; -fx-background-color: rgba(0, 255, 20, 0.6);" text="Play  ▶">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -81,12 +77,12 @@
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnDel" layoutX="27.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="54.0" prefWidth="311.0" style="-fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.6);" text="Delete ❌" textFill="WHITE">
+      <Button fx:id="btnDel" disable="true" layoutX="27.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="54.0" prefWidth="311.0" style="-fx-border-color: red; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.6);" text="Delete ❌">
          <font>
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </Button>
-      <ToggleButton fx:id="btnFavourite" layoutX="338.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnFavourite" prefHeight="48.0" prefWidth="119.0" style="-fx-background-radius: 0; -fx-border-color: yellow; -fx-border-width: 5; -fx-border-radius: 0; -fx-background-color: rgba(255, 255, 0, 0.7);" text="Like ★" wrapText="true">
+      <ToggleButton fx:id="btnFavourite" disable="true" layoutX="338.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnFavourite" prefHeight="48.0" prefWidth="119.0" style="-fx-background-radius: 0 20 20 0; -fx-border-color: yellow; -fx-border-width: 5; -fx-border-radius: 0 20 20 0; -fx-background-color: rgba(255, 255, 0, 0.7);" text="Like ★" wrapText="true">
          <font>
             <Font name="Manjari Regular" size="20.0" />
          </font>
@@ -96,12 +92,12 @@
             <Font name="Manjari Regular" size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="126.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 2: Play it!" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="484.0" layoutY="126.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 2: Pick a song and play it!" textAlignment="CENTER">
          <font>
             <Font name="Manjari Regular" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="618.0" layoutY="728.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="134.0" style="-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.7);" text="Stop ■" textFill="WHITE">
+      <Button disable="true" layoutX="973.0" layoutY="727.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.7);" text="Stop ■">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -109,13 +105,11 @@
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnPlay11" layoutX="1001.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="54.0" prefWidth="134.0" style="-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: blue; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 255, 0.7);" text="Fullscreen" textFill="WHITE">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+      <ChoiceBox layoutX="588.0" layoutY="728.0" prefHeight="54.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 0 20 20 0;" />
+      <Label alignment="CENTER" layoutX="484.0" layoutY="728.0" prefHeight="54.0" prefWidth="104.0" style="-fx-background-color: rgba(255, 255, 255, 0.6); -fx-background-radius: 20 0 0 20; -fx-border-radius: 20 0 0 20; -fx-border-width: 5; -fx-border-color: white;" text="Music:" textAlignment="CENTER">
          <font>
-            <Font name="Manjari Regular" size="20.0" />
+            <Font name="Manjari Thin" size="20.0" />
          </font>
-      </Button>
+      </Label>
    </children>
 </AnchorPane>
