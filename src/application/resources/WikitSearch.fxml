@@ -16,11 +16,10 @@
             <Image url="@woodtexture.jpg" />
         </image>
         </ImageView>
-      <ImageView fx:id="loadingGif" fitHeight="690.0" fitWidth="690.0" layoutY="-259.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="loadingGif" fitHeight="240.0" fitWidth="690.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../loading.gif" />
-         </image>
-      </ImageView>
+            <Image url="@loading2.gif" />
+         </image></ImageView>
         <AnchorPane fx:id="searchPane" layoutX="54.0" layoutY="-44.0" prefHeight="292.0" prefWidth="583.0" visible="true">
             <children>
                 <Label alignment="CENTER" layoutX="19.0" layoutY="261.0" prefHeight="72.0" prefWidth="546.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: yellow; -fx-border-width: 5;" text="What would you like to search for:" textAlignment="CENTER">
