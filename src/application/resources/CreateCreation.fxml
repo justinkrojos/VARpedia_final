@@ -29,13 +29,8 @@
                   <Font name="Manjari Regular" size="30.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="textActions" layoutX="652.0" layoutY="131.0" prefHeight="587.0" prefWidth="479.0" style="-fx-border-color: white; -fx-border-width: 5; -fx-background-color: rgba(255, 255, 255, 0.5);">
+            <AnchorPane fx:id="textActions" disable="true" layoutX="652.0" layoutY="146.0" prefHeight="572.0" prefWidth="479.0" style="-fx-border-color: white; -fx-border-width: 5; -fx-background-color: rgba(255, 255, 255, 0.5);">
                <children>
-                  <Label alignment="CENTER" layoutX="92.0" layoutY="363.0" prefHeight="42.0" prefWidth="293.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Click on me to edit text!" textAlignment="CENTER">
-                     <font>
-                        <Font name="Manjari Regular" size="25.0" />
-                     </font>
-                  </Label>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="16.0" prefHeight="54.0" prefWidth="203.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select a voice" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
@@ -60,38 +55,38 @@
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <ListView fx:id="savedText" editable="true" layoutX="15.0" layoutY="197.0" prefHeight="374.0" prefWidth="449.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
-               </children>
-            </AnchorPane>
-            <Button fx:id="btnNext" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleBtnNext" prefHeight="54.0" prefWidth="479.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: black; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 0, 0.7);" text="Next Step" textFill="WHITE">
-               <font>
-                  <Font name="Manjari Regular" size="20.0" />
-               </font>
-            </Button>
-            <Label alignment="CENTER" layoutX="652.0" layoutY="89.0" prefHeight="42.0" prefWidth="479.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Step 2: Save Some Audio!" textAlignment="CENTER">
-               <font>
-                  <Font name="Manjari Regular" size="25.0" />
-               </font>
-            </Label>
-            <Pane fx:id="textPane" layoutX="27.0" layoutY="89.0" prefHeight="686.0" prefWidth="609.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="417.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select some text to get started:" textAlignment="CENTER" textFill="WHITE">
+                  <ListView fx:id="savedText" editable="true" layoutX="15.0" layoutY="197.0" prefHeight="356.0" prefWidth="449.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
+                  <Label alignment="CENTER" layoutY="-49.0" prefHeight="48.0" prefWidth="417.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: grey; -fx-opacity: 0.8;" text="Select some text to get started:" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="_textArea" layoutX="1.0" layoutY="39.0" prefHeight="641.0" prefWidth="609.0" style="-fx-background-color: white;" wrapText="true">
+                  <Label alignment="CENTER" disable="true" layoutX="116.0" layoutY="313.0" prefHeight="124.0" prefWidth="246.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 0, 0);" text="Click on me to edit text!" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Manjari Regular" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="btnNext" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleBtnNext" prefHeight="54.0" prefWidth="479.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: blue; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 255, 0.7);" text="Next Step" textFill="WHITE">
+               <font>
+                  <Font name="Manjari Regular" size="20.0" />
+               </font>
+            </Button>
+            <Pane fx:id="textPane" layoutX="26.0" layoutY="146.0" prefHeight="593.0" prefWidth="618.0">
+               <children>
+                  <TextArea fx:id="_textArea" prefHeight="629.0" prefWidth="597.0" style="-fx-background-color: white;" wrapText="true">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </TextArea>
                </children>
             </Pane>
-            <Pane fx:id="editorPane" visible="false" layoutX="26.0" layoutY="129.0" prefHeight="593.0" prefWidth="1104.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);">
+            <Pane fx:id="editorPane" layoutX="26.0" layoutY="144.0" prefHeight="572.0" prefWidth="1104.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" visible="false">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="593.0" layoutX="627.0" stroke="WHITE" strokeType="INSIDE" width="479.0" />
-                  <ListView fx:id="savedTextEdit" editable="true" layoutX="31.0" layoutY="65.0" prefHeight="497.0" prefWidth="534.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
-                  <Label alignment="CENTER" layoutX="31.0" layoutY="25.0" prefHeight="42.0" prefWidth="534.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Click on the text to edit it!" textAlignment="CENTER">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="572.0" layoutX="627.0" stroke="WHITE" strokeType="INSIDE" width="479.0" />
+                  <ListView fx:id="savedTextEdit" editable="true" layoutX="19.0" layoutY="56.0" prefHeight="497.0" prefWidth="534.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
+                  <Label alignment="CENTER" layoutX="19.0" layoutY="16.0" prefHeight="42.0" prefWidth="534.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Click on the text to edit it!" textAlignment="CENTER">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
@@ -129,12 +124,12 @@
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnMoveDown" disable="true" layoutX="562.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleMoveDown" prefHeight="252.0" prefWidth="59.0" style="-fx-background-radius: 0 0 20 0; -fx-border-radius: 0 0 20 0; -fx-border-color: white; -fx-border-width: 5;" text="↓">
+                  <Button fx:id="btnMoveDown" disable="true" layoutX="550.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleMoveDown" prefHeight="252.0" prefWidth="59.0" style="-fx-background-radius: 0 0 20 0; -fx-border-radius: 0 0 20 0; -fx-border-color: white; -fx-border-width: 5;" text="↓">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnMoveUp" disable="true" layoutX="562.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleMoveUp" prefHeight="252.0" prefWidth="59.0" style="-fx-background-radius: 0 20 0 0; -fx-border-radius: 00 20 0 0; -fx-border-color: white; -fx-border-width: 5;" text="↑">
+                  <Button fx:id="btnMoveUp" disable="true" layoutX="550.0" layoutY="56.0" mnemonicParsing="false" onAction="#handleMoveUp" prefHeight="252.0" prefWidth="59.0" style="-fx-background-radius: 0 20 0 0; -fx-border-radius: 00 20 0 0; -fx-border-color: white; -fx-border-width: 5;" text="↑">
                      <font>
                         <Font name="Manjari Regular" size="20.0" />
                      </font>
@@ -151,6 +146,11 @@
                   </Button>
                </children>
             </Pane>
+            <Label alignment="CENTER" layoutX="26.0" layoutY="98.0" prefHeight="48.0" prefWidth="479.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Step 2: Save Some Audio!" textAlignment="CENTER">
+               <font>
+                  <Font name="Manjari Regular" size="25.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="162.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10; -fx-border-radius: 10;" text="Back to Menu">
