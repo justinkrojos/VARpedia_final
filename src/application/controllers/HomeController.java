@@ -107,6 +107,10 @@ public class HomeController {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
+                if (player != null) {
+                    return;
+                }
+
                 selectItem();
                     try {
                         sortFavourites();
@@ -143,6 +147,9 @@ public class HomeController {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
+                if (player != null) {
+                    return;
+                }
                 selectItem();
 
                     try {
@@ -270,87 +277,108 @@ public class HomeController {
     @FXML
     private void handleBtnPlay() {
 
-        if (btnPlay.getText().equals("S T O P   P L A Y I N G")) {
-            btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
-            btnPlay.setText("P L A Y   C R E A T I O N");
+        
+
+        if (btnPlay.getText().equals("Pause")) {
+            timeSlider.setDisable(true);
+            btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
+            btnPlay.setText("Continue ▶");
             btnDel.setDisable(false);
             btnFavourite.setDisable(false);
-            player.stop();
-            player = null;
-            _player.getChildren().clear();
+            player.pause();
+            //player = null;
+            //_player.getChildren().clear();
         }
 
         else {
-
-
-
-
-            btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.8); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
-            btnPlay.setText("S T O P   P L A Y I N G");
+            timeSlider.setDisable(false);
+            btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.8); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
+            btnPlay.setText("Pause");
 
             btnFavourite.setDisable(true);
             btnDel.setDisable(true);
 
-            _player.getChildren().removeAll();
-            _player.getChildren().clear();
-            File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
-            Media video = new Media(fileUrl.toURI().toString());
-            player = new MediaPlayer(video);
-            player.setAutoPlay(true);
-            MediaView mediaView = new MediaView(player);
-            mediaView.fitWidthProperty().bind(_player.widthProperty());
-            mediaView.fitHeightProperty().bind(_player.heightProperty());
-            mediaView.setPreserveRatio(false);
+            if (player!=null) {
+                player.play();
+                player.currentTimeProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        if (btnPlay.getText().equals("Pause")) {
+                            updateValues();
+                        }
 
-
-
-            player.setOnReady(new Runnable() {
-                @Override
-                public void run() {
-                    //Some observable map thing goes here.
-
-                }
-            });
-            player.setOnEndOfMedia(new Runnable() {
-                @Override
-                public void run() {
-                    _player.getChildren().removeAll();
-                    _player.getChildren().clear();
-                    player = null;
-                    btnPlay.setDisable(false);
-                    btnDel.setDisable(false);
-                    btnFavourite.setDisable(false);
-                    btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
-                    btnPlay.setText("P L A Y   C R E A T I O N");
-                }
-            });
-
-
-            _player.getChildren().add(mediaView);
-
-
-            player.currentTimeProperty().addListener(new InvalidationListener() {
-                @Override
-                public void invalidated(Observable observable) {
-                    if (btnPlay.getText().equals("S T O P   P L A Y I N G")){
-                        updateValues();
                     }
+                });
 
-                }
-            });
-
-            timeSlider.valueProperty().addListener(new InvalidationListener() {
-                @Override
-                public void invalidated(Observable observable) {
-                    if (timeSlider.isPressed()) {
-                        player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue()/100));
+                timeSlider.valueProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        if (timeSlider.isPressed()) {
+                            player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+
+                _player.getChildren().removeAll();
+                _player.getChildren().clear();
+                File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
+                Media video = new Media(fileUrl.toURI().toString());
+                player = new MediaPlayer(video);
+                player.setAutoPlay(true);
+                MediaView mediaView = new MediaView(player);
+                mediaView.fitWidthProperty().bind(_player.widthProperty());
+                mediaView.fitHeightProperty().bind(_player.heightProperty());
+                mediaView.setPreserveRatio(false);
 
 
+                player.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Some observable map thing goes here.
+
+                    }
+                });
+                player.setOnEndOfMedia(new Runnable() {
+                    @Override
+                    public void run() {
+                        timeSlider.setDisable(true);
+                        _player.getChildren().removeAll();
+                        _player.getChildren().clear();
+                        player = null;
+                        btnDel.setDisable(false);
+                        btnFavourite.setDisable(false);
+                        btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
+                        btnPlay.setText("Play  ▶");
+                    }
+                });
 
 
+                _player.getChildren().add(mediaView);
+
+
+                player.currentTimeProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        if (btnPlay.getText().equals("Pause")) {
+                            updateValues();
+                        }
+
+                    }
+                });
+
+                timeSlider.valueProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        if (timeSlider.isPressed()) {
+                            player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
+                        }
+                    }
+                });
+
+
+            }
         }
     }
 
