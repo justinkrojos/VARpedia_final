@@ -99,6 +99,8 @@ public class HomeController {
     @FXML
     private Slider timeSlider;
 
+    private Boolean musicToggled;
+
     public void initialize() {
 
         updateListTree();
@@ -281,12 +283,19 @@ public class HomeController {
         }
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
-        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
+        String s = "Music: OFF";
+        if (!musicToggled) {
+            s = "Music: ON";
+            bgmusic.play();
+        }
+        welcomeController.transferMusic(bgmusic, musicToggled, s);
     }
 
     /**
      * Play a video creation.
      */
+
+    MediaPlayer creationMusic;
     @FXML
     private void handleBtnPlay() {
 
@@ -453,15 +462,6 @@ btnStop.setDisable(false);
         wikitController.transferMusic(player, music.isSelected(), music.getText());
     }
 
-    /**
-     * Refresh the creation list.
-     */
-    @FXML
-    public void handleBtnRefresh() {
-        //System.out.println("Refresh");
-        updateListTree();
-    }
-
     @FXML
     public void handleBtnFavourite() throws IOException, InterruptedException {
         if (btnFavourite.isSelected()) {
@@ -540,11 +540,12 @@ btnStop.setDisable(false);
 
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
         this.bgmusic = bgmusic;
-        music.setSelected(toggle);
-        music.setText(text);
+        music.setSelected(true);
+        music.setText("Music: OFF");
+        music.setDisable(true);
+        bgmusic.pause();
+        music.setTooltip(new Tooltip("CANNOT PLAY MUSIC"));
+        musicToggled = toggle;
     }
 
-    @FXML
-    private void handleHomeHelp() {
-    }
 }
