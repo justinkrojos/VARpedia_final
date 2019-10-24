@@ -3,9 +3,12 @@ package application.controllers;
 import application.Main;
 import application.Quiz;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -81,6 +84,15 @@ public class QuizController {
         _correctText.setText("" +_numCorrect);
         _questionsText.setText("" + _numQuestions);
         _btnCheck.setDisable(true);
+
+        _answerField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    handleBtnCheck();
+                }
+            }
+        });
     }
 
     /**
