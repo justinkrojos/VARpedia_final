@@ -406,7 +406,7 @@ public class HomeController {
                         player = null;
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
-                        btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
+                        btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
                         btnPlay.setText("Play  ▶");
                         btnStop.setDisable(true);
                         creationMusic.stop();
