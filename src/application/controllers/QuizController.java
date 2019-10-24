@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -161,6 +162,7 @@ public class QuizController {
             _numCorrect++;
             _numQuestions++;
             _answerLabel.setText("Correct!!! Keep Going!");
+            _answerLabel.setTextFill(Color.GREEN);
 /*            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correct");
             alert.setContentText("Correct!!!");
@@ -172,6 +174,7 @@ public class QuizController {
 
         } else {
             _answerLabel.setText("HINT: " +_term);
+            _answerLabel.setTextFill(Color.RED);
 /*            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Wrong");
             alert.setContentText("WRONG!!!!" + System.getProperty("line.separator")+"Correct Answer is : " + _term);
