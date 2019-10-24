@@ -67,7 +67,7 @@ public class HomeController {
     private Button btnRefresh;
 
     @FXML
-    private Button btnPause;
+    private Button btnStop;
 
     @FXML
     private Button btnMute;
@@ -227,6 +227,19 @@ public class HomeController {
 
     }
 
+    public void handleBtnStop() {
+        player.stop();
+        _player.getChildren().removeAll();
+        _player.getChildren().clear();
+        player = null;
+        btnStop.setDisable(true);
+        btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
+        btnPlay.setText("Play  ▶");
+        btnFavourite.setDisable(false);
+        btnDel.setDisable(false);
+        timeSlider.setValue(0);
+    }
+
     public void sortFavourites() throws IOException, InterruptedException {
 
         String listOfFavourites = " ";
@@ -277,7 +290,7 @@ public class HomeController {
     @FXML
     private void handleBtnPlay() {
 
-        
+btnStop.setDisable(false);
 
         if (btnPlay.getText().equals("Pause")) {
             timeSlider.setDisable(true);
@@ -351,6 +364,7 @@ public class HomeController {
                         btnFavourite.setDisable(false);
                         btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
                         btnPlay.setText("Play  ▶");
+                        btnStop.setDisable(true);
                     }
                 });
 
@@ -371,7 +385,10 @@ public class HomeController {
                 timeSlider.valueProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {
-                        if (timeSlider.isPressed()) {
+                        if (player == null) {
+                            return;
+                        }
+                        else if (timeSlider.isPressed()) {
                             player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
                         }
                     }

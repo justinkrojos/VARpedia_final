@@ -94,7 +94,7 @@
             <Font name="Manjari Regular" size="30.0" />
          </font>
       </Label>
-      <Button disable="true" layoutX="973.0" layoutY="727.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.7);" text="Stop ■">
+      <Button fx:id="btnStop" disable="true" layoutX="973.0" layoutY="727.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" onAction="#handleBtnStop" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.7);" text="Stop ■">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
