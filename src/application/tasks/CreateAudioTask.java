@@ -1,5 +1,7 @@
-package application;
+package application.tasks;
 
+import application.Main;
+import application.Voices;
 import javafx.concurrent.Task;
 import java.io.File;
 import java.io.FileNotFoundException;

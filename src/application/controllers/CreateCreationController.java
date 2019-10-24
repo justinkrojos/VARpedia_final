@@ -1,31 +1,19 @@
 package application.controllers;
 
 import application.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
+import application.tasks.PreviewAudioTask;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Optional;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

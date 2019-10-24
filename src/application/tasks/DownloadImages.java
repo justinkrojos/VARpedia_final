@@ -1,5 +1,6 @@
-package application;
+package application.tasks;
 
+import application.Main;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;

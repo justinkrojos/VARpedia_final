@@ -1,7 +1,7 @@
 package application.controllers;
 
 import application.Main;
-import application.WikitSearchTask;
+import application.tasks.WikitSearchTask;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

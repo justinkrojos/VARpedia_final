@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.*;
+import application.tasks.*;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,18 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,5 +1,6 @@
-package application;
+package application.tasks;
 
+import application.Main;
 import javafx.concurrent.Task;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
