@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -45,6 +46,12 @@ public class Main extends Application {
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMediaPlayer(player);
         player.play();
+        player.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                player.seek(Duration.ZERO);
+            }
+        });
 
         Scene scene = new Scene(layout);
         primaryStage.setScene(scene);

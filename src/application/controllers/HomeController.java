@@ -81,6 +81,9 @@ public class HomeController {
     //private MediaView mediaView;
 
     @FXML
+    private ChoiceBox<String> musicCreationBox;
+
+    @FXML
     private TabPane creationCategories;
 
     @FXML
@@ -93,6 +96,8 @@ public class HomeController {
     private Button homeHelpBtn;
 
     private MediaPlayer bgmusic;
+
+    private MediaPlayer creationMusic;
 
     private MediaPlayer player;
 
@@ -240,6 +245,12 @@ public class HomeController {
         btnFavourite.setDisable(false);
         btnDel.setDisable(false);
         timeSlider.setValue(0);
+        musicCreationBox.setDisable(false);
+
+        if (creationMusic != null) {
+            creationMusic.stop();
+            creationMusic = null;
+        }
     }
 
     public void sortFavourites() throws IOException, InterruptedException {
@@ -294,12 +305,10 @@ public class HomeController {
     /**
      * Play a video creation.
      */
-
-    MediaPlayer creationMusic;
     @FXML
     private void handleBtnPlay() {
 
-btnStop.setDisable(false);
+ btnStop.setDisable(false);
 
         if (btnPlay.getText().equals("Pause")) {
             timeSlider.setDisable(true);
@@ -308,19 +317,32 @@ btnStop.setDisable(false);
             btnDel.setDisable(false);
             btnFavourite.setDisable(false);
             player.pause();
+
+            if (creationMusic != null) {
+                creationMusic.pause();
+            }
             //player = null;
             //_player.getChildren().clear();
         }
 
         else {
+
+
+
             timeSlider.setDisable(false);
             btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.8); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
             btnPlay.setText("Pause");
 
             btnFavourite.setDisable(true);
             btnDel.setDisable(true);
+            musicCreationBox.setDisable(true);
 
             if (player!=null) {
+
+                if (creationMusic != null) {
+                    creationMusic.play();
+                }
+
                 player.play();
                 player.currentTimeProperty().addListener(new InvalidationListener() {
                     @Override
@@ -342,6 +364,18 @@ btnStop.setDisable(false);
                 });
             }
             else {
+
+                if (musicCreationBox.getSelectionModel().getSelectedItem().equals("Techno Music")) {
+                    creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Techno.mp3").toURI().toString()));
+                    creationMusic.play();
+                }
+                else if (musicCreationBox.getSelectionModel().getSelectedItem().equals("Chill Music")) {
+                    creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Chill.mp3").toURI().toString()));
+                    creationMusic.play();
+                }
+                else {
+                    creationMusic = null;
+                }
 
                 _player.getChildren().removeAll();
                 _player.getChildren().clear();
@@ -366,6 +400,7 @@ btnStop.setDisable(false);
                     @Override
                     public void run() {
                         timeSlider.setDisable(true);
+                        timeSlider.setValue(0);
                         _player.getChildren().removeAll();
                         _player.getChildren().clear();
                         player = null;
@@ -374,6 +409,9 @@ btnStop.setDisable(false);
                         btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0;");
                         btnPlay.setText("Play  ▶");
                         btnStop.setDisable(true);
+                        creationMusic.stop();
+                        creationMusic = null;
+                        musicCreationBox.setDisable(false);
                     }
                 });
 

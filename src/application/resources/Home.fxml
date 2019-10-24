@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -16,8 +18,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.HomeController">
    <children>
       <ImageView fitHeight="1197.0" fitWidth="1212.0" layoutX="-40.0" layoutY="-271.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
@@ -91,12 +91,12 @@
             <Font name="Manjari Regular" size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="126.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 2: Pick a song and play it!" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="484.0" layoutY="126.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 2: Pick a song and play!" textAlignment="CENTER">
          <font>
             <Font name="Manjari Regular" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnStop" disable="true" layoutX="973.0" layoutY="727.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" onAction="#handleBtnStop" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.7);" text="Stop ■">
+      <Button fx:id="btnStop" disable="true" layoutX="973.0" layoutY="727.0" mnemonicParsing="false" onAction="#handleBtnStop" prefHeight="54.0" prefWidth="164.0" style="-fx-background-radius: 0 20 20 0; -fx-border-radius: 0 20 20 0; -fx-border-color: red; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.7);" text="Stop ■">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -104,16 +104,16 @@
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </Button>
-      <ChoiceBox layoutX="588.0" layoutY="728.0" prefHeight="54.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font: 20px &quot;Manjari Thin&quot;; -fx-background-radius: 0 20 20 0;" value="No Music">
+      <ChoiceBox fx:id="musicCreationBox" layoutX="573.0" layoutY="723.0" prefHeight="62.0" prefWidth="192.0" style="-fx-background-color: white; -fx-font: 20px &quot;Manjari Thin&quot;; -fx-background-radius: 0 20 20 0;" value="No Music">
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <String fx:value="No Music" />
-                  <String fx:value="Electronic" />
-                  <String fx:value="Relaxing" />
+                  <String fx:value="Techno Music" />
+                  <String fx:value="Chill Music" />
               </FXCollections>
           </items>
       </ChoiceBox>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="728.0" prefHeight="54.0" prefWidth="104.0" style="-fx-background-color: rgba(255, 255, 255, 0.6); -fx-background-radius: 20 0 0 20; -fx-border-radius: 20 0 0 20; -fx-border-width: 5; -fx-border-color: white;" text="Music:" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="484.0" layoutY="726.0" prefHeight="56.0" prefWidth="89.0" style="-fx-background-color: rgba(255, 255, 255, 0.6); -fx-background-radius: 20 0 0 20; -fx-border-radius: 20 0 0 20; -fx-border-width: 5; -fx-border-color: white;" text="Music:" textAlignment="CENTER">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font>
