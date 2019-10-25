@@ -242,6 +242,19 @@ public class HomeController {
             }
         });
 
+        btnStop.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnStop.setOpacity(0.7);
+            }
+        });
+
+        btnStop.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnStop.setOpacity(1.0);
+            }
+        });
     }
 
     /**
@@ -425,8 +438,15 @@ public class HomeController {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
-            _favouriteList.getItems().remove(_selectedItem);
-            //String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem;
+            btnPlay.setDisable(true);
+            btnDel.setDisable(true);
+            btnFavourite.setDisable(true);
+
+            player = null;
+            _player.getChildren().clear();
+            if (_favouriteList.getItems().contains(_selectedItem)) {
+                _favouriteList.getItems().remove(_selectedItem);
+            }
             String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4";
             ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
 
@@ -439,6 +459,8 @@ public class HomeController {
             }
             updateListTree();
             sortFavourites();
+
+
         }
     }
 

@@ -272,6 +272,8 @@ public class SelectImageController {
 
                         try {
                             loader = Main.changeScene("resources/Welcome.fxml");
+                            WelcomeController welcomeController = loader.<WelcomeController>getController();
+                            welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
