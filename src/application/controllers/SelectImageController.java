@@ -36,6 +36,8 @@ public class SelectImageController {
     private static String _term;
     public int count = 0;
 
+    @FXML private Button _btnBack;
+
     @FXML
     private Button _btnDownload;
 
@@ -139,6 +141,7 @@ public class SelectImageController {
                 }
             }
             _loadingImage.setVisible(true);
+            _btnBack.setDisable(true);
             downloadImgBtn.setDisable(true);
             downloadImgBtn.setText("Loading...");
             creationName.setDisable(true);
@@ -155,6 +158,7 @@ public class SelectImageController {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
                 _loadingImage.setVisible(false);
+                _btnBack.setDisable(false);
                 imagePane.setVisible(true);
                 downloadImgBtn.setText("Done");
                 dir = new File(Main.getCreationDir()+"/"+creationName.getText()+"/"+"images/");
@@ -206,6 +210,7 @@ public class SelectImageController {
         }
 
         _loadingImage.setVisible(true);
+        _btnBack.setDisable(true);
         _btnCreateCreation.setText("Creating creation...");
         _btnCreateCreation.setDisable(true);
 
@@ -241,7 +246,6 @@ public class SelectImageController {
                 team.submit(task);
 
                 QuizTask quizTask = new QuizTask(_term, creationName.getText());
-//                team.submit(quizTask);
 
                 task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                     @Override
@@ -294,6 +298,7 @@ public class SelectImageController {
 
     public void initialize() {
         _loadingImage.setVisible(false);
+        _btnBack.setDisable(false);
 
         _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
         _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
