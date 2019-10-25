@@ -34,6 +34,9 @@ public class WikitSearchController {
     private Button btnSearch;
 
     @FXML
+    private Button btnBack;
+
+    @FXML
     private TextField _termField;
 
     @FXML
@@ -70,7 +73,7 @@ public class WikitSearchController {
         WikitSearchTask task = new WikitSearchTask(_termField.getText());
         team.submit(task);
 
-        searchPane.setVisible(false);
+        btnBack.setDisable(true);
         loadingGif.setVisible(true);
         btnSearch.setDisable(true);
         errorLabel.setVisible(false);
@@ -81,12 +84,12 @@ public class WikitSearchController {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
                 if (_termField.getText().isEmpty() | task.getExit() != 0 | task.getOutput().equals( _termField.getText()+" not found :^(")) {
-                   searchPane.setVisible(true);
                    loadingGif.setVisible(false);
                     errorLabel.setVisible(true);
                     btnSearch.setDisable(false);
                     btnSearch.setText("Search");
                     _termField.setDisable(false);
+                    btnBack.setDisable(false);
                     return;
                 }
                 else {

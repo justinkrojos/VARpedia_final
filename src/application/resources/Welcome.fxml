@@ -69,7 +69,7 @@
             <Font name="Navilu" size="32.0" />
          </font>
       </Text>
-      <ToggleButton fx:id="music" layoutX="510.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: ON">
+      <ToggleButton fx:id="music" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: ON">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font>

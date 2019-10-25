@@ -96,7 +96,7 @@ public class MakeSlideShow extends Task<Void> {
         writer.close();
 
         String command1 = "ffmpeg -y -f concat -safe 0 -i "+path+"cmd.txt"+ " -pix_fmt yuv420p -r 25 -vf 'scale=trunc(iw/2)*2:trunc(ih/2)*2' " +path+"video.mp4";
-        String command2 = "ffmpeg -y -i "+Main.getCreationDir()+"/"+_creationName+"/"+"video.mp4 "+ "-vf \"drawtext=fontfile=myfont.ttf:fontsize=50:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2:text='"+_term+"'\" "+"-r 25 "+Main.getCreationDir()+"/"+_creationName+"/"+_creationName+".mp4";
+        String command2 = "ffmpeg -y -i "+Main.getCreationDir()+"/"+_creationName+"/"+"video.mp4 "+ "-vf \"drawtext=fontfile=myfont.ttf:fontsize=70:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2:text='"+_term+"'\" "+"-r 25 "+Main.getCreationDir()+"/"+_creationName+"/"+_creationName+".mp4";
         String command = command1+";"+command2;
 
         ProcessBuilder pbb = new ProcessBuilder("/bin/bash","-c",command);

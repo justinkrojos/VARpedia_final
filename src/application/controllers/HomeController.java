@@ -369,6 +369,10 @@ public class HomeController {
             player = null;
             _player.getChildren().clear();
 
+            if (favourites.contains(_selectedItem)) {
+                favourites.remove(_selectedItem);
+            }
+
             String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4";
             ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
 
@@ -459,6 +463,8 @@ public class HomeController {
         _items = FXCollections.observableArrayList(listFilesOfFolder(_folder));
         for (int i = 0; i < _items.size(); i++) {
             Label label = new Label(_items.get(i));
+            label.prefWidthProperty().bind(_creationList.widthProperty().subtract(27));
+            label.setWrapText(true);
 
             for (int j = 0; j < favourites.size(); j++) {
                 if (_items.get(i).equals(favourites.get(j))) {
@@ -506,7 +512,7 @@ public class HomeController {
     @FXML
     private void handleBtnBack() throws IOException {
         if (player != null) {
-            player.stop();
+            player.pause();
         }
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
