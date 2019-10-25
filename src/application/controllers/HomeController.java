@@ -40,13 +40,7 @@ public class HomeController {
     private String _selectedItem = null;
 
     @FXML
-    private Text _title;
-
-    @FXML
-    private Text _creationTitle;
-
-    @FXML
-    private ListView _creationList;
+    private ListView<Label> _creationList;
 
     @FXML
     private ListView _favouriteList;
@@ -58,25 +52,10 @@ public class HomeController {
     private Button btnDel;
 
     @FXML
-    private Button btnCreate;
-
-    @FXML
     private Pane _player;
 
     @FXML
-    private Button btnRefresh;
-
-    @FXML
     private Button btnStop;
-
-    @FXML
-    private Button btnMute;
-
-    @FXML
-    private Button btnForward;
-
-    @FXML
-    private Button btnBackward;
 
     @FXML
     private ChoiceBox<String> musicCreationBox;
@@ -89,9 +68,6 @@ public class HomeController {
 
     @FXML
     private ToggleButton music;
-
-    @FXML
-    private Button homeHelpBtn;
 
     private MediaPlayer bgmusic;
 
@@ -116,10 +92,6 @@ public class HomeController {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                if (player != null) {
-                    return;
-                }
-
                 selectItem();
                     try {
                         sortFavourites();
@@ -129,7 +101,7 @@ public class HomeController {
 
 
                 if (_selectedItem != null) {
-                    if (player != null) {
+                    if (!timeSlider.isDisabled()) {
                         btnPlay.setDisable(true);
                         btnDel.setDisable(true);
                         btnFavourite.setDisable(true);
@@ -142,6 +114,7 @@ public class HomeController {
                         mediaView.fitWidthProperty().bind(_player.widthProperty());
                         mediaView.fitHeightProperty().bind(_player.heightProperty());
                         mediaView.setPreserveRatio(false);
+                        _player.getChildren().clear();
                         _player.getChildren().add(mediaView);
                         btnPlay.setDisable(false);
                         btnDel.setDisable(false);
@@ -183,6 +156,15 @@ public class HomeController {
                         btnFavourite.setDisable(true);
                     }
                     else {
+                        File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
+                        video = new Media(fileUrl.toURI().toString());
+                        player = new MediaPlayer(video);
+                        mediaView = new MediaView(player);
+                        mediaView.fitWidthProperty().bind(_player.widthProperty());
+                        mediaView.fitHeightProperty().bind(_player.heightProperty());
+                        mediaView.setPreserveRatio(false);
+                        _player.getChildren().clear();
+                        _player.getChildren().add(mediaView);
                         btnPlay.setDisable(false);
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
@@ -261,11 +243,13 @@ public class HomeController {
      * Stops playing a video creation.
      */
     public void handleBtnStop() {
+        btnStop.setDisable(true);
         player.stop();
         _player.getChildren().removeAll();
         _player.getChildren().clear();
+        _player.getChildren().add(mediaView);
         player = new MediaPlayer(video);
-        btnStop.setDisable(true);
+
         btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
         btnPlay.setText("Play  ▶");
         btnFavourite.setDisable(false);
@@ -475,7 +459,12 @@ public class HomeController {
         }
         FXMLLoader loader = Main.changeScene("resources/WikitSearch.fxml");
         WikitSearchController wikitController = loader.<WikitSearchController>getController();
-        wikitController.transferMusic(player, music.isSelected(), music.getText());
+        String s = "Music: OFF";
+        if (!musicToggled) {
+            s = "Music: ON";
+            bgmusic.play();
+        }
+        wikitController.transferMusic(player, musicToggled, s);
     }
 
     /**
@@ -543,7 +532,11 @@ public class HomeController {
      */
     public void updateListTree() {
         _items = FXCollections.observableArrayList(listFilesOfFolder(_folder));
-        _creationList.setItems(_items);
+        for (int i = 0; i < _items.size(); i++) {
+            Label label = new Label(_items.get(i));
+            _creationList.getItems().add(label);
+        }
+        // _creationList.setItems(_items);
     }
 
     /**
@@ -573,7 +566,7 @@ public class HomeController {
     @FXML
     private void selectItem() {
         if (creationCategories.getSelectionModel().getSelectedIndex() == 0) {
-            _selectedItem = (String) _creationList.getSelectionModel().getSelectedItem();
+            _selectedItem = _creationList.getSelectionModel().getSelectedItem().getText();
 
         }
         else {
@@ -627,7 +620,6 @@ public class HomeController {
         music.setText("Music: OFF");
         music.setDisable(true);
         bgmusic.pause();
-        music.setTooltip(new Tooltip("CANNOT PLAY MUSIC"));
         musicToggled = toggle;
     }
 
