@@ -112,7 +112,7 @@ public class DownloadImages extends Task<Void> {
         String creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
         creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
         String config = creationsDir+ "/flickr-api-keys.txt";
-        
+
         File file = new File(config);
         BufferedReader br = new BufferedReader(new FileReader(file));
 
