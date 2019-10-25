@@ -92,6 +92,10 @@ public class WelcomeController {
         }
     }
 
+    /**
+     * Go to quiz scene
+     * @throws IOException
+     */
     @FXML
     private void handleBtnQuiz() throws IOException {
         loader = Main.changeScene("resources/Quiz.fxml");
@@ -99,6 +103,10 @@ public class WelcomeController {
         quizController.transferMusic(player, music.isSelected(), music.getText());
     }
 
+    /**
+     * Go to watch screen
+     * @throws IOException
+     */
     @FXML
     private void handleBtnPlay() throws IOException {
         loader = Main.changeScene("resources/Home.fxml");
@@ -107,7 +115,7 @@ public class WelcomeController {
     }
 
     /**
-     * Not working fully yet
+     * Switches to WikitSearch screen.
      * @throws IOException
      */
     @FXML

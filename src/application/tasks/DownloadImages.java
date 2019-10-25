@@ -61,8 +61,6 @@ public class DownloadImages extends Task<Void> {
                 sharedSecret = "42ccf0520e0515f1";
             }
 
-
-
             Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
             String query = _term;
             int resultsPerPage = 10;
@@ -80,7 +78,6 @@ public class DownloadImages extends Task<Void> {
                 return;
             }
             PhotoList<Photo> results = photos.search(params, resultsPerPage, page);
-            // System.out.println("Retrieving " + results.size()+ " results");
             int count = 0;
             for (Photo photo: results) {
                 if (this.isCancelled()) {
@@ -88,23 +85,19 @@ public class DownloadImages extends Task<Void> {
                 }
                 try {
                     BufferedImage image = photos.getImage(photo, Size.LARGE);
-                    //String filename = query.trim().replace(' ', '-')+"-"+System.currentTimeMillis()+"-"+photo.getId()+".jpg";
+
                     String filename = "image"+count+".jpg";
                     File outputfile = new File(Main.getCreationDir()+"/"+_creationName+"/"+"images",filename);
                     ImageIO.write(image, "jpg", outputfile);
-                    //System.out.println("Downloaded "+filename);
 
-                    //_images.add(new Image(Main.getCreationDir()+"/"+_creationName+"/"+"images/"+filename,50,50,false,false));
                     count++;
                 } catch (FlickrException | IOException fe) {
-                    // System.err.println("Ignoring image " +photo.getId() +": "+ fe.getMessage());
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // System.out.println("\nDone");
     }
 
     /**
@@ -116,17 +109,10 @@ public class DownloadImages extends Task<Void> {
      * @throws Exception
      */
     public static String getAPIKey(String key) throws Exception {
-        // TODO fix the following based on where you will have your config file stored
-
-/*        String config = System.getProperty("user.dir")
-                + System.getProperty("file.separator")+ "flickr-api-keys.txt";*/
         String creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
         creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
         String config = creationsDir+ "/flickr-api-keys.txt";
-
-//		String config = System.getProperty("user.home")
-//				+ System.getProperty("file.separator")+ "bin"
-//				+ System.getProperty("file.separator")+ "flickr-api-keys.txt";
+        
         File file = new File(config);
         BufferedReader br = new BufferedReader(new FileReader(file));
 

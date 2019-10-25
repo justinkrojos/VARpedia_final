@@ -19,6 +19,9 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This class manages the create scene.
+ */
 public class CreateController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();

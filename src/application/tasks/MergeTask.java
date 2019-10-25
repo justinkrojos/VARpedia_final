@@ -3,6 +3,9 @@ package application.tasks;
 import application.Main;
 import javafx.concurrent.Task;
 
+/**
+ * This task merges the audio and video files together. With bash commands.
+ */
 public class MergeTask extends Task<Void> {
 
     String _creationName;

@@ -6,7 +6,7 @@ import javafx.concurrent.Task;
 import java.io.*;
 
 /**
- * This class creates a slideshow of images downloaded from flickr.
+ * This class creates a slideshow of images downloaded from flickr. Uses bash commands.
  */
 public class MakeSlideShow extends Task<Void> {
     private String _term;
@@ -95,37 +95,18 @@ public class MakeSlideShow extends Task<Void> {
         }
         writer.close();
 
-
-
-        //String command = command1+";"+command2;
-
         String command1 = "ffmpeg -y -f concat -safe 0 -i "+path+"cmd.txt"+ " -pix_fmt yuv420p -r 25 -vf 'scale=trunc(iw/2)*2:trunc(ih/2)*2' " +path+"video.mp4";
         String command2 = "ffmpeg -y -i "+Main.getCreationDir()+"/"+_creationName+"/"+"video.mp4 "+ "-vf \"drawtext=fontfile=myfont.ttf:fontsize=30:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2:text='"+_term+"'\" "+"-r 25 "+Main.getCreationDir()+"/"+_creationName+"/"+_creationName+".mp4";
         String command = command1+";"+command2;
 
-        //System.out.println(command);
         ProcessBuilder pbb = new ProcessBuilder("/bin/bash","-c",command);
         try {
             Process p = pbb.start();
             p.waitFor();
-
-            //System.out.println("Done");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        // System.out.println(command);
-
     }
 
-
-    //Old one... too afraid to delete. so im keeping it here just in case.
-/*    @Override
-    protected Void call() throws Exception {
-        String command = "ffmpeg -framerate 1/2 -i image%01d.jpg -r 25 -vf \"pad=ceil(iw/2)*2:ceil(ih/2)*2\" /media/sf_VBoxSharedFolder/Ass3/IdeaProjects/206Assignment3/out/production/creations/213/video.mp4;ffmpeg -i /media/sf_VBoxSharedFolder/Ass3/IdeaProjects/206Assignment3/out/production/creations/213/video.mp4 -vf \"drawtext=fontfile=myfont.ttf:fontsize=30:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2:text='apple'\" /media/sf_VBoxSharedFolder/Ass3/IdeaProjects/206Assignment3/out/production/creations/213/213.mp4";
-        ProcessBuilder pb = new ProcessBuilder("bash","-c",command);
-        Process p = pb.start();
-        p.waitFor();
-        return null;
-    }*/
 }
 

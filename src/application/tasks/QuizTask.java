@@ -3,6 +3,9 @@ package application.tasks;
 import application.Main;
 import javafx.concurrent.Task;
 
+/**
+ * This class creates a quiz video, a normal creation video without the term subtitled.
+ */
 public class QuizTask extends Task<Void> {
     private String _term;
     private String _creationName;

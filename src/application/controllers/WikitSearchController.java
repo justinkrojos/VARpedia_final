@@ -18,6 +18,9 @@ import java.util.concurrent.Executors;
 
 import java.io.IOException;
 
+/**
+ * This class manages the wikit search screen.
+ */
 public class WikitSearchController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();
@@ -58,7 +61,7 @@ public class WikitSearchController {
     }
 
     /**
-     * This method searches the wiki with the inputted term.
+     * This method searches the wiki with the inputted term. Runs the bash command wikit with the term inputted by the user. And checks for a valid input.
      * @throws IOException
      */
     @FXML
@@ -77,15 +80,7 @@ public class WikitSearchController {
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                //TODO What happens when wikit search fails?? invalid wikie searches not handled.
                 if (_termField.getText().isEmpty() | task.getExit() != 0 | task.getOutput().equals( _termField.getText()+" not found :^(")) {
-                   /* Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Wikit Search");
-                    alert.setHeaderText("Please enter a valid search term");
-                    alert.setContentText("Enter a valid search term and try again.");
-                    alert.showAndWait();
-
-                    */
                    searchPane.setVisible(true);
                    loadingGif.setVisible(false);
                     errorLabel.setVisible(true);
@@ -110,6 +105,10 @@ public class WikitSearchController {
         });
     }
 
+    /**
+     * Go back to the main menu screen.
+     * @throws IOException
+     */
     @FXML
     private void handleBtnBack() throws IOException {
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");

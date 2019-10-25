@@ -80,8 +80,6 @@ public class QuizController {
 
 
     public void initialize() {
- /*       _correctText.textProperty().bind(new SimpleIntegerProperty(_numCorrect).asString());
-        _questionsText.textProperty().bind(new SimpleIntegerProperty(_numQuestions).asString());*/
         _correctText.setText("" +_numCorrect);
         _questionsText.setText("" + _numQuestions);
         _btnCheck.setDisable(true);
@@ -101,14 +99,13 @@ public class QuizController {
      */
     @FXML
     private void handleBtnStart() {
-        //_answerLabel.setText("");
         _correctText.setText("" +_numCorrect);
         _questionsText.setText("" + _numQuestions);
         _btnCheck.setDisable(false);
         System.out.println(_numCorrect +""+ _numQuestions);
         _player.getChildren().removeAll();
         _player.getChildren().clear();
-        //_numQuestions++;
+
 
         String selectedItem = _quiz.play();
         _term = selectedItem;
@@ -123,8 +120,6 @@ public class QuizController {
         player.setOnReady(new Runnable() {
             @Override
             public void run() {
-                //Some observable map thing goes here.
-
             }
         });
 
@@ -133,12 +128,8 @@ public class QuizController {
             public void run() {
                 player.seek(Duration.ZERO);
                 player.play();
-                // btnPlay.setDisable(false);
-                //mediaView = null;
             }
         });
-
-
 
         _player.getChildren().add(mediaView);
         _btnStart.setDisable(true);
@@ -163,11 +154,6 @@ public class QuizController {
             _numQuestions++;
             _answerLabel.setText("Correct!!! Keep Going!");
             _answerLabel.setTextFill(Color.GREEN);
-/*            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Correct");
-            alert.setContentText("Correct!!!");
-            alert.setHeaderText(null);
-            alert.showAndWait();*/
             handleBtnStart();
             _correctText.setText("" +_numCorrect);
             _questionsText.setText("" + _numQuestions);
@@ -175,16 +161,10 @@ public class QuizController {
         } else {
             _answerLabel.setText("HINT: " +_term);
             _answerLabel.setTextFill(Color.RED);
-/*            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Wrong");
-            alert.setContentText("WRONG!!!!" + System.getProperty("line.separator")+"Correct Answer is : " + _term);
-            alert.setHeaderText(null);
-            alert.showAndWait();*/
             _numQuestions++;
             _correctText.setText("" +_numCorrect);
             _questionsText.setText("" + _numQuestions);
         }
-
         _answerField.clear();
     }
 

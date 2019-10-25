@@ -12,12 +12,6 @@ public class Quiz {
     private final File _folder = new File(Main.getQuizDir());
     private String _term;
 
-    public boolean checkAns(String answer) {
-        if (answer.equals(_term)) {
-            return true;
-        }
-        return false;
-    }
     public String getTerm() {
         return _term;
     }
@@ -50,7 +44,6 @@ public class Quiz {
                 list.add(fileEntry.getName().replace(".mp4", ""));//.replace(".mp4", ""));
             }
         }
-
         Collections.shuffle(list);
         return list;
     }

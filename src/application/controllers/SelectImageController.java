@@ -89,8 +89,6 @@ public class SelectImageController {
     private final int _numRows = 2;
     private final int _numCols = 5;
 
-   // private List<Image> _image;
-
     private static File dir;
 
     FXMLLoader loader;
@@ -112,7 +110,6 @@ public class SelectImageController {
 
         String creationDir = Main.getCreationDir();
         String creationFile = creationDir + "/" + creationName.getText();
-        //String cmd = "[ -e " + creationFile + " ]";
         String cmd = "[ -e " + creationFile+".mp4" + " ] || [ -e " + creationFile + " ]";
         ProcessBuilder checkName = new ProcessBuilder("bash", "-c", cmd);
 
@@ -223,7 +220,6 @@ public class SelectImageController {
                 ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
                 Process p = pb.start();
                 p.waitFor();
-                //System.out.println(cmd);
                 imageNum++;
             }
             count++;
@@ -259,8 +255,6 @@ public class SelectImageController {
                             e.printStackTrace();
                         }
 
-
-
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.getDialogPane().getStylesheets().add(("Alert.css"));
                         alert.setTitle("Creation Complete!");
@@ -277,28 +271,10 @@ public class SelectImageController {
                         delCreationDir();
                     }
                 });
-                //_homeController.updateListTree();
-
-
             }
         });
     }
 
-/*    private Popup createPopup(String message) {
-        Popup popup = new Popup();
-        popup.setAutoFix(true);
-        popup.setAutoHide(true);
-        popup.setHideOnEscape(true);
-        Label label = new Label(message);
-        label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                popup.hide();
-            }
-        });
-        popup.getContent().add(label);
-        return popup;
-    }*/
 
     /**
      * Deletes the creation folder of the current creation.

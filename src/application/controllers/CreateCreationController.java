@@ -53,9 +53,6 @@ public class CreateCreationController {
 
     FXMLLoader loader;
 
-    /**
-     * Check if creation name is taken, and if so let the user pick if they want to overwrite
-     */
     @FXML
     private Button btnPreviewAudioEdit;
 
@@ -151,6 +148,7 @@ public class CreateCreationController {
         });
 
     }
+
 
     @FXML
     private void handleDelEditor() {

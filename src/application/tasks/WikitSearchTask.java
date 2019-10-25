@@ -5,6 +5,9 @@ import javafx.concurrent.Task;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * This class manages the wikit search. Gets output from the bash wikit command.
+ */
 public class WikitSearchTask extends Task<Void> {
     private String _term;
     private String _output;
@@ -23,16 +26,12 @@ public class WikitSearchTask extends Task<Void> {
         _exit = wikitp.waitFor();
         BufferedReader stdout = new BufferedReader(new InputStreamReader(wikitp.getInputStream()));
 
-        //exitStatus = wikitTask.getValue();
         _output = stdout.readLine();
 
         if (_output.startsWith("  ")) {
             _output = _output.replaceFirst("  ", "");
         }
         _output = _output.replace(". ", ".\n");
-
-        //System.out.println(_output);
-        //splitWikitOut = wikitOutput.split("\n");
 
         stdout.close();
         return null;

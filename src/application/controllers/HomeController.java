@@ -78,8 +78,6 @@ public class HomeController {
     @FXML
     private Button btnBackward;
 
-    //private MediaView mediaView;
-
     @FXML
     private ChoiceBox<String> musicCreationBox;
 
@@ -308,7 +306,7 @@ public class HomeController {
     @FXML
     private void handleBtnPlay() {
 
- btnStop.setDisable(false);
+        btnStop.setDisable(false);
 
         if (btnPlay.getText().equals("Pause")) {
             timeSlider.setDisable(true);
@@ -321,8 +319,6 @@ public class HomeController {
             if (creationMusic != null) {
                 creationMusic.pause();
             }
-            //player = null;
-            //_player.getChildren().clear();
         }
 
         else {
@@ -392,8 +388,6 @@ public class HomeController {
                 player.setOnReady(new Runnable() {
                     @Override
                     public void run() {
-                        //Some observable map thing goes here.
-
                     }
                 });
                 player.setOnEndOfMedia(new Runnable() {
@@ -456,7 +450,7 @@ public class HomeController {
 
 
     /**
-     * Delete a creation.
+     * Delete a creation. And prompts the user to confirm their actions.
      */
     @FXML
     private void handleBtnDel() throws IOException, InterruptedException {
@@ -487,7 +481,7 @@ public class HomeController {
     }
 
     /**
-     * Opens up the create menu.
+     * Switches to WikitSearch screen.
      * @throws IOException
      */
     @FXML
@@ -561,7 +555,6 @@ public class HomeController {
         else {
             _selectedItem = (String) _favouriteList.getSelectionModel().getSelectedItem();
         }
-        //System.out.println(_selectedItem);
     }
 
     @FXML
