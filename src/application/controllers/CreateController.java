@@ -115,20 +115,19 @@ public class CreateController {
      */
     public void setUp(Stage stage){
         _currentStage = stage;
-        //_welcomeController = welcomeController;
-        //_homeController = homeController;
     }
 
     public void initialize(){
         btnCreate.setVisible(false);
         btnCreate.setDisable(true);
-
-        // _currentStage = (Stage) _ap.getScene().getWindow();
     }
 
 
+    /**
+     * Opens the selectImage window.
+     */
     @FXML
-    private void handleBtnSelectImages() throws IOException, InterruptedException {
+    private void handleBtnSelectImages() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("resources/SelectImage.fxml"));
         Parent layout = null;
@@ -140,36 +139,13 @@ public class CreateController {
         SelectImageController controller = loader.getController();
         Scene scene = new Scene(layout);
         Stage imageStage = new Stage();
-        // controller.setUp(_creationNameField.getText(),_termField.getText(), this, imageStage);
         imageStage.setScene(scene);
         imageStage.show();
-
-/*        DownloadImages dl = new DownloadImages(_creationNameField.getText(), _termField.getText());
-        team.submit(dl);
-        dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("resources/SelectImage.fxml"));
-                Parent layout = null;
-                try {
-                    layout = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                SelectImageController controller = loader.getController();
-                controller.setUp(_creationNameField.getText(),_termField.getText());
-                Scene scene = new Scene(layout);
-                Stage imageStage = new Stage();
-                imageStage.setScene(scene);
-                imageStage.show();
-            }
-        });*/
 
     }
 
     /**
-     * Checks the creation name and handles overwriting creation name.
+     * Checks that the creation name is valid and handles overwriting creation name.
      */
     @FXML
     public void handleCreationName() {
@@ -242,19 +218,16 @@ public class CreateController {
     }
 
     /**
-     * Handle the wikit search term.
+     * Handle the wikit search term. Runs the wikit bash command with the term the user inputs.
      */
     @FXML
     public void handleSearch() {
-
-
             WikitSearchTask task = new WikitSearchTask(_termField.getText());
             team.submit(task);
             btnSearch.setDisable(true);
             task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                 @Override
                 public void handle(WorkerStateEvent workerStateEvent) {
-                    //TODO What happens when wikit search fails?? invalid wikie searches not handled.
                     if (_termField.getText().isEmpty() | task.getExit() != 0 | task.getOutput().equals( _termField.getText()+" not found :^(")) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Wikit Search");
@@ -276,7 +249,7 @@ public class CreateController {
     }
 
     /**
-     * Gets the images and creates the creation video.
+     * Gets the images and creates the creation video. Checks if all the fields are set correctly, before downloading the images.
      */
     @FXML
     private void handleGetImages() {
@@ -324,15 +297,6 @@ public class CreateController {
      */
     @FXML
     private void mergeVideoAudio(){
-/*        if (!btnImage.getText().equals("Success!")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Cannot merge video and audio file");
-            alert.setHeaderText(null);
-            alert.setContentText("Please check that the Make Video(under the Get image");
-            alert.showAndWait();
-            return;
-        }*/
-
         String creationName = _creationNameField.getText();
         String term = _termField.getText();
         MergeTask task = new MergeTask(creationName);
@@ -347,23 +311,20 @@ public class CreateController {
                 btnCreate.setText("Success!");
             }
         });
-        //_homeController.updateListTree();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Creation Complete");
         alert.setHeaderText(null);
         alert.setContentText("Creation complete, please refresh list of creations.");
         alert.showAndWait();
-        //_homeController.updateListTree();
     }
 
     /**
-     * Downloads the images.
+     * This method downloads 10 images from Flickr with the searched term, and stores them in creation/images.
      * @param term
      * @param creationName
      * @param numImages
      */
     private void getImages(String term, String creationName, int numImages) {
-        //GetImagesTask task = new GetImagesTask(term, creationName, numImages);
         MakeSlideShow task = new MakeSlideShow(term, creationName);
         team.submit(task);
         _currentStage.close();
@@ -372,8 +333,6 @@ public class CreateController {
             public void handle(WorkerStateEvent workerStateEvent) {
                 btnImage.setText("Success!");
                 mergeVideoAudio();
-
-
             }
         });
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
