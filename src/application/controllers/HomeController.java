@@ -232,6 +232,9 @@ public class HomeController {
 
     }
 
+    /**
+     * Stops playing a video creation.
+     */
     public void handleBtnStop() {
         player.stop();
         _player.getChildren().removeAll();
@@ -251,57 +254,8 @@ public class HomeController {
         }
     }
 
-    public void sortFavourites() throws IOException, InterruptedException {
-
-        String listOfFavourites = " ";
-
-        for (int i = 0; i < _favouriteList.getItems().size(); i++) {
-            listOfFavourites += _favouriteList.getItems().get(i) + ".mp4 ";
-        }
-
-        String cmd = "echo -e '" + listOfFavourites + "' > " + Main.getFavouriteDir() + "/favourites.txt";
-
-        ProcessBuilder getFavouritespb = new ProcessBuilder("bash", "-c", cmd);
-        Process getFavouritesprocess = getFavouritespb.start();
-        getFavouritesprocess.waitFor();
-
-        if (_favouriteList.getItems().size() > 2) {
-
-            String allFavourites = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A").next();
-            allFavourites.trim();
-
-            String[] favouriteArray = allFavourites.split(".mp4 ");
-
-            Arrays.sort(favouriteArray);
-
-            _favouriteList.getItems().clear();
-            for (int i = 1; i < favouriteArray.length; i++) {
-                _favouriteList.getItems().add(favouriteArray[i]);
-            }
-        }
-    }
-
     /**
-     * Go back to welcome screen
-     * @throws IOException
-     */
-    @FXML
-    private void handleBtnBack() throws IOException {
-        if (player != null) {
-            player.stop();
-        }
-        FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
-        WelcomeController welcomeController = loader.<WelcomeController>getController();
-        String s = "Music: OFF";
-        if (!musicToggled) {
-            s = "Music: ON";
-            bgmusic.play();
-        }
-        welcomeController.transferMusic(bgmusic, musicToggled, s);
-    }
-
-    /**
-     * Play a video creation.
+     * Play/Pause a video creation.
      */
     @FXML
     private void handleBtnPlay() {
@@ -322,8 +276,6 @@ public class HomeController {
         }
 
         else {
-
-
 
             timeSlider.setDisable(false);
             btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.8); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
@@ -440,6 +392,9 @@ public class HomeController {
         }
     }
 
+    /**
+     * Update values of time slider to current video.
+     */
     protected void updateValues() {
         Platform.runLater(new Runnable() {
             public void run() {
@@ -494,6 +449,11 @@ public class HomeController {
         wikitController.transferMusic(player, music.isSelected(), music.getText());
     }
 
+    /**
+     * Toggles the favourites/like button.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @FXML
     public void handleBtnFavourite() throws IOException, InterruptedException {
         if (btnFavourite.isSelected()) {
@@ -515,6 +475,41 @@ public class HomeController {
     }
 
     /**
+     * Sort favourites in alphabetical order.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public void sortFavourites() throws IOException, InterruptedException {
+
+        String listOfFavourites = " ";
+
+        for (int i = 0; i < _favouriteList.getItems().size(); i++) {
+            listOfFavourites += _favouriteList.getItems().get(i) + ".mp4 ";
+        }
+
+        String cmd = "echo -e '" + listOfFavourites + "' > " + Main.getFavouriteDir() + "/favourites.txt";
+
+        ProcessBuilder getFavouritespb = new ProcessBuilder("bash", "-c", cmd);
+        Process getFavouritesprocess = getFavouritespb.start();
+        getFavouritesprocess.waitFor();
+
+        if (_favouriteList.getItems().size() > 2) {
+
+            String allFavourites = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A").next();
+            allFavourites.trim();
+
+            String[] favouriteArray = allFavourites.split(".mp4 ");
+
+            Arrays.sort(favouriteArray);
+
+            _favouriteList.getItems().clear();
+            for (int i = 1; i < favouriteArray.length; i++) {
+                _favouriteList.getItems().add(favouriteArray[i]);
+            }
+        }
+    }
+
+    /**
      * Get the creations in the folder.
      */
     public void updateListTree() {
@@ -523,7 +518,7 @@ public class HomeController {
     }
 
     /**
-     * Get the creations in the folder into an arrylist sorted.
+     * Get the creations in the folder into an arraylist sorted.
      *
      * Code created with help from:
      * https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
@@ -557,6 +552,28 @@ public class HomeController {
         }
     }
 
+    /**
+     * Go back to welcome screen
+     * @throws IOException
+     */
+    @FXML
+    private void handleBtnBack() throws IOException {
+        if (player != null) {
+            player.stop();
+        }
+        FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
+        WelcomeController welcomeController = loader.<WelcomeController>getController();
+        String s = "Music: OFF";
+        if (!musicToggled) {
+            s = "Music: ON";
+            bgmusic.play();
+        }
+        welcomeController.transferMusic(bgmusic, musicToggled, s);
+    }
+
+    /**
+     * Toggle background music.
+     */
     @FXML
     private void handleMusic() {
         if (music.isSelected()) {
@@ -569,6 +586,12 @@ public class HomeController {
         }
     }
 
+    /**
+     * Turn off music for this window and keep previous user selection for music.
+     * @param bgmusic
+     * @param toggle
+     * @param text
+     */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
         this.bgmusic = bgmusic;
         music.setSelected(true);

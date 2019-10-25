@@ -26,10 +26,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //System.out.println(this.getClass().getResource("resources/Home.fxml"));
 
-        // MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/src/application/resources/bgmusic.wav").toURI().toString()));
         MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/bgmusic.wav").toURI().toString()));
+        player.play();
+        player.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                player.seek(Duration.ZERO);
+            }
+        });
+
         _primaryStage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
@@ -39,13 +45,6 @@ public class Main extends Application {
 
         WelcomeController welcomeController = loader.<WelcomeController>getController();
         welcomeController.transferMediaPlayer(player);
-        player.play();
-        player.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                player.seek(Duration.ZERO);
-            }
-        });
 
         Scene scene = new Scene(layout);
         primaryStage.setScene(scene);

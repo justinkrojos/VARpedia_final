@@ -116,6 +116,9 @@ public class WikitSearchController {
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
 
+    /**
+     * Toggle background music.
+     */
     @FXML
     private void handleMusic() {
         if (music.isSelected()) {
@@ -128,6 +131,12 @@ public class WikitSearchController {
         }
     }
 
+    /**
+     * Transfer music to this scene.
+     * @param bgmusic
+     * @param toggle
+     * @param text
+     */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
         this.bgmusic = bgmusic;
         music.setSelected(toggle);

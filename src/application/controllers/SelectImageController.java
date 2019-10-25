@@ -95,6 +95,23 @@ public class SelectImageController {
 
     FXMLLoader loader;
 
+    public void initialize() {
+        _loadingImage.setVisible(false);
+        _btnBack.setDisable(false);
+
+        _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
+        _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
+
+        creationName.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    handleBtnDownload();
+                }
+            }
+        });
+    }
+
     /**
      * Download 10 images from flikr associated with the term.
      */
@@ -296,22 +313,6 @@ public class SelectImageController {
     }
 
 
-    public void initialize() {
-        _loadingImage.setVisible(false);
-        _btnBack.setDisable(false);
-
-        _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
-        _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
-
-        creationName.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    handleBtnDownload();
-                }
-            }
-        });
-    }
 
     public void transferInfo(String text, String[][] savedText) {
         _term = text;
@@ -349,6 +350,9 @@ public class SelectImageController {
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
 
+    /**
+     * Toggle background music.
+     */
     @FXML
     private void handleMusic() {
         if (music.isSelected()) {
@@ -361,6 +365,12 @@ public class SelectImageController {
         }
     }
 
+    /**
+     * Transfer music to this scene.
+     * @param bgmusic
+     * @param toggle
+     * @param text
+     */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
         this.bgmusic = bgmusic;
         music.setSelected(toggle);

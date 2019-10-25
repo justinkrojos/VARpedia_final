@@ -79,19 +79,6 @@ public class WelcomeController {
         });
     }
 
-    @FXML
-    public void handleMusic() {
-
-        if (music.isSelected()) {
-            music.setText("Music: OFF");
-            player.pause();
-        }
-        else {
-            music.setText("Music: ON");
-            player.play();
-        }
-    }
-
     /**
      * Go to quiz scene
      * @throws IOException
@@ -125,13 +112,32 @@ public class WelcomeController {
         wikitController.transferMusic(player, music.isSelected(), music.getText());
     }
 
+    /**
+     * Toggle background music.
+     */
+    @FXML
+    public void handleMusic() {
+
+        if (music.isSelected()) {
+            music.setText("Music: OFF");
+            player.pause();
+        }
+        else {
+            music.setText("Music: ON");
+            player.play();
+        }
+    }
+
+    /**
+     * Transfer music to this scene.
+     * @param bgmusic
+     * @param toggle
+     * @param text
+     */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
         player = bgmusic;
         music.setSelected(toggle);
         music.setText(text);
     }
 
-    public void transferMediaPlayer(MediaPlayer bgmusic) {
-        player = bgmusic;
-    }
 }

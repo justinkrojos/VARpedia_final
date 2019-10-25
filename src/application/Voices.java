@@ -1,5 +1,8 @@
 package application;
 
+/**
+ * Enumerated class that stores voice packages (strings).
+ */
 public enum Voices {
 
     Default ("(voice_kal_diphone)"),

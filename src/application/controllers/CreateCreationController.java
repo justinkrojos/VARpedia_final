@@ -44,7 +44,7 @@ public class CreateCreationController {
     private ChoiceBox<String> voicesChoiceBox;
 
     @FXML
-            private ChoiceBox<String> voicesChoiceBoxEdit;
+    private ChoiceBox<String> voicesChoiceBoxEdit;
 
     MediaPlayer bgmusic;
 
@@ -57,38 +57,34 @@ public class CreateCreationController {
     private Button btnPreviewAudioEdit;
 
     @FXML
-            private TextArea editTextArea;
+    private TextArea editTextArea;
 
     @FXML
-            private ListView<Label> savedTextEdit;
+    private ListView<Label> savedTextEdit;
 
     @FXML
-            private Button btnSaveChanges;
+    private Button btnSaveChanges;
 
     @FXML
-            private Button btnMoveDown;
+    private Button btnMoveDown;
 
     @FXML
-            private Button btnMoveUp;
+    private Button btnMoveUp;
 
     @FXML
-            private Button btnExitEditor;
+    private Pane textActions;
 
     @FXML
-            private Pane textActions;
+    private Pane textPane;
 
     @FXML
-            private Pane textPane;
-
-    @FXML
-            private Pane editorPane;
+    private Pane editorPane;
 
     @FXML
     private Button btnDelEditor;
 
 
     public void initialize(){
-        //voicesList.clear();
         btnNext.setDisable(true);
 
         savedText.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -149,68 +145,10 @@ public class CreateCreationController {
 
     }
 
-
-    @FXML
-    private void handleDelEditor() {
-        savedTextEdit.getItems().remove(savedTextEdit.getSelectionModel().getSelectedIndex());
-        btnDelEditor.setDisable(true);
-        btnMoveDown.setDisable(true);
-        btnMoveUp.setDisable(true);
-        btnPreviewAudioEdit.setDisable(true);
-        btnSaveChanges.setDisable(true);
-        editTextArea.setDisable(true);
-        voicesChoiceBoxEdit.setDisable(false);
-    }
-
-    @FXML
-    private void handleMoveUp() {
-        Label l = savedTextEdit.getSelectionModel().getSelectedItem();
-        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
-        if (i == 0) {
-
-        }
-        else {
-            savedTextEdit.getItems().remove(i);
-            savedTextEdit.getItems().add(i - 1, l);
-            Collections.swap(voicesList, i, i - 1);
-            savedTextEdit.getSelectionModel().select(i - 1);
-        }
-
-
-    }
-
-    @FXML
-    private void handleMoveDown() {
-        Label l = savedTextEdit.getSelectionModel().getSelectedItem();
-        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
-        if (i == savedTextEdit.getItems().size() - 1) {
-
-        }
-        else {
-            savedTextEdit.getItems().remove(i);
-            savedTextEdit.getItems().add(i + 1, l);
-            Collections.swap(voicesList, i, i + 1);
-            savedTextEdit.getSelectionModel().select(i + 1);
-        }
-
-    }
-
-    public void updateListViews() {
-        if (editorPane.isVisible()) {
-            savedTextEdit.getItems().clear();
-            for (int i = 0; i < savedText.getItems().size(); i++) {
-                savedTextEdit.getItems().add(savedText.getItems().get(i));
-            }
-        }
-        else {
-            savedText.getItems().clear();
-            for (int i = 0; i < savedTextEdit.getItems().size(); i++) {
-                savedText.getItems().add(savedTextEdit.getItems().get(i));
-            }
-        }
-
-    }
-
+    /**
+     * Change to the select image and name creation scene.
+     * @throws IOException
+     */
     @FXML
     private void handleBtnNext() throws IOException {
 
@@ -228,6 +166,10 @@ public class CreateCreationController {
     }
 
 
+    /**
+     * Previews selected text with the users desired voice.
+     * @throws IOException
+     */
     @FXML
     public void handleAudioPreview() throws IOException {
 
@@ -251,36 +193,9 @@ public class CreateCreationController {
         }
     }
 
-    @FXML
-    public void handleSaveEdit() {
-        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
-
-        voicesList.add(i, voicesChoiceBoxEdit.getValue());
-        voicesList.remove(i + 1);
-        savedTextEdit.getItems().add(i, new Label(editTextArea.getText()));
-        savedTextEdit.getItems().remove(i + 1);
-
-    }
-
-    @FXML
-    public void handleExitEditor() {
-        editorPane.setVisible(false);
-        textPane.setVisible(true);
-        textActions.setVisible(true);
-        if (savedText.getItems().size() == 0) {
-
-        }
-        else {
-            btnNext.setVisible(true);
-        }
-        updateListViews();
-    }
-
-
     /**
-     * Saves the chunk of text as a wav file
+     * Saves the chunk of text as a wav file.
      */
-
     @FXML
     public void handleSaveAudioBtn() {
 
@@ -310,66 +225,114 @@ public class CreateCreationController {
     }
 
     /**
-     * Previews the entire audio queue.
+     * Move selected text up one in the listview.
      */
-/*
     @FXML
-    public void handlePreviewBtn() {
+    private void handleMoveUp() {
+        Label l = savedTextEdit.getSelectionModel().getSelectedItem();
+        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
+        if (i == 0) {
 
-        btnPreviewAudio.setDisable(true);
-        btnStopAudio.setDisable(false);
+        }
+        else {
+            savedTextEdit.getItems().remove(i);
+            savedTextEdit.getItems().add(i - 1, l);
+            Collections.swap(voicesList, i, i - 1);
+            savedTextEdit.getSelectionModel().select(i - 1);
+        }
 
-        //AudioMergeTask audioMergeTask = new AudioMergeTask(_creationNameField.getText(), _audioList, btnPreviewAudio.isDisabled());
-        //team.submit(audioMergeTask);
-
-        audioMergeTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                btnPreviewAudio.setDisable(false);
-                btnStopAudio.setDisable(true);
-                try {
-                    audioMergeTask.removePreviewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        btnStopAudio.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                audioMergeTask.stopProcess();
-                try {
-                    audioMergeTask.removePreviewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                btnPreviewAudio.setDisable(false);
-                btnStopAudio.setDisable(true);
-
-            }
-        });
 
     }
 
     /**
-     * Saves the audio queue into a wav file.
+     * Move selected text down one row in the listview.
      */
-/*
     @FXML
-    public void handleSaveFinalAudioBtn() {
-        AudioMergeTask audioMergeTask = new AudioMergeTask(_creationNameField.getText(), _audioList, btnPreviewAudio.isDisabled());
-        team.submit(audioMergeTask);
-        btnSaveAudioFile.setText("Save and Overwrite");
-        step3.setSelected(true);
+    private void handleMoveDown() {
+        Label l = savedTextEdit.getSelectionModel().getSelectedItem();
+        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
+        if (i == savedTextEdit.getItems().size() - 1) {
+
+        }
+        else {
+            savedTextEdit.getItems().remove(i);
+            savedTextEdit.getItems().add(i + 1, l);
+            Collections.swap(voicesList, i, i + 1);
+            savedTextEdit.getSelectionModel().select(i + 1);
+        }
+
     }
-*/
+
     /**
-     * Method to get Voice object based on choicebox.
+     * Delete the selected text in the editor pane.
+     */
+    @FXML
+    private void handleDelEditor() {
+        savedTextEdit.getItems().remove(savedTextEdit.getSelectionModel().getSelectedIndex());
+        btnDelEditor.setDisable(true);
+        btnMoveDown.setDisable(true);
+        btnMoveUp.setDisable(true);
+        btnPreviewAudioEdit.setDisable(true);
+        btnSaveChanges.setDisable(true);
+        editTextArea.setDisable(true);
+        voicesChoiceBoxEdit.setDisable(false);
+    }
+
+    /**
+     * Save new changes made in the editor pane.
+     */
+    @FXML
+    public void handleSaveEdit() {
+        int i = savedTextEdit.getSelectionModel().getSelectedIndex();
+
+        voicesList.add(i, voicesChoiceBoxEdit.getValue());
+        voicesList.remove(i + 1);
+        savedTextEdit.getItems().add(i, new Label(editTextArea.getText()));
+        savedTextEdit.getItems().remove(i + 1);
+
+    }
+
+    /**
+     * Exit from editor pane.
+     */
+    @FXML
+    public void handleExitEditor() {
+        editorPane.setVisible(false);
+        textPane.setVisible(true);
+        textActions.setVisible(true);
+        if (savedText.getItems().size() == 0) {
+
+        }
+        else {
+            btnNext.setVisible(true);
+        }
+        updateListViews();
+    }
+
+    /**
+     * Transfer new changes in editor pane to the listview.
+     */
+    public void updateListViews() {
+        if (editorPane.isVisible()) {
+            savedTextEdit.getItems().clear();
+            for (int i = 0; i < savedText.getItems().size(); i++) {
+                savedTextEdit.getItems().add(savedText.getItems().get(i));
+            }
+        }
+        else {
+            savedText.getItems().clear();
+            for (int i = 0; i < savedTextEdit.getItems().size(); i++) {
+                savedText.getItems().add(savedTextEdit.getItems().get(i));
+            }
+        }
+
+    }
+
+    /**
+     * Getter for voice enum - dependant on choice box selection.
      * @param voiceCode
      * @return
      */
-
     public Voices getVoicesObject(String voiceCode) {
         if (voiceCode.equals("Default")) {
             return Voices.Default;
@@ -382,12 +345,10 @@ public class CreateCreationController {
         }
     }
 
-    public void transferTerm(String term, String _textArea) {
-        _termField = term;
-        this._textArea.setText(_textArea);
-        searchConfirmation.setText(searchConfirmation.getText() + " " + _termField);
-    }
-
+    /**
+     * Go back to the main menu.
+     * @throws IOException
+     */
     @FXML
     private void handleBtnBack() throws IOException {
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
@@ -395,6 +356,9 @@ public class CreateCreationController {
         welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
     }
 
+    /**
+     * Toggle background mis.c
+     */
     @FXML
     private void handleMusic() {
         if (music.isSelected()) {
@@ -407,10 +371,26 @@ public class CreateCreationController {
         }
     }
 
+    /**
+     * Transfer music to this scene.
+     * @param bgmusic
+     * @param toggle
+     * @param text
+     */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
         this.bgmusic = bgmusic;
         music.setSelected(toggle);
         music.setText(text);
     }
 
+    /**
+     * Transfer wikit search information to this scene.
+     * @param term
+     * @param _textArea
+     */
+    public void transferTerm(String term, String _textArea) {
+        _termField = term;
+        this._textArea.setText(_textArea);
+        searchConfirmation.setText(searchConfirmation.getText() + " " + _termField);
+    }
 }
