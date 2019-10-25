@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -56,7 +57,7 @@
                      </font>
                   </Button>
                   <ListView fx:id="savedText" editable="true" layoutX="15.0" layoutY="197.0" prefHeight="356.0" prefWidth="449.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
-                  <Label alignment="CENTER" disable="true" layoutX="116.0" layoutY="313.0" prefHeight="124.0" prefWidth="246.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 0, 0);" text="Click on me to edit text!" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" disable="true" layoutX="116.0" layoutY="313.0" prefHeight="124.0" prefWidth="246.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 0, 0);" text="Click on me to edit text!" textAlignment="CENTER" textFill="#d0c5c5" wrapText="true">
                      <font>
                         <Font name="Manjari Regular" size="30.0" />
                      </font>
@@ -66,9 +67,33 @@
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
                   </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="425.0" layoutY="81.0" prefHeight="41.0" prefWidth="39.0" style="-fx-background-radius: 24; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Select a voice and listen to the text!">
+                           <font>
+                              <Font name="Manjari Thin" size="25.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="425.0" layoutY="143.0" prefHeight="41.0" prefWidth="39.0" style="-fx-background-radius: 24; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Like it? Save your text below!">
+                           <font>
+                              <Font name="Manjari Thin" size="25.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                  </Label>
                </children>
             </AnchorPane>
-            <Button fx:id="btnNext" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleBtnNext" prefHeight="54.0" prefWidth="479.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: blue; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 255, 0.7);" text="Next Step" textFill="WHITE">
+            <Button fx:id="btnNext" layoutX="652.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleBtnNext" prefHeight="54.0" prefWidth="479.0" style="-fx-background-radius: 0 0 25 25; -fx-border-radius: 0 0 20 20; -fx-border-color: blue; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 255, 0.7);" text="Next Step →" textFill="WHITE">
                <font>
                   <Font name="Manjari Regular" size="20.0" />
                </font>
@@ -86,7 +111,7 @@
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="572.0" layoutX="627.0" stroke="WHITE" strokeType="INSIDE" width="479.0" />
                   <ListView fx:id="savedTextEdit" editable="true" layoutX="19.0" layoutY="118.0" prefHeight="440.0" prefWidth="534.0" style="-fx-font: 20px &quot;Manjari Thin&quot;" />
-                  <Label alignment="CENTER" layoutX="19.0" layoutY="78.0" prefHeight="42.0" prefWidth="534.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Click on a text to make changes!" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="19.0" layoutY="78.0" prefHeight="42.0" prefWidth="534.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-opacity: 0.8;" text="Click on the text to make changes!" textAlignment="CENTER">
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
@@ -148,6 +173,18 @@
                      <font>
                         <Font name="Manjari Regular" size="25.0" />
                      </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="578.0" layoutY="110.0" prefHeight="41.0" prefWidth="39.0" style="-fx-background-radius: 24; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Select your text and move it up/down as you please!">
+                           <font>
+                              <Font name="Manjari Thin" size="25.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
                   </Label>
                </children>
             </Pane>
