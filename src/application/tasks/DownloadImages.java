@@ -76,10 +76,16 @@ public class DownloadImages extends Task<Void> {
             params.setMedia("photos");
             params.setText(query);
 
+            if (this.isCancelled()) {
+                return;
+            }
             PhotoList<Photo> results = photos.search(params, resultsPerPage, page);
             // System.out.println("Retrieving " + results.size()+ " results");
             int count = 0;
             for (Photo photo: results) {
+                if (this.isCancelled()) {
+                    return;
+                }
                 try {
                     BufferedImage image = photos.getImage(photo, Size.LARGE);
                     //String filename = query.trim().replace(' ', '-')+"-"+System.currentTimeMillis()+"-"+photo.getId()+".jpg";

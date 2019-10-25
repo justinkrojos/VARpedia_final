@@ -357,6 +357,7 @@ public class SelectImageController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
+        team.shutdownNow();
 
         if (downloadImgBtn.isDisabled()) {
             delCreationDir();
