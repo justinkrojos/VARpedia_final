@@ -143,6 +143,8 @@ public class CreateCreationController {
             }
         });
 
+
+
     }
 
     /**
@@ -287,7 +289,9 @@ public class CreateCreationController {
 
         voicesList.add(i, voicesChoiceBoxEdit.getValue());
         voicesList.remove(i + 1);
-        savedTextEdit.getItems().add(i, new Label(editTextArea.getText()));
+        Label label = new Label(editTextArea.getText());
+        label.setWrapText(true);
+        savedTextEdit.getItems().add(i, label);
         savedTextEdit.getItems().remove(i + 1);
 
     }
