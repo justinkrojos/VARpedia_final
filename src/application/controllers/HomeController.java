@@ -38,12 +38,10 @@ public class HomeController {
     private final File _folder = new File(Main.getCreationDir());
     private ObservableList<String> _items;
     private String _selectedItem = null;
+    private ArrayList<String> favourites = new ArrayList<String>();
 
     @FXML
     private ListView<Label> _creationList;
-
-    @FXML
-    private ListView _favouriteList;
 
     @FXML
     private Button btnPlay;
@@ -59,9 +57,6 @@ public class HomeController {
 
     @FXML
     private ChoiceBox<String> musicCreationBox;
-
-    @FXML
-    private TabPane creationCategories;
 
     @FXML
     private ToggleButton btnFavourite;
@@ -84,8 +79,7 @@ public class HomeController {
 
     private Media video;
 
-    public void initialize() {
-
+    public void initialize() throws IOException, InterruptedException {
         updateListTree();
 
         _creationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -93,12 +87,6 @@ public class HomeController {
             public void handle(MouseEvent mouseEvent) {
 
                 selectItem();
-                    try {
-                        sortFavourites();
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
 
                 if (_selectedItem != null) {
                     if (!timeSlider.isDisabled()) {
@@ -120,7 +108,7 @@ public class HomeController {
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
                     }
-                    if (_favouriteList.getItems().contains(_selectedItem)) {
+                    if (favourites.contains(_selectedItem)) {
                         btnFavourite.setText("Unlike ★");
                         btnFavourite.setSelected(true);
                         btnFavourite.setOpacity(0.7);
@@ -133,54 +121,6 @@ public class HomeController {
             }
         });
 
-        _favouriteList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                if (player != null) {
-                    return;
-                }
-                selectItem();
-
-                    try {
-                        sortFavourites();
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-
-                if (_selectedItem != null) {
-                    if (player != null) {
-                        btnPlay.setDisable(true);
-                        btnDel.setDisable(true);
-                        btnFavourite.setDisable(true);
-                    }
-                    else {
-                        File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
-                        video = new Media(fileUrl.toURI().toString());
-                        player = new MediaPlayer(video);
-                        mediaView = new MediaView(player);
-                        mediaView.fitWidthProperty().bind(_player.widthProperty());
-                        mediaView.fitHeightProperty().bind(_player.heightProperty());
-                        mediaView.setPreserveRatio(false);
-                        _player.getChildren().clear();
-                        _player.getChildren().add(mediaView);
-                        btnPlay.setDisable(false);
-                        btnDel.setDisable(false);
-                        btnFavourite.setDisable(false);
-                    }
-                    if (_favouriteList.getItems().contains(_selectedItem)) {
-                        btnFavourite.setText("Unlike ★");
-                        btnFavourite.setSelected(true);
-                        btnFavourite.setOpacity(0.7);
-                    }
-                    else {
-                        btnFavourite.setText("Like ★");
-                        btnFavourite.setSelected(false);
-                    }
-                }
-            }
-        });
 
         btnPlay.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -428,9 +368,7 @@ public class HomeController {
 
             player = null;
             _player.getChildren().clear();
-            if (_favouriteList.getItems().contains(_selectedItem)) {
-                _favouriteList.getItems().remove(_selectedItem);
-            }
+
             String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4";
             ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
 
@@ -442,7 +380,6 @@ public class HomeController {
                 e.printStackTrace();
             }
             updateListTree();
-            sortFavourites();
 
 
         }
@@ -472,71 +409,64 @@ public class HomeController {
      * @throws IOException
      * @throws InterruptedException
      */
+
     @FXML
     public void handleBtnFavourite() throws IOException, InterruptedException {
         if (btnFavourite.isSelected()) {
-            _favouriteList.getItems().add(_selectedItem);
+            _creationList.getSelectionModel().getSelectedItem().setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
             btnFavourite.setText("Unlike ★");
-
+            favourites.add(_selectedItem);
 
         } else {
-            _favouriteList.getItems().remove(_selectedItem);
+            _creationList.getSelectionModel().getSelectedItem().setStyle("-fx-background-color: rgba(255, 255, 0, 0.0);");
             btnFavourite.setText("Like ★");
+            favourites.remove(_selectedItem);
         }
 
-        try {
-            sortFavourites();
+        updateFavourites();
+
+    }
+
+    public void updateFavourites() throws IOException {
+
+        String s = "";
+        for (int i = 0; i < favourites.size(); i++) {
+            s += favourites.get(i) + ".mp4 ";
         }
-        catch (FileNotFoundException e) {
-            // do nothing
-        }
+
+        String cmd = "echo '" + s + "' > " + Main.getFavouriteDir() + "/favourites.txt";
+
+        ProcessBuilder updateFavouritespb = new ProcessBuilder("bash", "-c", cmd);
+        Process favouritesProcess = updateFavouritespb.start();
     }
 
     /**
-     * Sort favourites in alphabetical order.
-     * @throws IOException
-     * @throws InterruptedException
+     * Get the creations and favourites in the folder.
      */
-    public void sortFavourites() throws IOException, InterruptedException {
+    public void updateListTree() throws FileNotFoundException {
+        _creationList.getItems().clear();
 
-        String listOfFavourites = " ";
+        String allFavourites = "";
+        Scanner scanner = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A");
+        if (scanner.hasNextLine()) {
+            allFavourites = scanner.nextLine();
 
-        for (int i = 0; i < _favouriteList.getItems().size(); i++) {
-            listOfFavourites += _favouriteList.getItems().get(i) + ".mp4 ";
+            favourites.addAll(Arrays.asList(allFavourites.split(".mp4 ")));
+            Collections.sort(favourites);
         }
 
-        String cmd = "echo -e '" + listOfFavourites + "' > " + Main.getFavouriteDir() + "/favourites.txt";
 
-        ProcessBuilder getFavouritespb = new ProcessBuilder("bash", "-c", cmd);
-        Process getFavouritesprocess = getFavouritespb.start();
-        getFavouritesprocess.waitFor();
-
-        if (_favouriteList.getItems().size() > 2) {
-
-            String allFavourites = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A").next();
-            allFavourites.trim();
-
-            String[] favouriteArray = allFavourites.split(".mp4 ");
-
-            Arrays.sort(favouriteArray);
-
-            _favouriteList.getItems().clear();
-            for (int i = 1; i < favouriteArray.length; i++) {
-                _favouriteList.getItems().add(favouriteArray[i]);
-            }
-        }
-    }
-
-    /**
-     * Get the creations in the folder.
-     */
-    public void updateListTree() {
         _items = FXCollections.observableArrayList(listFilesOfFolder(_folder));
         for (int i = 0; i < _items.size(); i++) {
             Label label = new Label(_items.get(i));
+
+            for (int j = 0; j < favourites.size(); j++) {
+                if (_items.get(i).equals(favourites.get(j))) {
+                    label.setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
+                }
+            }
             _creationList.getItems().add(label);
         }
-        // _creationList.setItems(_items);
     }
 
     /**
@@ -565,13 +495,8 @@ public class HomeController {
      */
     @FXML
     private void selectItem() {
-        if (creationCategories.getSelectionModel().getSelectedIndex() == 0) {
             _selectedItem = _creationList.getSelectionModel().getSelectedItem().getText();
 
-        }
-        else {
-            _selectedItem = (String) _favouriteList.getSelectionModel().getSelectedItem();
-        }
     }
 
     /**
