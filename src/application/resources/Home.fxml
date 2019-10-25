@@ -28,7 +28,7 @@
       <Pane fx:id="_player" layoutX="484.0" layoutY="180.0" prefHeight="527.0" prefWidth="650.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5; -fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20;" />
       <Button fx:id="btnCreate" layoutX="26.0" layoutY="656.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="44.0" prefWidth="431.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-color: white; -fx-border-width: 5;" text="Create More Creations">
          <font>
-            <Font name="Manjari Thin" size="20.0" />
+            <Font name="Manjari Regular" size="20.0" />
          </font>
       </Button>
       <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="81.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10 0 0 10; -fx-border-radius: 10 0 0 10;" text="Back">
@@ -76,7 +76,7 @@
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnDel" disable="true" layoutX="27.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="54.0" prefWidth="311.0" style="-fx-border-color: red; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.6);" text="Delete ❌">
+      <Button fx:id="btnDel" disable="true" layoutX="27.0" layoutY="728.0" mnemonicParsing="false" onAction="#handleBtnDel" prefHeight="54.0" prefWidth="311.0" style="-fx-border-color: red; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20; -fx-border-width: 5; -fx-background-color: rgba(255, 0, 0, 0.6);" text="Delete the creation">
          <font>
             <Font name="Manjari Regular" size="20.0" />
          </font>
@@ -91,7 +91,7 @@
             <Font name="Manjari Regular" size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="126.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 2: Pick a song and play!" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="484.0" layoutY="126.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 2: Watch your creation!" textAlignment="CENTER">
          <font>
             <Font name="Manjari Regular" size="30.0" />
          </font>

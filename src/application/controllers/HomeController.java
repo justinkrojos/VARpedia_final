@@ -104,6 +104,10 @@ public class HomeController {
 
     private Boolean musicToggled;
 
+    private MediaView mediaView;
+
+    private Media video;
+
     public void initialize() {
 
         updateListTree();
@@ -131,6 +135,14 @@ public class HomeController {
                         btnFavourite.setDisable(true);
                     }
                     else {
+                        File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
+                        video = new Media(fileUrl.toURI().toString());
+                        player = new MediaPlayer(video);
+                        mediaView = new MediaView(player);
+                        mediaView.fitWidthProperty().bind(_player.widthProperty());
+                        mediaView.fitHeightProperty().bind(_player.heightProperty());
+                        mediaView.setPreserveRatio(false);
+                        _player.getChildren().add(mediaView);
                         btnPlay.setDisable(false);
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
@@ -239,7 +251,7 @@ public class HomeController {
         player.stop();
         _player.getChildren().removeAll();
         _player.getChildren().clear();
-        player = null;
+        player = new MediaPlayer(video);
         btnStop.setDisable(true);
         btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
         btnPlay.setText("Play  ▶");
@@ -285,7 +297,7 @@ public class HomeController {
             btnDel.setDisable(true);
             musicCreationBox.setDisable(true);
 
-            if (player!=null) {
+            if (player.getCurrentTime() != Duration.ZERO) {
 
                 if (creationMusic != null) {
                     creationMusic.play();
@@ -327,15 +339,7 @@ public class HomeController {
 
                 _player.getChildren().removeAll();
                 _player.getChildren().clear();
-                File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
-                Media video = new Media(fileUrl.toURI().toString());
-                player = new MediaPlayer(video);
                 player.setAutoPlay(true);
-                MediaView mediaView = new MediaView(player);
-                mediaView.fitWidthProperty().bind(_player.widthProperty());
-                mediaView.fitHeightProperty().bind(_player.heightProperty());
-                mediaView.setPreserveRatio(false);
-
 
                 player.setOnReady(new Runnable() {
                     @Override
@@ -349,14 +353,17 @@ public class HomeController {
                         timeSlider.setValue(0);
                         _player.getChildren().removeAll();
                         _player.getChildren().clear();
-                        player = null;
+                        _player.getChildren().add(mediaView);
+                        player = new MediaPlayer(video);
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
                         btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
                         btnPlay.setText("Play  ▶");
                         btnStop.setDisable(true);
-                        creationMusic.stop();
-                        creationMusic = null;
+                        if (creationMusic != null) {
+                            creationMusic.stop();
+                            creationMusic = null;
+                        }
                         musicCreationBox.setDisable(false);
                     }
                 });
