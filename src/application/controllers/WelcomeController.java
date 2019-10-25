@@ -140,4 +140,12 @@ public class WelcomeController {
         music.setText(text);
     }
 
+    /**
+     * Transfer MediaPlayer to scene.
+     * @param player
+     */
+    public void transferMediaPlayer(MediaPlayer player) {
+        this.player = player;
+    }
+
 }
