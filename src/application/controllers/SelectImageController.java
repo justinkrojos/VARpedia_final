@@ -44,7 +44,7 @@ public class SelectImageController {
     @FXML
     private TextField creationName;
 
-    @FXML private ImageView _loadingImage;
+    //@FXML private ImageView _loadingImage;
 
     @FXML Button _btnCreateCreation;
 
@@ -96,7 +96,7 @@ public class SelectImageController {
     FXMLLoader loader;
 
     public void initialize() {
-        _loadingImage.setVisible(false);
+       // _loadingImage.setVisible(false);
         _btnBack.setDisable(false);
 
         _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
@@ -157,7 +157,7 @@ public class SelectImageController {
                     return;
                 }
             }
-            _loadingImage.setVisible(true);
+            // _loadingImage.setVisible(true);
             _btnBack.setDisable(true);
             downloadImgBtn.setDisable(true);
             downloadImgBtn.setText("Loading...");
@@ -174,7 +174,7 @@ public class SelectImageController {
         dl.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                _loadingImage.setVisible(false);
+                // _loadingImage.setVisible(false);
                 _btnBack.setDisable(false);
                 imagePane.setVisible(true);
                 downloadImgBtn.setText("Done");
@@ -226,7 +226,7 @@ public class SelectImageController {
             return;
         }
 
-        _loadingImage.setVisible(true);
+        //_loadingImage.setVisible(true);
         _btnBack.setDisable(true);
         _btnCreateCreation.setText("Creating creation...");
         _btnCreateCreation.setDisable(true);

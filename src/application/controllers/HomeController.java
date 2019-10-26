@@ -451,13 +451,20 @@ public class HomeController {
         _creationList.getItems().clear();
 
         String allFavourites = "";
-        Scanner scanner = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A");
-        if (scanner.hasNextLine()) {
-            allFavourites = scanner.nextLine();
+        try {
+            Scanner scanner = new Scanner(new File(Main.getFavouriteDir() + "/favourites.txt")).useDelimiter("\\A");
+            if (scanner.hasNextLine()) {
+                allFavourites = scanner.nextLine();
 
-            favourites.addAll(Arrays.asList(allFavourites.split(".mp4 ")));
-            Collections.sort(favourites);
+                favourites.addAll(Arrays.asList(allFavourites.split(".mp4 ")));
+                Collections.sort(favourites);
+            }
+
         }
+        catch (FileNotFoundException e) {
+
+        }
+
 
 
         _items = FXCollections.observableArrayList(listFilesOfFolder(_folder));
