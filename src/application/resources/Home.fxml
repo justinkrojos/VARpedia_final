@@ -30,7 +30,7 @@
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10 0 0 10; -fx-border-radius: 10 0 0 10;" text="&#8592; Back">
+      <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10 0 0 10; -fx-border-radius: 10 0 0 10;" text="← Back">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font></Button>
@@ -63,7 +63,7 @@
             <Font name="Manjari Regular" size="20.0" />
          </font>
       </ToggleButton>
-      <Label alignment="CENTER" layoutX="26.0" layoutY="126.0" prefHeight="54.0" prefWidth="431.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 1: Select a creation!" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="26.0" layoutY="126.0" prefHeight="54.0" prefWidth="431.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-width: 5;" text="Step 1: Pick a creation!" textAlignment="CENTER">
          <font>
             <Font name="Manjari Regular" size="30.0" />
          </font>
@@ -114,6 +114,30 @@
             <Image url="@popcorn.gif" />
          </image>
       </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1099.0" layoutY="125.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 24; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Play, pause and stop your creation below!">
+               <font>
+                  <Font name="Manjari Thin" size="25.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="422.0" layoutY="125.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 24; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Click on a creation below!">
+               <font>
+                  <Font name="Manjari Thin" size="25.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
    </children>
    
 </AnchorPane>
