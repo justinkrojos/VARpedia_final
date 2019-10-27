@@ -228,9 +228,10 @@ public class QuizController {
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
 
-        String s = "Music: ON";
-        if (_musictoggle) {
-            s = "Music: OFF";
+        String s = "Music: OFF";
+        if (!_musictoggle) {
+            s = "Music: ON";
+            _bgmusic.play();
 
         }
         welcomeController.transferMusic(_bgmusic, _musictoggle, s);
@@ -253,9 +254,10 @@ public class QuizController {
         FXMLLoader loader = Main.changeScene("resources/QuizMan.fxml");
         QuizManController quizManController = loader.<QuizManController>getController();
 
-        String s = "Music: ON";
+        String s = "Music: OFF";
         if (_musictoggle) {
-            s = "Music: OFF";
+            s = "Music: ON";
+
         }
         quizManController.transferMusic(_bgmusic, _musictoggle, s);
 
@@ -271,7 +273,7 @@ public class QuizController {
 
         this._bgmusic = bgmusic;
         this._bgmusic.pause();
-        
+
         btnMusic.setSelected(true);
         btnMusic.setText("Music: OFF");
         btnMusic.setDisable(true);

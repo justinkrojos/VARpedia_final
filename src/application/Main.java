@@ -24,7 +24,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
 
         // Play Background Music repetitively
-        MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/bgmusic.wav").toURI().toString()));
+        MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/music/bgmusic.wav").toURI().toString()));
         player.play();
 
         player.setOnEndOfMedia(new Runnable() {

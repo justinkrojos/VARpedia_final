@@ -72,8 +72,8 @@ public class PlayController {
 
                 if (_selectedItem != null) {
 
-                    if (!timeSlider.isDisabled()) {
-                        btnPlay.setDisable(true);
+                    if (!btnStop.isDisabled()) {
+                        btnPlay.setDisable(false);
                         btnDel.setDisable(true);
                         btnFavourite.setDisable(true);
 
@@ -95,19 +95,20 @@ public class PlayController {
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
 
+                        if (_favourites.contains(_selectedItem)) {
+                            btnFavourite.setText("Unlike ★");
+                            btnFavourite.setSelected(true);
+                            btnFavourite.setOpacity(0.7);
+
+                        }
+                        else {
+                            btnFavourite.setText("Like ★");
+                            btnFavourite.setSelected(false);
+
+                        }
                     }
 
-                    if (_favourites.contains(_selectedItem)) {
-                        btnFavourite.setText("Unlike ★");
-                        btnFavourite.setSelected(true);
-                        btnFavourite.setOpacity(0.7);
 
-                    }
-                    else {
-                        btnFavourite.setText("Like ★");
-                        btnFavourite.setSelected(false);
-
-                    }
                 }
             }
         });
@@ -270,12 +271,28 @@ public class PlayController {
             else {
 
                 if (musicCreationBox.getSelectionModel().getSelectedItem().equals("Techno Music")) {
-                    _creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Techno.mp3").toURI().toString()));
+                    _creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/music/Techno.mp3").toURI().toString()));
                     _creationMusic.play();
+                    _creationMusic.setVolume(0.1);
+
+                    _creationMusic.setOnEndOfMedia(new Runnable() {
+                        @Override
+                        public void run() {
+                            _creationMusic.seek(Duration.ZERO);
+                        }
+                    });
                 }
                 else if (musicCreationBox.getSelectionModel().getSelectedItem().equals("Chill Music")) {
-                    _creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Chill.mp3").toURI().toString()));
+                    _creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/music/Chill.mp3").toURI().toString()));
                     _creationMusic.play();
+                    _creationMusic.setVolume(0.3);
+
+                    _creationMusic.setOnEndOfMedia(new Runnable() {
+                        @Override
+                        public void run() {
+                            _creationMusic.seek(Duration.ZERO);
+                        }
+                    });
                 }
                 else {
                     _creationMusic = null;
