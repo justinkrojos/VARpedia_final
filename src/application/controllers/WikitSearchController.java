@@ -25,19 +25,18 @@ public class WikitSearchController {
 
     private ExecutorService team = Executors.newSingleThreadExecutor();
 
-    MediaPlayer bgmusic;
+    private MediaPlayer _bgmusic;
 
     @FXML
-    private ToggleButton music;
+    private ToggleButton btnMusic;
 
     @FXML
     private Button btnSearch;
-
     @FXML
     private Button btnBack;
 
     @FXML
-    private TextField _termField;
+    private TextField termField;
 
     @FXML
     private Label errorLabel;
@@ -45,21 +44,21 @@ public class WikitSearchController {
     @FXML
     private ImageView loadingGif;
 
-    @FXML
-    private AnchorPane searchPane;
-
     public void initialize() {
-        _termField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+        termField.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
                         handleBtnSearch();
+
                     } catch (IOException e) {
                         e.printStackTrace();
+
                     }
                 }
-                }
+            }
         });
     }
 
@@ -70,39 +69,43 @@ public class WikitSearchController {
     @FXML
     private void handleBtnSearch() throws IOException {
 
-        WikitSearchTask task = new WikitSearchTask(_termField.getText());
+        WikitSearchTask task = new WikitSearchTask(termField.getText());
         team.submit(task);
 
         btnBack.setDisable(true);
         loadingGif.setVisible(true);
         btnSearch.setDisable(true);
         errorLabel.setVisible(false);
-        _termField.setDisable(true);
+        termField.setDisable(true);
         btnSearch.setText("Searching...");
 
+        // When wikit search finishes, go to next scene
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                if (_termField.getText().isEmpty() | task.getExit() != 0 | task.getOutput().equals( _termField.getText()+" not found :^(")) {
-                   loadingGif.setVisible(false);
+
+                if (termField.getText().isEmpty() | task.getExit() != 0 | task.getOutput().equals( termField.getText()+" not found :^(")) {
                     errorLabel.setVisible(true);
+                    loadingGif.setVisible(false);
+                    termField.setDisable(false);
+                    btnBack.setDisable(false);
                     btnSearch.setDisable(false);
                     btnSearch.setText("Search");
-                    _termField.setDisable(false);
-                    btnBack.setDisable(false);
                     return;
+
                 }
                 else {
+
                     try {
                         FXMLLoader loader = Main.changeScene("resources/CreateCreation.fxml");
                         CreateCreationController createCreationController = loader.<CreateCreationController>getController();
-                        createCreationController.transferTerm(_termField.getText(), task.getOutput());
-                        createCreationController.transferMusic(bgmusic, music.isSelected(), music.getText());
+                        createCreationController.transferTerm(termField.getText(), task.getOutput());
+                        createCreationController.transferMusic(_bgmusic, btnMusic.isSelected(), btnMusic.getText());
+
                     } catch (IOException e) {
                         e.printStackTrace();
+
                     }
-
-
                 }
             }
         });
@@ -114,9 +117,11 @@ public class WikitSearchController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
+
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
-        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
+        welcomeController.transferMusic(_bgmusic, btnMusic.isSelected(), btnMusic.getText());
+
     }
 
     /**
@@ -124,13 +129,16 @@ public class WikitSearchController {
      */
     @FXML
     private void handleMusic() {
-        if (music.isSelected()) {
-            music.setText("Music: OFF");
-            bgmusic.pause();
+
+        if (btnMusic.isSelected()) {
+            btnMusic.setText("Music: OFF");
+            _bgmusic.pause();
+
         }
         else {
-            music.setText("Music: ON");
-            bgmusic.play();
+            btnMusic.setText("Music: ON");
+            _bgmusic.play();
+
         }
     }
 
@@ -141,8 +149,10 @@ public class WikitSearchController {
      * @param text
      */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
-        this.bgmusic = bgmusic;
-        music.setSelected(toggle);
-        music.setText(text);
+
+        this._bgmusic = bgmusic;
+        btnMusic.setSelected(toggle);
+        btnMusic.setText(text);
+        
     }
 }
