@@ -438,6 +438,6 @@ public class SelectImageController {
         this._bgmusic = bgmusic;
         btnMusic.setSelected(toggle);
         btnMusic.setText(text);
-        
+
     }
 }

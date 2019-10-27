@@ -23,7 +23,7 @@
          </image>
       </ImageView>
 
-      <Button fx:id="playBtn" contentDisplay="BOTTOM" layoutX="37.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: blue; -fx-border-width: 5;" text="WATCH" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="btnPlay" contentDisplay="BOTTOM" layoutX="37.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleBtnPlay" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: blue; -fx-border-width: 5;" text="WATCH" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Manjari Thin" size="24.0" />
          </font>
@@ -35,7 +35,7 @@
             </ImageView>
       </graphic>
       </Button>
-      <Button fx:id="createBtn" contentDisplay="BOTTOM" layoutX="259.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: red; -fx-border-width: 5;" text="CREATE">
+      <Button fx:id="btnCreate" contentDisplay="BOTTOM" layoutX="259.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-radius: 30; -fx-border-color: red; -fx-border-width: 5;" text="CREATE">
          <font>
             <Font name="Manjari Thin" size="24.0" />
          </font>
@@ -52,7 +52,7 @@
             <Font name="Manjari Regular" size="70.0" />
          </font>
       </Text>
-      <Button fx:id="learnBtn" contentDisplay="BOTTOM" layoutX="480.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleBtnQuiz" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-color: green; -fx-border-radius: 30; -fx-border-width: 5;" text="LEARN">
+      <Button fx:id="btnLearn" contentDisplay="BOTTOM" layoutX="480.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleBtnQuiz" prefHeight="116.0" prefWidth="174.0" style="-fx-background-radius: 32.5; -fx-background-color: white; -fx-border-color: green; -fx-border-radius: 30; -fx-border-width: 5;" text="LEARN">
          <font>
             <Font name="Manjari Thin" size="24.0" />
          </font>
@@ -69,7 +69,7 @@
             <Font name="Navilu" size="32.0" />
          </font>
       </Text>
-      <ToggleButton fx:id="music" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: ON">
+      <ToggleButton fx:id="btnMusic" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: ON">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font>

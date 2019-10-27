@@ -13,63 +13,68 @@ import java.io.IOException;
 
 public class WelcomeController {
 
-    @FXML
-    ToggleButton music = new ToggleButton();
-
-    MediaPlayer player;
-
-    FXMLLoader loader;
+    private MediaPlayer _player;
 
     @FXML
-    Button playBtn;
+    private ToggleButton btnMusic = new ToggleButton();
 
     @FXML
-    Button createBtn;
-
+    private Button btnPlay;
     @FXML
-    Button learnBtn;
+    private Button btnCreate;
+    @FXML
+    private Button btnLearn;
+
 
     public void initialize() {
 
-        playBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        // Initialise dynamic style changes to components
+
+        btnPlay.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                playBtn.setOpacity(0.7);
+                btnPlay.setOpacity(0.7);
             }
         });
 
-        playBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+        btnPlay.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                playBtn.setOpacity(1.0);
+                if (!btnPlay.isDisabled()) {
+                    btnPlay.setOpacity(1.0);
+                }
             }
         });
 
-        createBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        btnCreate.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                createBtn.setOpacity(0.7);
+                btnCreate.setOpacity(0.7);
             }
         });
 
-        createBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+        btnCreate.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                createBtn.setOpacity(1.0);
+                if (!btnCreate.isDisabled()) {
+                    btnCreate.setOpacity(1.0);
+                }
             }
         });
 
-        learnBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        btnLearn.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                learnBtn.setOpacity(0.7);
+                btnLearn.setOpacity(0.7);
             }
         });
 
-        learnBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+        btnLearn.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                learnBtn.setOpacity(1.0);
+                if (!btnLearn.isDisabled()) {
+                    btnLearn.setOpacity(1.0);
+                }
             }
         });
     }
@@ -80,9 +85,11 @@ public class WelcomeController {
      */
     @FXML
     private void handleBtnQuiz() throws IOException {
-        loader = Main.changeScene("resources/Quiz.fxml");
+
+        FXMLLoader loader = Main.changeScene("resources/Quiz.fxml");
         QuizController quizController = loader.<QuizController>getController();
-        quizController.transferMusic(player, music.isSelected(), music.getText());
+        quizController.transferMusic(_player, btnMusic.isSelected(), btnMusic.getText());
+
     }
 
     /**
@@ -91,9 +98,11 @@ public class WelcomeController {
      */
     @FXML
     private void handleBtnPlay() throws IOException {
-        loader = Main.changeScene("resources/Home.fxml");
+
+        FXMLLoader loader = Main.changeScene("resources/Play.fxml");
         PlayController homeController = loader.<PlayController>getController();
-        homeController.transferMusic(player, music.isSelected(), music.getText());
+        homeController.transferMusic(_player, btnMusic.isSelected(), btnMusic.getText());
+
     }
 
     /**
@@ -102,9 +111,11 @@ public class WelcomeController {
      */
     @FXML
     private void handleBtnCreate() throws IOException {
-        loader = Main.changeScene("resources/WikitSearch.fxml");
+
+        FXMLLoader loader = Main.changeScene("resources/WikitSearch.fxml");
         WikitSearchController wikitController = loader.<WikitSearchController>getController();
-        wikitController.transferMusic(player, music.isSelected(), music.getText());
+        wikitController.transferMusic(_player, btnMusic.isSelected(), btnMusic.getText());
+
     }
 
     /**
@@ -113,13 +124,15 @@ public class WelcomeController {
     @FXML
     public void handleMusic() {
 
-        if (music.isSelected()) {
-            music.setText("Music: OFF");
-            player.pause();
+        if (btnMusic.isSelected()) {
+            btnMusic.setText("Music: OFF");
+            _player.pause();
+
         }
         else {
-            music.setText("Music: ON");
-            player.play();
+            btnMusic.setText("Music: ON");
+            _player.play();
+
         }
     }
 
@@ -130,9 +143,11 @@ public class WelcomeController {
      * @param text
      */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
-        player = bgmusic;
-        music.setSelected(toggle);
-        music.setText(text);
+
+        _player = bgmusic;
+        btnMusic.setSelected(toggle);
+        btnMusic.setText(text);
+
     }
 
     /**
@@ -140,7 +155,9 @@ public class WelcomeController {
      * @param player
      */
     public void transferMediaPlayer(MediaPlayer player) {
-        this.player = player;
+
+        this._player = player;
+
     }
 
 }
