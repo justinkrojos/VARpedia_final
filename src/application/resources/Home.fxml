@@ -24,7 +24,7 @@
             <Image url="@images/woodtexture.jpg" />
          </image>
       </ImageView>
-      <Pane fx:id="_player" layoutX="484.0" layoutY="180.0" prefHeight="527.0" prefWidth="650.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5; -fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20;" />
+      <Pane fx:id="videoPane" layoutX="484.0" layoutY="180.0" prefHeight="527.0" prefWidth="650.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5; -fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20;" />
       <Button fx:id="btnCreate" layoutX="26.0" layoutY="656.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="44.0" prefWidth="431.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-color: white; -fx-border-width: 5;" text="Create More Creations">
          <font>
             <Font name="Manjari Regular" size="20.0" />
@@ -96,7 +96,7 @@
          </font>
       </Label>
             <Slider fx:id="timeSlider" disable="true" layoutX="497.0" layoutY="654.0" prefHeight="54.0" prefWidth="623.0" style="-fx-background-radius: 0;" />
-      <ListView fx:id="_creationList" layoutX="26.0" layoutY="179.0" onMouseClicked="#selectItem" prefHeight="485.0" prefWidth="431.0" style="-fx-background-color: white; -fx-fixed-cell-size: 40px; -fx-font: 20px &quot;Manjari Thin&quot;" />
+      <ListView fx:id="creationList" layoutX="26.0" layoutY="179.0" onMouseClicked="#selectItem" prefHeight="485.0" prefWidth="431.0" style="-fx-background-color: white; -fx-fixed-cell-size: 40px; -fx-font: 20px &quot;Manjari Thin&quot;" />
 
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1112.0" layoutY="10.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 24; -fx-background-color: red; -fx-border-color: white; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ" textFill="WHITE">
       <font>

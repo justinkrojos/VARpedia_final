@@ -9,119 +9,110 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class HomeController {
-
-    private ExecutorService team = Executors.newSingleThreadExecutor();
 
     private final File _folder = new File(Main.getCreationDir());
     private ObservableList<String> _items;
     private String _selectedItem = null;
-    private ArrayList<String> favourites = new ArrayList<String>();
+    private ArrayList<String> _favourites = new ArrayList<String>();
+
+    private MediaPlayer _bgmusic;
+    private MediaPlayer _creationMusic;
+    private MediaPlayer _player;
+    private MediaView _mediaView;
+    private Media _video;
+    private Boolean _musicToggle;
 
     @FXML
-    private ListView<Label> _creationList;
-
-    @FXML
-    private Button btnPlay;
+    private ListView<Label> creationList;
 
     @FXML
     private Button btnDel;
-
     @FXML
-    private Pane _player;
-
+    private Button btnPlay;
     @FXML
     private Button btnStop;
+
+    @FXML
+    private ToggleButton btnFavourite;
+    @FXML
+    private ToggleButton music;
+
+    @FXML
+    private Pane videoPane;
 
     @FXML
     private ChoiceBox<String> musicCreationBox;
 
     @FXML
-    private ToggleButton btnFavourite;
-
-    @FXML
-    private ToggleButton music;
-
-    private MediaPlayer bgmusic;
-
-    private MediaPlayer creationMusic;
-
-    private MediaPlayer player;
-
-    @FXML
     private Slider timeSlider;
 
-    private Boolean musicToggled;
-
-    private MediaView mediaView;
-
-    private Media video;
 
     public void initialize() throws IOException, InterruptedException {
         updateListTree();
 
-        _creationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        // Upon selecting a creation, display video buttons and image preview, and toggle favourite
+        creationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
                 selectItem();
 
                 if (_selectedItem != null) {
+
                     if (!timeSlider.isDisabled()) {
                         btnPlay.setDisable(true);
                         btnDel.setDisable(true);
                         btnFavourite.setDisable(true);
+
                     }
                     else {
                         File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
-                        video = new Media(fileUrl.toURI().toString());
-                        player = new MediaPlayer(video);
-                        mediaView = new MediaView(player);
-                        mediaView.fitWidthProperty().bind(_player.widthProperty());
-                        mediaView.fitHeightProperty().bind(_player.heightProperty());
-                        mediaView.setPreserveRatio(false);
-                        _player.getChildren().clear();
-                        _player.getChildren().add(mediaView);
+                        _video = new Media(fileUrl.toURI().toString());
+                        _player = new MediaPlayer(_video);
+
+                        _mediaView = new MediaView(_player);
+                        _mediaView.fitWidthProperty().bind(videoPane.widthProperty());
+                        _mediaView.fitHeightProperty().bind(videoPane.heightProperty());
+                        _mediaView.setPreserveRatio(false);
+
+                        videoPane.getChildren().clear();
+                        videoPane.getChildren().add(_mediaView);
+
                         btnPlay.setDisable(false);
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
+
                     }
-                    if (favourites.contains(_selectedItem)) {
+
+                    if (_favourites.contains(_selectedItem)) {
                         btnFavourite.setText("Unlike ★");
                         btnFavourite.setSelected(true);
                         btnFavourite.setOpacity(0.7);
+
                     }
                     else {
                         btnFavourite.setText("Like ★");
                         btnFavourite.setSelected(false);
+
                     }
                 }
             }
         });
 
-
+        // Initialise dynamic style changes for components
         btnPlay.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -132,7 +123,9 @@ public class HomeController {
         btnPlay.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                btnPlay.setOpacity(1.0);
+                if (!btnPlay.isDisabled()) {
+                    btnPlay.setOpacity(1.0);
+                }
             }
         });
 
@@ -146,7 +139,9 @@ public class HomeController {
         btnDel.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                btnDel.setOpacity(1.0);
+                if (!btnDel.isDisabled()) {
+                    btnDel.setOpacity(1.0);
+                }
             }
         });
 
@@ -160,7 +155,9 @@ public class HomeController {
         btnFavourite.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                btnFavourite.setOpacity(1.0);
+                if (!btnFavourite.isDisabled()) {
+                    btnFavourite.setOpacity(1.0);
+                }
             }
         });
 
@@ -174,7 +171,9 @@ public class HomeController {
         btnStop.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                btnStop.setOpacity(1.0);
+                if (!btnStop.isDisabled()) {
+                    btnStop.setOpacity(1.0);
+                }
             }
         });
     }
@@ -183,23 +182,27 @@ public class HomeController {
      * Stops playing a video creation.
      */
     public void handleBtnStop() {
+
         btnStop.setDisable(true);
-        player.stop();
-        _player.getChildren().removeAll();
-        _player.getChildren().clear();
-        _player.getChildren().add(mediaView);
-        player = new MediaPlayer(video);
+
+        _player.stop();
+        _player = new MediaPlayer(_video);
+
+        videoPane.getChildren().clear();
+        videoPane.getChildren().add(_mediaView);
 
         btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
         btnPlay.setText("Play  ▶");
         btnFavourite.setDisable(false);
         btnDel.setDisable(false);
+
         timeSlider.setValue(0);
         musicCreationBox.setDisable(false);
 
-        if (creationMusic != null) {
-            creationMusic.stop();
-            creationMusic = null;
+        if (_creationMusic != null) {
+            _creationMusic.stop();
+            _creationMusic = null;
+
         }
     }
 
@@ -213,35 +216,39 @@ public class HomeController {
 
         if (btnPlay.getText().equals("Pause")) {
             timeSlider.setDisable(true);
+            _player.pause();
+
             btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
             btnPlay.setText("Continue ▶");
             btnDel.setDisable(false);
             btnFavourite.setDisable(false);
-            player.pause();
 
-            if (creationMusic != null) {
-                creationMusic.pause();
+            if (_creationMusic != null) {
+                _creationMusic.pause();
+
             }
         }
-
         else {
-
             timeSlider.setDisable(false);
+
             btnPlay.setStyle("-fx-background-color: rgba(255, 165, 0, 0.8); -fx-border-width: 5; -fx-border-color: orange; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
             btnPlay.setText("Pause");
-
-            btnFavourite.setDisable(true);
             btnDel.setDisable(true);
+            btnFavourite.setDisable(true);
+
             musicCreationBox.setDisable(true);
 
-            if (player.getCurrentTime() != Duration.ZERO) {
+            if (_player.getCurrentTime() != Duration.ZERO) {
 
-                if (creationMusic != null) {
-                    creationMusic.play();
+                if (_creationMusic != null) {
+                    _creationMusic.play();
+
                 }
 
-                player.play();
-                player.currentTimeProperty().addListener(new InvalidationListener() {
+                _player.play();
+
+                // Configure time slider to sync with video after pausing
+                _player.currentTimeProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {
                         if (btnPlay.getText().equals("Pause")) {
@@ -250,66 +257,67 @@ public class HomeController {
 
                     }
                 });
-
                 timeSlider.valueProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {
                         if (timeSlider.isPressed()) {
-                            player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
+                            _player.seek(_player.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
                         }
                     }
                 });
             }
+
             else {
 
                 if (musicCreationBox.getSelectionModel().getSelectedItem().equals("Techno Music")) {
-                    creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Techno.mp3").toURI().toString()));
-                    creationMusic.play();
+                    _creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Techno.mp3").toURI().toString()));
+                    _creationMusic.play();
                 }
                 else if (musicCreationBox.getSelectionModel().getSelectedItem().equals("Chill Music")) {
-                    creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Chill.mp3").toURI().toString()));
-                    creationMusic.play();
+                    _creationMusic = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/Chill.mp3").toURI().toString()));
+                    _creationMusic.play();
                 }
                 else {
-                    creationMusic = null;
+                    _creationMusic = null;
                 }
 
-                _player.getChildren().removeAll();
-                _player.getChildren().clear();
-                player.setAutoPlay(true);
+                videoPane.getChildren().clear();
+                videoPane.getChildren().add(_mediaView);
+                _player.setAutoPlay(true);
 
-                player.setOnReady(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
-                player.setOnEndOfMedia(new Runnable() {
+                // On end of video, disable buttons and reset time slider/pane to default
+                _player.setOnEndOfMedia(new Runnable() {
                     @Override
                     public void run() {
                         timeSlider.setDisable(true);
                         timeSlider.setValue(0);
-                        _player.getChildren().removeAll();
-                        _player.getChildren().clear();
-                        _player.getChildren().add(mediaView);
-                        player = new MediaPlayer(video);
+
+                        videoPane.getChildren().clear();
+                        videoPane.getChildren().add(_mediaView);
+
+                        _player = new MediaPlayer(_video);
+
                         btnDel.setDisable(false);
                         btnFavourite.setDisable(false);
                         btnPlay.setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-border-width: 5; -fx-border-color: green; -fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20;");
                         btnPlay.setText("Play  ▶");
                         btnStop.setDisable(true);
-                        if (creationMusic != null) {
-                            creationMusic.stop();
-                            creationMusic = null;
-                        }
+
                         musicCreationBox.setDisable(false);
+
+                        if (_creationMusic != null) {
+                            _creationMusic.stop();
+                            _creationMusic = null;
+
+                        }
                     }
                 });
 
 
-                _player.getChildren().add(mediaView);
 
 
-                player.currentTimeProperty().addListener(new InvalidationListener() {
+                // Configure time slider to sync with video
+                _player.currentTimeProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {
                         if (btnPlay.getText().equals("Pause")) {
@@ -318,19 +326,19 @@ public class HomeController {
 
                     }
                 });
-
                 timeSlider.valueProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {
-                        if (player == null) {
+                        if (_player == null) {
                             return;
+
                         }
                         else if (timeSlider.isPressed()) {
-                            player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
+                            _player.seek(_player.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
+
                         }
                     }
                 });
-
 
             }
         }
@@ -342,23 +350,23 @@ public class HomeController {
     protected void updateValues() {
         Platform.runLater(new Runnable() {
             public void run() {
-                timeSlider.setValue(player.getCurrentTime().toMillis()/player.getTotalDuration().toMillis() * 100);
+                timeSlider.setValue(_player.getCurrentTime().toMillis()/ _player.getTotalDuration().toMillis() * 100);
+
             }
         });
     }
 
-
     /**
      * Delete a creation. And prompts the user to confirm their actions.
+     * @throws IOException
      */
     @FXML
-    private void handleBtnDel() throws IOException, InterruptedException {
-        //System.out.println("Deleting");
+    private void handleBtnDel() throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Deleting...");
-        alert.setHeaderText("Are you sure you want to delete " + _selectedItem + "?");
-        alert.setContentText("Are you sure? Press okay to delete, cancel to keep.");
+        alert.getDialogPane().getStylesheets().add(("Alert.css"));
+        alert.setTitle("Confirm Deletion");
+        alert.setContentText("Are you sure you want to delete " + _selectedItem + "?");
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
@@ -366,25 +374,26 @@ public class HomeController {
             btnDel.setDisable(true);
             btnFavourite.setDisable(true);
 
-            player = null;
-            _player.getChildren().clear();
+            _player = null;
+            videoPane.getChildren().clear();
 
-            if (favourites.contains(_selectedItem)) {
-                favourites.remove(_selectedItem);
+            if (_favourites.contains(_selectedItem)) {
+                _favourites.remove(_selectedItem);
+
             }
-
             String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4 " + Main.getQuizDir() + "/" + _selectedItem + ".mp4";
-            ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
 
+            ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
             Process delProcess = null;
             try {
                 delProcess = delBuilder.start();
                 delProcess.waitFor();
+
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
+
             }
             updateListTree();
-
 
         }
     }
@@ -395,47 +404,55 @@ public class HomeController {
      */
     @FXML
     private void handleBtnCreate() throws IOException {
-        if (player != null) {
-            player.stop();
+
+        if (_player != null) {
+            _player.stop();
+
         }
         FXMLLoader loader = Main.changeScene("resources/WikitSearch.fxml");
         WikitSearchController wikitController = loader.<WikitSearchController>getController();
+
         String s = "Music: OFF";
-        if (!musicToggled) {
+        if (!_musicToggle) {
             s = "Music: ON";
-            bgmusic.play();
+            _bgmusic.play();
         }
-        wikitController.transferMusic(player, musicToggled, s);
+
+        wikitController.transferMusic(_player, _musicToggle, s);
     }
 
     /**
      * Toggles the favourites/like button.
      * @throws IOException
-     * @throws InterruptedException
      */
-
     @FXML
-    public void handleBtnFavourite() throws IOException, InterruptedException {
+    public void handleBtnFavourite() throws IOException {
+
         if (btnFavourite.isSelected()) {
-            _creationList.getSelectionModel().getSelectedItem().setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
+            creationList.getSelectionModel().getSelectedItem().setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
             btnFavourite.setText("Unlike ★");
-            favourites.add(_selectedItem);
+            _favourites.add(_selectedItem);
+
 
         } else {
-            _creationList.getSelectionModel().getSelectedItem().setStyle("-fx-background-color: rgba(255, 255, 0, 0.0);");
+            creationList.getSelectionModel().getSelectedItem().setStyle("-fx-background-color: rgba(255, 255, 0, 0.0);");
             btnFavourite.setText("Like ★");
-            favourites.remove(_selectedItem);
-        }
+            _favourites.remove(_selectedItem);
 
+        }
         updateFavourites();
 
     }
 
+    /**
+     * Updates text file from current array.
+     * @throws IOException
+     */
     public void updateFavourites() throws IOException {
 
         String s = "";
-        for (int i = 0; i < favourites.size(); i++) {
-            s += favourites.get(i) + ".mp4 ";
+        for (int i = 0; i < _favourites.size(); i++) {
+            s += _favourites.get(i) + ".mp4 ";
         }
 
         String cmd = "echo '" + s + "' > " + Main.getFavouriteDir() + "/favourites.txt";
@@ -446,9 +463,10 @@ public class HomeController {
 
     /**
      * Get the creations and favourites in the folder.
+     * @throws FileNotFoundException
      */
     public void updateListTree() throws FileNotFoundException {
-        _creationList.getItems().clear();
+        creationList.getItems().clear();
 
         String allFavourites = "";
         try {
@@ -456,29 +474,30 @@ public class HomeController {
             if (scanner.hasNextLine()) {
                 allFavourites = scanner.nextLine();
 
-                favourites.addAll(Arrays.asList(allFavourites.split(".mp4 ")));
-                Collections.sort(favourites);
+                _favourites.addAll(Arrays.asList(allFavourites.split(".mp4 ")));
+                Collections.sort(_favourites);
             }
 
         }
         catch (FileNotFoundException e) {
-
+            // Do nothing
         }
 
-
-
         _items = FXCollections.observableArrayList(listFilesOfFolder(_folder));
+
         for (int i = 0; i < _items.size(); i++) {
             Label label = new Label(_items.get(i));
-            label.prefWidthProperty().bind(_creationList.widthProperty().subtract(27));
+            label.prefWidthProperty().bind(creationList.widthProperty().subtract(27));
             label.setWrapText(true);
 
-            for (int j = 0; j < favourites.size(); j++) {
-                if (_items.get(i).equals(favourites.get(j))) {
+            for (int j = 0; j < _favourites.size(); j++) {
+                if (_items.get(i).equals(_favourites.get(j))) {
                     label.setStyle("-fx-background-color: rgba(255, 255, 0, 0.5);");
                 }
+
             }
-            _creationList.getItems().add(label);
+            creationList.getItems().add(label);
+
         }
     }
 
@@ -491,16 +510,19 @@ public class HomeController {
      * @return
      */
     private ArrayList<String> listFilesOfFolder(final File folder) {
+
         ArrayList<String> list = new ArrayList<String>();
 
         for (final File fileEntry : folder.listFiles()) {
+
             if (!fileEntry.isDirectory()) {
                 list.add(fileEntry.getName().replace(".mp4",""));//.replace(".mp4", ""));
+
             }
         }
-
         Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
         return list;
+
     }
 
     /**
@@ -508,7 +530,7 @@ public class HomeController {
      */
     @FXML
     private void selectItem() {
-            _selectedItem = _creationList.getSelectionModel().getSelectedItem().getText();
+            _selectedItem = creationList.getSelectionModel().getSelectedItem().getText();
 
     }
 
@@ -518,17 +540,22 @@ public class HomeController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
-        if (player != null) {
-            player.pause();
+
+        if (_player != null) {
+            _player.pause();
+
         }
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
+
         String s = "Music: OFF";
-        if (!musicToggled) {
+        if (!_musicToggle) {
             s = "Music: ON";
-            bgmusic.play();
+            _bgmusic.play();
+
         }
-        welcomeController.transferMusic(bgmusic, musicToggled, s);
+        welcomeController.transferMusic(_bgmusic, _musicToggle, s);
+
     }
 
     /**
@@ -538,12 +565,16 @@ public class HomeController {
      * @param text
      */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
-        this.bgmusic = bgmusic;
+
+        this._bgmusic = bgmusic;
+        this._bgmusic.pause();
+
         music.setSelected(true);
         music.setText("Music: OFF");
         music.setDisable(true);
-        this.bgmusic.pause();
-        musicToggled = toggle;
+
+        _musicToggle = toggle;
+
     }
 
 }

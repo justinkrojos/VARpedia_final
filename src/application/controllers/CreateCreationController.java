@@ -22,29 +22,30 @@ import java.util.concurrent.Executors;
  */
 public class CreateCreationController {
 
-    private ExecutorService team = Executors.newSingleThreadExecutor();
+    private ExecutorService _team = Executors.newSingleThreadExecutor();
     private ArrayList<String> voicesList = new ArrayList<String>();
     private String _termField;
-    private String originalText;
+    private String _originalText;
+    private MediaPlayer _bgmusic;
 
     @FXML
-    private TextArea wikitResults;
-    @FXML
     private Label searchConfirmation;
-    @FXML
-    private ChoiceBox<String> voicesChoiceBox;
+
     @FXML
     private ListView<Label> savedText;
     @FXML
-    private Button btnNext;
+    private ListView<Label> savedTextEditor;
 
-    // Editor Components
     @FXML
     private ChoiceBox<String> voicesChoiceBoxEditor;
     @FXML
+    private ChoiceBox<String> voicesChoiceBox;
+
+    @FXML
     private TextArea textEditor;
     @FXML
-    private ListView<Label> savedTextEditor;
+    private TextArea wikitResults;
+
     @FXML
     private Button btnPreviewEditor;
     @FXML
@@ -55,8 +56,12 @@ public class CreateCreationController {
     private Button btnDelEditor;
     @FXML
     private Button btnSaveEditor;
+    @FXML
+    private Button btnNext;
 
-    // Panes
+    @FXML
+    private ToggleButton btnMusic;
+
     @FXML
     private Pane actionsPane;
     @FXML
@@ -64,10 +69,6 @@ public class CreateCreationController {
     @FXML
     private Pane editorPane;
 
-    // Music
-    @FXML
-    private ToggleButton music;
-    private MediaPlayer bgmusic;
 
     public void initialize(){
 
@@ -94,9 +95,9 @@ public class CreateCreationController {
             public void handle(MouseEvent mouseEvent) {
 
                 if (savedTextEditor.getSelectionModel().getSelectedItem() != null) {
-                    originalText = savedTextEditor.getSelectionModel().getSelectedItem().getText();
+                    _originalText = savedTextEditor.getSelectionModel().getSelectedItem().getText();
 
-                    textEditor.setText(originalText);
+                    textEditor.setText(_originalText);
                     voicesChoiceBoxEditor.setValue(voicesList.get(savedTextEditor.getSelectionModel().getSelectedIndex()));
 
                     btnDelEditor.setDisable(false);
@@ -164,7 +165,7 @@ public class CreateCreationController {
         FXMLLoader loader = Main.changeScene("resources/SelectImage.fxml");
         SelectImageController selectImageController = loader.<SelectImageController>getController();
         selectImageController.transferInfo(_termField, finalText);
-        selectImageController.transferMusic(bgmusic, music.isSelected(), music.getText());
+        selectImageController.transferMusic(_bgmusic, btnMusic.isSelected(), btnMusic.getText());
     }
 
 
@@ -177,7 +178,7 @@ public class CreateCreationController {
 
         if (editorPane.isVisible()) {
             PreviewAudioTask previewAudioTask = new PreviewAudioTask(textEditor.getText(), getVoicesObject(voicesChoiceBoxEditor.getSelectionModel().getSelectedItem()).getVoicePackage());
-            team.submit(previewAudioTask);
+            _team.submit(previewAudioTask);
 
         } else {
             PreviewAudioTask previewAudioTask = new PreviewAudioTask(wikitResults.getSelectedText(), getVoicesObject(voicesChoiceBox.getSelectionModel().getSelectedItem()).getVoicePackage());
@@ -190,7 +191,7 @@ public class CreateCreationController {
                 alert.showAndWait();
 
             } else {
-                team.submit(previewAudioTask);
+                _team.submit(previewAudioTask);
 
             }
         }
@@ -305,7 +306,7 @@ public class CreateCreationController {
             alert.setTitle("Warning: Empty Text");
             alert.setContentText("No text was saved. Try deleting the text instead.");
             alert.showAndWait();
-            textEditor.setText(originalText);
+            textEditor.setText(_originalText);
             return;
 
         }
@@ -399,7 +400,7 @@ public class CreateCreationController {
 
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
-        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
+        welcomeController.transferMusic(_bgmusic, btnMusic.isSelected(), btnMusic.getText());
 
     }
 
@@ -409,14 +410,14 @@ public class CreateCreationController {
     @FXML
     private void handleMusic() {
 
-        if (music.isSelected()) {
-            music.setText("Music: OFF");
-            bgmusic.pause();
+        if (btnMusic.isSelected()) {
+            btnMusic.setText("Music: OFF");
+            _bgmusic.pause();
 
         }
         else {
-            music.setText("Music: ON");
-            bgmusic.play();
+            btnMusic.setText("Music: ON");
+            _bgmusic.play();
 
         }
     }
@@ -428,9 +429,11 @@ public class CreateCreationController {
      * @param text
      */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
-        this.bgmusic = bgmusic;
-        music.setSelected(toggle);
-        music.setText(text);
+
+        this._bgmusic = bgmusic;
+        btnMusic.setSelected(toggle);
+        btnMusic.setText(text);
+        
     }
 
     /**
@@ -439,8 +442,10 @@ public class CreateCreationController {
      * @param wikitResults
      */
     public void transferTerm(String term, String wikitResults) {
+
         _termField = term;
         this.wikitResults.setText(wikitResults);
         searchConfirmation.setText(searchConfirmation.getText() + " " + _termField);
+
     }
 }
