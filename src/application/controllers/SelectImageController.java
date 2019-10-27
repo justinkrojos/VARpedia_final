@@ -300,9 +300,6 @@ public class SelectImageController {
         CreateAudioTask audioTask = new CreateAudioTask(creationName.getText(), _savedText);
         team.submit(audioTask);
 
-        AudioMergeTask audioMergeTask = new AudioMergeTask(creationName.getText(), _savedText.length);
-        team.submit(audioMergeTask);
-
         MakeSlideShow task = new MakeSlideShow(_term, creationName.getText());
         team.submit(task);
 
@@ -335,7 +332,7 @@ public class SelectImageController {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.getDialogPane().getStylesheets().add(("Alert.css"));
                         alert.setTitle("Creation Complete!");
-                        alert.setContentText("Creation complete! You can now watch your new creation!");
+                        alert.setHeaderText("Creation complete! You can now watch your new creation!");
                         alert.showAndWait();
 
                     }

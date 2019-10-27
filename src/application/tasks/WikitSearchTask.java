@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
  * This class manages the wikit search. Gets output from the bash wikit command.
  */
 public class WikitSearchTask extends Task<Void> {
+
     private String _term;
     private String _output;
     private int _exit;
@@ -18,9 +19,9 @@ public class WikitSearchTask extends Task<Void> {
 
     @Override
     protected Void call() throws Exception {
+
         String cmd = "wikit " + _term;
         ProcessBuilder wikitpb = new ProcessBuilder("bash", "-c", cmd);
-
 
         Process wikitp = wikitpb.start();
         _exit = wikitp.waitFor();
@@ -30,6 +31,7 @@ public class WikitSearchTask extends Task<Void> {
 
         if (_output.startsWith("  ")) {
             _output = _output.replaceFirst("  ", "");
+
         }
         _output = _output.replace(". ", ".\n");
 
@@ -41,7 +43,9 @@ public class WikitSearchTask extends Task<Void> {
     public int getExit() {
         return _exit;
     }
+
     public String getOutput() {
         return _output;
     }
+
 }

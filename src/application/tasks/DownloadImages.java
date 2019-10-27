@@ -32,12 +32,8 @@ public class DownloadImages extends Task<Void> {
         _term = term;
     }
 
-    public List<Image> getImages() {
-        return _images;
-    }
-
     @Override
-    protected Void call() throws Exception {
+    protected Void call() {
         flickr();
         return null;
     }
@@ -56,9 +52,11 @@ public class DownloadImages extends Task<Void> {
             try {
                 apiKey = getAPIKey("apiKey");
                 sharedSecret = getAPIKey("sharedSecret");
+
             } catch (Exception e) {
                 apiKey = "e37d6b63e1b4bceb47a42a3a37f316e3";
                 sharedSecret = "42ccf0520e0515f1";
+
             }
 
             Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
@@ -76,12 +74,15 @@ public class DownloadImages extends Task<Void> {
 
             if (this.isCancelled()) {
                 return;
+
             }
             PhotoList<Photo> results = photos.search(params, resultsPerPage, page);
             int count = 0;
+
             for (Photo photo: results) {
                 if (this.isCancelled()) {
                     return;
+
                 }
                 try {
                     BufferedImage image = photos.getImage(photo, Size.LARGE);
@@ -92,12 +93,13 @@ public class DownloadImages extends Task<Void> {
 
                     count++;
                 } catch (FlickrException | IOException fe) {
+
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
 
+        }
     }
 
     /**
@@ -109,6 +111,7 @@ public class DownloadImages extends Task<Void> {
      * @throws Exception
      */
     public static String getAPIKey(String key) throws Exception {
+
         String creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
         creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
         String config = creationsDir+ "/flickr-api-keys.txt";
@@ -121,9 +124,11 @@ public class DownloadImages extends Task<Void> {
             if (line.trim().startsWith(key)) {
                 br.close();
                 return line.substring(line.indexOf("=")+1).trim();
+
             }
         }
         br.close();
         throw new RuntimeException("Couldn't find " + key +" in config file "+file.getName());
+
     }
 }

@@ -24,10 +24,9 @@ public class MakeSlideShow extends Task<Void> {
     @Override
     protected Void call() throws Exception {
         _numImages = getNumImages();
-        System.out.println(_numImages);
         makeVideo();
-
         return null;
+
     }
 
     /**
@@ -35,6 +34,7 @@ public class MakeSlideShow extends Task<Void> {
      * @return
      */
     private int getAudioLength() {
+
         String command = "soxi -D "+Main.getCreationDir()+"/"+_creationName+"/"+_creationName+".wav";
         ProcessBuilder audioLenBuilder = new ProcessBuilder("bash","-c",command);
         try {
@@ -44,10 +44,13 @@ public class MakeSlideShow extends Task<Void> {
             String audioString = stdout.readLine();
             stdout.close();
             return (int)Double.parseDouble(audioString) + 1;
+
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
+
         }
         return -1;
+
     }
 
     /**
@@ -55,43 +58,54 @@ public class MakeSlideShow extends Task<Void> {
      * @return
      */
     private int getNumImages() {
-        System.out.println(dir);
+
         File[] files = dir.listFiles();
+
         int count = 0;
         for (File f: files) {
-            System.out.println(f.getName());
+
             if (f.getName().endsWith(".jpg")) {
                 count++;
             }
+
         }
         return count;
+
     }
 
     /**
      * This method create the slideshow and adds sub titles.
      */
     private void makeVideo() {
+
         double length = getAudioLength();
 
         String path = Main.getCreationDir()+"/"+_creationName+"/";
         length = length/_numImages;
+
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(path+"cmd.txt", "UTF-8");
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+
         }
+
         for (int i = 0; i < _numImages; i++) {
             if (i==_numImages-1) {
                 writer.println("file "+path+"image"+i+".jpg");
                 writer.println("duration "+length);
                 writer.println("file "+path+"image"+i+".jpg");
                 break;
+
             }
             writer.println("file "+path+"image"+i+".jpg");
             writer.println("duration "+length);
+
         }
         writer.close();
 
@@ -103,10 +117,11 @@ public class MakeSlideShow extends Task<Void> {
         try {
             Process p = pbb.start();
             p.waitFor();
+
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+
         }
     }
-
 }
 

@@ -2,6 +2,9 @@ package application.tasks;
 
 import javafx.concurrent.Task;
 
+/**
+ * This task previews audio, given a string and a voice.
+ */
 public class PreviewAudioTask extends Task<Void> {
 
 
@@ -22,11 +25,13 @@ public class PreviewAudioTask extends Task<Void> {
         ProcessBuilder previewAudiopb1 = new ProcessBuilder("bash", "-c", cmd);
         processAudioPreview = previewAudiopb1.start();
         processAudioPreview.waitFor();
-
         return null;
 
     }
 
+    /**
+     * Stops the preview.
+     */
     public void stopProcess() {
         processAudioPreview.destroyForcibly();
 

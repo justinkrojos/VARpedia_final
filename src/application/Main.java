@@ -23,8 +23,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
+        // Play Background Music repetitively
         MediaPlayer player = new MediaPlayer(new Media(new File(System.getProperty("user.dir") + "/bgmusic.wav").toURI().toString()));
         player.play();
+
         player.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
@@ -61,13 +63,16 @@ public class Main extends Application {
      * @throws IOException
      */
     public static FXMLLoader changeScene(String fxml) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource(fxml));
         Parent layout = loader.load();
         Scene scene = new Scene(layout);
+
         _primaryStage.setScene(scene);
         _primaryStage.show();
         return loader;
+
     }
 
     /**
@@ -77,15 +82,19 @@ public class Main extends Application {
      * @return
      */
     public static String getCreationDir() {
+
         String creationsDir = null;
         try {
             creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
             creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
             creationsDir = creationsDir + "/creations";
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
+
         }
         return creationsDir;
+
     }
 
     /**
@@ -93,15 +102,19 @@ public class Main extends Application {
      * @return
      */
     public static String getFavouriteDir() {
+
         String creationsDir = null;
         try {
             creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
             creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
             creationsDir = creationsDir + "/favourites";
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
+
         }
         return creationsDir;
+
     }
 
     /**
@@ -109,15 +122,18 @@ public class Main extends Application {
      * @return
      */
     public static String getQuizDir() {
+
         String creationsDir = null;
         try {
             creationsDir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
             creationsDir = creationsDir.substring(0,creationsDir.lastIndexOf("/"));
             creationsDir = creationsDir + "/quiz";
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         return creationsDir;
+
     }
 
     /**
@@ -127,18 +143,22 @@ public class Main extends Application {
      * @throws IOException
      */
     private static void createDirectory(String dir) throws InterruptedException, IOException {
+
         String cmd = "[ ! -d " + dir + " ]";
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
 
         Process process = pb.start();
+
         if (process.waitFor() == 0) {
             cmd = "mkdir -p " + dir;
             ProcessBuilder mkdirpb = new ProcessBuilder("bash", "-c", cmd);
             Process mkdirP = mkdirpb.start();
+
         }
     }
 
     public static void main(String[] args) {
+
         try {
             createDirectory(getFavouriteDir());
             createDirectory(getCreationDir());
@@ -146,8 +166,10 @@ public class Main extends Application {
             createDirectory(getQuizDir() + "/deleted");
 
             launch(args);
+
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 }

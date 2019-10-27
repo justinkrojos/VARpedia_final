@@ -12,7 +12,7 @@ public enum Voices {
 
     private final String voicesPackage;
 
-    private Voices(String voicesPackage) {
+    Voices(String voicesPackage) {
         this.voicesPackage = voicesPackage;
     }
 
