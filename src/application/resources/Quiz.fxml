@@ -4,82 +4,136 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.QuizController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.QuizController">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
+      <ImageView fitHeight="1197.0" fitWidth="1212.0" layoutX="-40.0" layoutY="-271.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
             <Image url="@woodtexture.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="_answerField" layoutX="21.0" layoutY="391.0" prefHeight="66.0" prefWidth="241.0" />
-      <Button fx:id="_btnCheck" layoutX="270.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleBtnCheck" prefHeight="66.0" prefWidth="116.0" style="-fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="Check">
+      <TextField fx:id="_answerField" disable="true" layoutX="28.0" layoutY="520.0" prefHeight="66.0" prefWidth="313.0" promptText="Enter term here...">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="20.0" />
+         </font></TextField>
+      <Button fx:id="_btnCheck" disable="true" layoutX="338.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleBtnCheck" prefHeight="66.0" prefWidth="116.0" style="-fx-border-radius: 0 20 20 0; -fx-background-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Check">
+         <font>
+            <Font name="Manjari Regular" size="25.0" />
          </font></Button>
-      <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: green;" text="Back">
+      <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBtnBack" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-radius: 10 0 0 10; -fx-border-radius: 10 0 0 10;" text="← Back">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Thin" size="20.0" />
          </font></Button>
-      <Pane fx:id="_player" layoutX="466.0" layoutY="45.0" prefHeight="600.0" prefWidth="800.0" />
-      <ToggleButton fx:id="music" layoutX="311.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleMusic" text="Music: ON" />
-      <Button layoutX="184.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleManageQuiz" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: red;" text="Manage Quiz">
+      <ToggleButton fx:id="music" disable="true" layoutX="990.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: OFF">
          <font>
-            <Font size="24.0" />
+            <Font name="Manjari Thin" size="20.0" />
+         </font>
+      </ToggleButton>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1112.0" layoutY="10.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 24; -fx-background-color: red; -fx-border-color: white; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Music not supported.">
+               <font>
+                  <Font name="Manjari Thin" size="25.0" />
+               </font></Tooltip>
+         </tooltip>
+      </Label>
+      <Pane fx:id="_player" layoutX="484.0" layoutY="180.0" prefHeight="527.0" prefWidth="650.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5; -fx-background-radius: 0 20 20 20; -fx-border-radius: 0 20 20 20;" />
+      <Button layoutX="26.0" layoutY="722.0" mnemonicParsing="false" onAction="#handleManageQuiz" prefHeight="56.0" prefWidth="430.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: white;" text="Manage Quiz">
+         <font>
+            <Font name="Manjari Regular" size="25.0" />
          </font>
       </Button>
-      <Text fx:id="_correctText" layoutX="140.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="Text">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="54.0" layoutX="775.0" layoutY="727.0" stroke="WHITE" strokeType="INSIDE" width="107.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="54.0" layoutX="1023.0" layoutY="727.0" stroke="WHITE" strokeType="INSIDE" width="107.0" />
+      <Text fx:id="_correctText" layoutX="792.0" layoutY="764.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="0" textAlignment="CENTER" wrappingWidth="73.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Manjari Regular" size="30.0" />
          </font></Text>
-      <Text fx:id="_questionsText" layoutX="140.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="Text">
+      <Text fx:id="_questionsText" layoutX="1041.0" layoutY="764.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="0" textAlignment="CENTER" wrappingWidth="73.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Manjari Regular" size="30.0" />
          </font></Text>
-      <Label layoutX="138.0" layoutY="18.0" style="-fx-border-color: blue; -fx-border-width: 5; -fx-border-radius: 30; -fx-background-radius: 30;" text="Quiz" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="268.0" layoutY="23.0" prefHeight="82.0" prefWidth="619.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="  LEARN A CREATION" textAlignment="CENTER">
          <font>
-            <Font size="36.0" />
+            <Font name="Manjari Regular" size="50.0" />
          </font>
       </Label>
-      <Label layoutX="18.0" layoutY="98.0" prefHeight="132.0" prefWidth="379.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5; -fx-background-color: white;" text="Guess the term! What term is the video playing? Start by pressing Start!" wrapText="true">
+      <Label layoutX="26.0" layoutY="180.0" prefHeight="54.0" prefWidth="430.0" style="-fx-background-radius: 0 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white;" text="   1) Start the Quiz" wrapText="true">
          <font>
-            <Font size="24.0" />
+            <Font name="Manjari Regular" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="248.0" prefHeight="132.0" prefWidth="379.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5; -fx-background-color: white;" text="Type your answer here: and Click Check! or click Skip to move on!" wrapText="true">
+      <Label layoutX="27.0" layoutY="454.0" prefHeight="66.0" prefWidth="319.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0; -fx-border-color: black; -fx-border-width: 5; -fx-background-color: white;" text="   Enter your answer here:" wrapText="true">
          <font>
-            <Font size="24.0" />
+            <Font name="Manjari Regular" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="524.0" prefHeight="56.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: purple; -fx-border-width: 5;" text="Score:">
+      <Label alignment="CENTER" layoutX="659.0" layoutY="726.0" prefHeight="56.0" prefWidth="116.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20 0 0 20; -fx-border-color: green; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-border-width: 5;" text="Score:" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="Manjari Regular" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="591.0" prefHeight="54.0" prefWidth="84.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: purple; -fx-border-width: 5;" text="Total:">
+      <Label alignment="CENTER" layoutX="907.0" layoutY="726.0" prefHeight="56.0" prefWidth="116.0" style="-fx-background-radius: 20 0 0 20; -fx-border-radius: 20 0 0 20; -fx-border-color: blue; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-border-width: 5;" text="Out of:" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="Manjari Regular" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="184.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleBtnStart" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: orange;" text="Skip">
+      <Button disable="true" layoutX="24.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleBtnStart" prefHeight="63.0" prefWidth="430.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: yellow; -fx-background-color: rgba(165, 165, 0, 0.7);" text="I don't know!" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="25.0" />
          </font>
       </Button>
-      <Button fx:id="_btnStart" layoutX="223.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleBtnStart" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: orange;" text="Start">
+      <Button fx:id="_btnStart" layoutX="293.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleBtnStart" prefHeight="43.0" prefWidth="163.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-width: 5; -fx-border-color: green; -fx-background-color: rgba(0, 255, 0, 0.7);" text="Start Quiz" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="25.0" />
          </font></Button>
-      <Label fx:id="_answerLabel" layoutX="35.0" layoutY="457.0" prefHeight="54.0" prefWidth="212.0">
+      <Label alignment="CENTER" layoutX="26.0" layoutY="117.0" prefHeight="63.0" prefWidth="171.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 0, 0.7);" text="How to play:" textFill="WHITE" wrapText="true">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="25.0" />
          </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="234.0" prefHeight="54.0" prefWidth="430.0" style="-fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white;" text="   2) Watch the video" wrapText="true">
+         <font>
+            <Font name="Manjari Regular" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="288.0" prefHeight="54.0" prefWidth="430.0" style="-fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: white; -fx-background-radius: 0 0 0 20;" text="   3) Which term was searched?" wrapText="true">
+         <font>
+            <Font name="Manjari Regular" size="25.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="484.0" layoutY="117.0" prefHeight="63.0" prefWidth="303.0" style="-fx-background-radius: 20 20 0 0; -fx-border-radius: 20; -fx-border-width: 5; -fx-background-color: rgba(0, 0, 0, 0.7);" text="Watch your videos here:" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Manjari Regular" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="135.0" fitWidth="116.0" layoutX="760.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@books.gif" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="420.0" layoutY="720.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 24; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Choose what terms to be tested on!">
+               <font>
+                  <Font name="Manjari Thin" size="25.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
       </Label>
    </children>
 </AnchorPane>
