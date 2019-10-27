@@ -79,12 +79,12 @@
             <Insets top="-10.0" />
          </opaqueInsets>
          <children>
-            <CheckBox fx:id="_cb0" ellipsisString="" layoutX="26.0" layoutY="5.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 20 0 0 0;" text="CheckBox">
+            <CheckBox fx:id="_cb0" ellipsisString="" layoutX="26.0" layoutY="5.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7);" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv0" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb1" ellipsisString="" layoutX="254.0" layoutY="5.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0 20 0 0;" text="CheckBox">
+            <CheckBox fx:id="_cb1" ellipsisString="" layoutX="254.0" layoutY="5.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7);" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -119,12 +119,12 @@
                   <ImageView fx:id="_iv7" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb8" ellipsisString="" layoutX="26.0" layoutY="485.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0 0 0 20;" text="CheckBox">
+            <CheckBox fx:id="_cb8" ellipsisString="" layoutX="26.0" layoutY="485.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7);" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv8" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </CheckBox>
-            <CheckBox fx:id="_cb9" ellipsisString="" layoutX="254.0" layoutY="485.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0 0 20 0;" text="CheckBox">
+            <CheckBox fx:id="_cb9" ellipsisString="" layoutX="254.0" layoutY="485.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="167.0" scaleY="0.8" style="-fx-background-color: rgba(255, 255, 255, 0.7);" text="CheckBox">
                <graphic>
                   <ImageView fx:id="_iv9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
