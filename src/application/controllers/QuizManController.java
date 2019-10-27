@@ -57,6 +57,7 @@ public class QuizManController {
                 selectItem();
                 if (_listView.getSelectionModel().getSelectedItem() != null) {
                     btnDel.setDisable(false);
+                    btnAdd.setDisable(true);
                 }
             }
         });
@@ -66,6 +67,7 @@ public class QuizManController {
             public void handle(MouseEvent mouseEvent) {
                 if (deletedList.getSelectionModel().getSelectedItem() != null) {
                     btnAdd.setDisable(false);
+                    btnDel.setDisable(true);
                 }
             }
         });
