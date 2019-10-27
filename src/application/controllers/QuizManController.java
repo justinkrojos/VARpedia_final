@@ -1,7 +1,6 @@
 package application.controllers;
 
 import application.Main;
-import com.sun.javafx.charts.Legend;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -26,48 +25,54 @@ public class QuizManController {
     private final File _folder = new File(Main.getQuizDir());
     private final File _delFolder = new File(Main.getQuizDir() + "/deleted");
 
-    private MediaPlayer bgmusic;
-
-    private Boolean musicToggled;
-
-    @FXML
-    private ToggleButton music;
-
-    @FXML
-    private Button btnDel;
-
-    @FXML
-    private Button btnAdd;
-
-    @FXML
-    private ListView _listView;
-
-    @FXML
-    private ListView deletedList;
-
     private ObservableList<String> _items;
     private ObservableList<String> _delItems;
     private String _selectedItem;
 
+    private MediaPlayer _bgmusic;
+    private Boolean _musicToggle;
+
+    @FXML
+    private ToggleButton btnMusic;
+
+    @FXML
+    private Button btnDel;
+    @FXML
+    private Button btnAdd;
+
+    @FXML
+    private ListView existingQuiz;
+    @FXML
+    private ListView deletedQuiz;
+
+
     public void initialize() {
+
         updateListTree();
-        _listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+        // Enable deletion button when existing quiz clicked
+        existingQuiz.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 selectItem();
-                if (_listView.getSelectionModel().getSelectedItem() != null) {
+
+                if (existingQuiz.getSelectionModel().getSelectedItem() != null) {
                     btnDel.setDisable(false);
                     btnAdd.setDisable(true);
+
                 }
             }
         });
 
-        deletedList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        // Enable addition button when deleted quiz clicked
+        deletedQuiz.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (deletedList.getSelectionModel().getSelectedItem() != null) {
+
+                if (deletedQuiz.getSelectionModel().getSelectedItem() != null) {
                     btnAdd.setDisable(false);
                     btnDel.setDisable(true);
+
                 }
             }
         });
@@ -81,13 +86,14 @@ public class QuizManController {
     @FXML
     private void handleBtnAdd() throws IOException, InterruptedException {
 
-        String cmd = "mv '" + Main.getQuizDir() + "/deleted/" + deletedList.getSelectionModel().getSelectedItem() + ".mp4' '" + Main.getQuizDir() + "'";
+        String cmd = "mv '" + Main.getQuizDir() + "/deleted/" + deletedQuiz.getSelectionModel().getSelectedItem() + ".mp4' '" + Main.getQuizDir() + "'";
 
         ProcessBuilder movepb = new ProcessBuilder("bash", "-c", cmd);
         Process moveprocess = movepb.start();
         moveprocess.waitFor();
 
         updateListTree();
+
     }
 
     /**
@@ -95,8 +101,6 @@ public class QuizManController {
      */
     @FXML
     private void handleBtnDelete() throws IOException, InterruptedException {
-
-        //File file = new File(Main.getQuizDir()+System.getProperty("file.separator") + _selectedItem + ".mp4");
 
         String cmd = "mv '" + Main.getQuizDir() + "/" + _selectedItem + ".mp4' '" + Main.getQuizDir() + "/deleted'";
 
@@ -106,22 +110,22 @@ public class QuizManController {
 
         updateListTree();
 
-        //_listView.getItems().remove(_listView.getSelectionModel().getSelectedIndex());
-        //deletedList.getItems().add(_selectedItem);
-        //System.out.println(file.getAbsolutePath());
-        //file.delete();
     }
 
     /**
      * Populate list view with array list of sorted quiz creations.
      */
     public void updateListTree() {
+
         btnAdd.setDisable(true);
         btnDel.setDisable(true);
+
         _items = FXCollections.observableArrayList(listFilesOfFolder(_folder));
         _delItems = FXCollections.observableArrayList(listFilesOfFolder(_delFolder));
-        _listView.setItems(_items);
-        deletedList.setItems(_delItems);
+
+        existingQuiz.setItems(_items);
+        deletedQuiz.setItems(_delItems);
+
     }
 
     /**
@@ -133,24 +137,27 @@ public class QuizManController {
      * @return
      */
     private ArrayList<String> listFilesOfFolder(final File folder) {
+
         ArrayList<String> list = new ArrayList<String>();
 
         for (final File fileEntry : folder.listFiles()) {
             if (!fileEntry.isDirectory()) {
                 list.add(fileEntry.getName().replace(".mp4",""));//.replace(".mp4", ""));
+
             }
         }
-
         Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
         return list;
+
     }
 
     /**
-     * Get the selected item from list view.
+     * Get the selected item from existing quizzes.
      */
     @FXML
     private void selectItem() {
-        _selectedItem = (String) _listView.getSelectionModel().getSelectedItem();
+        _selectedItem = (String) existingQuiz.getSelectionModel().getSelectedItem();
+
     }
 
     /**
@@ -159,23 +166,35 @@ public class QuizManController {
      */
     @FXML
     private void handleBtnBack() throws IOException {
+
         FXMLLoader loader = Main.changeScene("resources/Quiz.fxml");
         QuizController quizController = loader.<QuizController>getController();
+
         String s = "Music: ON";
-            if (musicToggled) {
+            if (_musicToggle) {
                 s = "Music: OFF";
+
             }
+        quizController.transferMusic(_bgmusic, _musicToggle, s);
 
-        quizController.transferMusic(bgmusic, musicToggled, s);
     }
 
+    /**
+     * Turn off music for this scene, but keep previous toggle.
+     * @param bgmusic
+     * @param toggle
+     * @param text
+     */
     public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
-        this.bgmusic = bgmusic;
-        music.setSelected(true);
-        music.setText("Music: OFF");
-        music.setDisable(true);
-        bgmusic.pause();
-        musicToggled = toggle;
-    }
 
+        this._bgmusic = bgmusic;
+        this._bgmusic.pause();
+
+        btnMusic.setSelected(true);
+        btnMusic.setText("Music: OFF");
+        btnMusic.setDisable(true);
+
+        _musicToggle = toggle;
+
+    }
 }

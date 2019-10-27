@@ -22,7 +22,7 @@
             <Font name="Manjari Regular" size="18.0" />
          </font>
       </Button>
-      <ToggleButton fx:id="music" disable="true" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: OFF">
+      <ToggleButton fx:id="btnMusic" disable="true" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: OFF">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font>
@@ -53,7 +53,7 @@
                </font></Tooltip>
          </tooltip>
       </Label>
-      <ListView fx:id="deletedList" layoutX="359.0" layoutY="246.0" prefHeight="119.0" prefWidth="300.0" style="-fx-background-color: white; -fx-fixed-cell-size: 40px; -fx-font: 20px &quot;Manjari Thin&quot;" />
+      <ListView fx:id="deletedQuiz" layoutX="359.0" layoutY="246.0" prefHeight="119.0" prefWidth="300.0" style="-fx-background-color: white; -fx-fixed-cell-size: 40px; -fx-font: 20px &quot;Manjari Thin&quot;" />
       <Button fx:id="btnAdd" disable="true" layoutX="359.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleBtnAdd" prefHeight="42.0" prefWidth="300.0" style="-fx-background-radius: 0 0 10 10; -fx-border-color: yellow; -fx-border-radius: 0 0 10 10; -fx-border-width: 5;" text="ADD">
          <font>
             <Font name="Manjari Regular" size="18.0" />
@@ -64,7 +64,7 @@
             <Font name="Manjari Regular" size="18.0" />
          </font>
       </Label>
-      <ListView fx:id="_listView" layoutX="34.0" layoutY="145.0" onMouseClicked="#selectItem" prefHeight="269.0" prefWidth="281.0" style="-fx-background-color: white; -fx-fixed-cell-size: 40px; -fx-font: 20px &quot;Manjari Thin&quot;" />
+      <ListView fx:id="existingQuiz" layoutX="34.0" layoutY="145.0" onMouseClicked="#selectItem" prefHeight="269.0" prefWidth="281.0" style="-fx-background-color: white; -fx-fixed-cell-size: 40px; -fx-font: 20px &quot;Manjari Thin&quot;" />
       <Label alignment="CENTER" layoutX="359.0" layoutY="211.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: grey; -fx-background-radius: 10 10 0 0; -fx-opacity: 0.8;" text="Or add removed quizzes" textFill="WHITE">
          <font>
             <Font name="Manjari Regular" size="20.0" />
