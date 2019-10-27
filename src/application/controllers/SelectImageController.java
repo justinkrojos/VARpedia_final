@@ -77,9 +77,17 @@ public class SelectImageController {
 
     @FXML
     private AnchorPane imagePane;
+    @FXML
+    private AnchorPane createPane;
+
+    @FXML
+    private AnchorPane loadingImage;
 
     @FXML
     private Button downloadImgBtn;
+
+    @FXML
+    private Button btnCreateCreation;
 
     private ArrayList<ImageView> _imageViews;
     private ArrayList<CheckBox> _checkBoxs;
@@ -102,12 +110,48 @@ public class SelectImageController {
         _imageViews = new ArrayList<ImageView>(Arrays.asList(_iv0,_iv1,_iv2,_iv3,_iv4,_iv5,_iv6,_iv7,_iv8,_iv9));
         _checkBoxs =  new ArrayList<CheckBox>(Arrays.asList(_cb0,_cb1,_cb2,_cb3,_cb4,_cb5,_cb6,_cb7,_cb8,_cb9));
 
+        for (CheckBox c: _checkBoxs) {
+
+            c.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (c.isSelected()) {
+                        c.setOpacity(0.7);
+                    }
+                    else {
+                        c.setOpacity(1);
+                    }
+                    if (checkedBoxes()) {
+                        createPane.setVisible(true);
+                        loadingImage.setVisible(false);
+                    }
+                    else {
+                        createPane.setVisible(false);
+                    }
+                }
+            });
+        }
+
         creationName.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     handleBtnDownload();
                 }
+            }
+        });
+
+        btnCreateCreation.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnCreateCreation.setOpacity(0.7);
+            }
+        });
+
+        btnCreateCreation.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnCreateCreation.setOpacity(1.0);
             }
         });
     }
@@ -216,20 +260,13 @@ public class SelectImageController {
     @FXML
     private void handleBtnSubmit() throws IOException, InterruptedException {
 
-        if (!checkedBoxes()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.getDialogPane().getStylesheets().add(("Alert.css"));
-            alert.setTitle("You selected no images D:");
-            alert.setHeaderText(null);
-            alert.setContentText("Please Select at least one image");
-            alert.showAndWait();
-            return;
-        }
+      loadingImage.setVisible(true);
+      imagePane.setDisable(true);
 
         //_loadingImage.setVisible(true);
         _btnBack.setDisable(true);
-        _btnCreateCreation.setText("Creating creation...");
-        _btnCreateCreation.setDisable(true);
+        btnCreateCreation.setText("Creating creation...");
+        btnCreateCreation.setDisable(true);
 
         int imageNum = 0;
         for (CheckBox c: _checkBoxs) {

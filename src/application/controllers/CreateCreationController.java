@@ -83,6 +83,8 @@ public class CreateCreationController {
     @FXML
     private Button btnDelEditor;
 
+    String temp;
+
 
     public void initialize(){
         btnNext.setDisable(true);
@@ -102,6 +104,7 @@ public class CreateCreationController {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (savedTextEdit.getSelectionModel().getSelectedItem() != null) {
+                    temp = savedTextEdit.getSelectionModel().getSelectedItem().getText();
                     editTextArea.setText(savedTextEdit.getSelectionModel().getSelectedItem().getText());
                         voicesChoiceBoxEdit.setValue(voicesList.get(savedTextEdit.getSelectionModel().getSelectedIndex()));
                         btnDelEditor.setDisable(false);
@@ -205,7 +208,7 @@ public class CreateCreationController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Wikit Search");
             alert.setHeaderText("No words were highlighted");
-            alert.setContentText("Please highlight a maximum of 20 words and try again.");
+            alert.setContentText("Please highlight a maximum of 30 words and try again.");
             alert.showAndWait();
         }  else if (_textArea.getSelectedText().split("\\s+").length > 30) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -285,7 +288,17 @@ public class CreateCreationController {
      */
     @FXML
     public void handleSaveEdit() {
+        if (editTextArea.getText().trim().isBlank()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.getDialogPane().getStylesheets().add(("Alert.css"));
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText("Empty Text");
+            alert.setContentText("No text was saved. Try deleting the text instead.");
+            alert.showAndWait();
+            editTextArea.setText(temp);
+        }
         int i = savedTextEdit.getSelectionModel().getSelectedIndex();
+        System.out.println(i);
 
         voicesList.add(i, voicesChoiceBoxEdit.getValue());
         voicesList.remove(i + 1);
@@ -321,6 +334,7 @@ public class CreateCreationController {
             savedTextEdit.getItems().clear();
             for (int i = 0; i < savedText.getItems().size(); i++) {
                 savedTextEdit.getItems().add(savedText.getItems().get(i));
+                savedTextEdit.getItems().get(i).setWrapText(true);
             }
         }
         else {
