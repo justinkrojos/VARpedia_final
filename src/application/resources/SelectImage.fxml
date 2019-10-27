@@ -134,7 +134,7 @@
                   <Font name="Manjari Regular" size="30.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-22.0" layoutY="197.0" prefHeight="41.0" prefWidth="39.0" style="-fx-background-radius: 24; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ">
+            <Label fx:id="selectToolTip" alignment="CENTER" contentDisplay="CENTER" layoutX="-22.0" layoutY="197.0" prefHeight="41.0" prefWidth="39.0" style="-fx-background-radius: 24; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ">
                <font>
                   <Font size="20.0" />
                </font>

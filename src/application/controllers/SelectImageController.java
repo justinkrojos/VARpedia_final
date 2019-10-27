@@ -89,6 +89,9 @@ public class SelectImageController {
     @FXML
     private Button btnCreateCreation;
 
+    @FXML
+    private Label selectToolTip;
+
     private ArrayList<ImageView> _imageViews;
     private ArrayList<CheckBox> _checkBoxs;
 
@@ -262,6 +265,7 @@ public class SelectImageController {
 
       loadingImage.setVisible(true);
       imagePane.setDisable(true);
+      selectToolTip.setDisable(false);
 
         //_loadingImage.setVisible(true);
         _btnBack.setDisable(true);
