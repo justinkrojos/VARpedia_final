@@ -26,6 +26,9 @@ public class Quiz {
      */
     public String play() {
         ArrayList<String> list = listFilesOfFolder(_folder);
+        if (list.size() == 0) {
+            return null;
+        }
         Random rand = new Random();
         String randomTerm = list.get(rand.nextInt(list.size()));
         setTerm(randomTerm);

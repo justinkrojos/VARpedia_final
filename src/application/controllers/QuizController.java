@@ -141,6 +141,18 @@ public class QuizController {
         if (player!= null) {
             player.stop();
         }
+
+        String selectedItem = _quiz.play();
+        if (selectedItem == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getDialogPane().getStylesheets().add(("Alert.css"));
+            alert.setTitle("No Quizzes Available");
+            alert.setHeaderText(null);
+            alert.setContentText("Make sure you have created some creations! You can see your quizzes in the quiz manager!");
+            alert.showAndWait();
+            return;
+        }
+
         btnSkip.setDisable(false);
         _btnCheck.setDisable(false);
         _answerField.setDisable(false);
@@ -152,7 +164,7 @@ public class QuizController {
         _player.getChildren().clear();
 
 
-        String selectedItem = _quiz.play();
+
         _term = selectedItem;
         File fileUrl = new File(Main.getQuizDir()+"/"+selectedItem+".mp4");
         Media video = new Media(fileUrl.toURI().toString());
@@ -236,7 +248,13 @@ public class QuizController {
             player.stop();
             player = null;
         }
-        Main.changeScene("resources/QuizMan.fxml");
+        FXMLLoader loader = Main.changeScene("resources/QuizMan.fxml");
+        QuizManController quizManController = loader.<QuizManController>getController();
+        String s = "Music: ON";
+        if (musicToggled) {
+            s = "Music: OFF";
+        }
+        quizManController.transferMusic(bgmusic, musicToggled, s);
     }
 
     /**

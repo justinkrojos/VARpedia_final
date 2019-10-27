@@ -147,6 +147,7 @@ public class Main extends Application {
             createDirectory(getFavouriteDir());
             createDirectory(getCreationDir());
             createDirectory(getQuizDir());
+            createDirectory(getQuizDir() + "/deleted");
 
             launch(args);
         } catch (Exception e) {
