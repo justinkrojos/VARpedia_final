@@ -116,10 +116,10 @@ public class SelectImageController {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     if (c.isSelected()) {
-                        c.setOpacity(0.7);
+                        c.setStyle("-fx-background-color: black;");
                     }
                     else {
-                        c.setOpacity(1);
+                        c.setStyle("-fx-background-color: rgba(255, 255, 255, 0.7)");
                     }
                     if (checkedBoxes()) {
                         createPane.setVisible(true);
