@@ -14,6 +14,7 @@ public class CreateAudioTask extends Task<Void> {
 
    private String _creationNameField;
    private String[][] _savedText;
+   int row = -1;
 
     public CreateAudioTask(String _creationNameField, String[][] savedText) {
         this._creationNameField = _creationNameField;
@@ -32,6 +33,11 @@ public class CreateAudioTask extends Task<Void> {
             Process process1 = saveAudiopb.start();
             process1.waitFor();
 
+            if (getError()) {
+                row = i;
+                return null;
+
+            }
         }
         String cmd = "sox";
 
@@ -67,6 +73,13 @@ public class CreateAudioTask extends Task<Void> {
     }
 
     /**
+     * Get row that is causing error
+     */
+    public int getRow() {
+        return row;
+    }
+
+    /**
      * Look for unintelligible words.
      * @return
      * @throws FileNotFoundException
@@ -75,7 +88,7 @@ public class CreateAudioTask extends Task<Void> {
 
         boolean error;
 
-        File errorFile = new File(  Main.getCreationDir() + "/" + _creationNameField + "/audio/error.txt");
+        File errorFile = new File(  Main.getCreationDir() + "/" + _creationNameField + "/error.txt");
         Scanner sc = new Scanner(errorFile);
 
         if (sc.hasNextLine()) {

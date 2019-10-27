@@ -1,7 +1,9 @@
 package application.controllers;
 
 import application.*;
+import application.tasks.CreateAudioTask;
 import application.tasks.PreviewAudioTask;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -153,7 +155,7 @@ public class CreateCreationController {
      * @throws IOException
      */
     @FXML
-    private void handleBtnNext() throws IOException {
+    private void handleBtnNext() throws IOException, InterruptedException {
 
         String[][] finalText = new String[savedText.getItems().size()][2];
 
@@ -162,10 +164,57 @@ public class CreateCreationController {
             finalText[i][1] = voicesList.get(i);
         }
 
-        FXMLLoader loader = Main.changeScene("resources/SelectImage.fxml");
-        SelectImageController selectImageController = loader.<SelectImageController>getController();
-        selectImageController.transferInfo(_termField, finalText);
-        selectImageController.transferMusic(_bgmusic, btnMusic.isSelected(), btnMusic.getText());
+        // Check if words can be synthesised
+        Main.createDirectory(Main.getCreationDir() + "/preview");
+
+        CreateAudioTask createAudioTask = new CreateAudioTask("preview", finalText);
+        _team.submit(createAudioTask);
+
+        createAudioTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+
+                FXMLLoader loader = null;
+                try {
+
+                    if (!createAudioTask.getError()) {
+                        loader = Main.changeScene("resources/SelectImage.fxml");
+                        SelectImageController selectImageController = loader.<SelectImageController>getController();
+                        selectImageController.transferInfo(_termField, finalText);
+                        selectImageController.transferMusic(_bgmusic, btnMusic.isSelected(), btnMusic.getText());
+
+                    }
+                    else {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.getDialogPane().getStylesheets().add(("Alert.css"));
+                        alert.setTitle("Invalid Words");
+                        alert.setHeaderText("A word from \"" + savedText.getItems().get(createAudioTask.getRow()).getText() + "\" doesn't exist. Use the preview button to test out your audio before you save it.");
+                        alert.showAndWait();
+
+                        savedText.getItems().remove(createAudioTask.getRow());
+                        voicesList.remove(createAudioTask.getRow());
+
+                        if (savedText.getItems().size() == 0) {
+                            btnNext.setVisible(false);
+                        }
+                    }
+
+                    String cmd = "rm -r " + Main.getCreationDir()+ System.getProperty("file.separator") + "preview";
+                    ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+
+                    Process p = pb.start();
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                }
+
+
+            }
+        });
+
+
     }
 
 
@@ -433,7 +482,7 @@ public class CreateCreationController {
         this._bgmusic = bgmusic;
         btnMusic.setSelected(toggle);
         btnMusic.setText(text);
-        
+
     }
 
     /**

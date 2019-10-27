@@ -142,7 +142,7 @@ public class Main extends Application {
      * @throws InterruptedException
      * @throws IOException
      */
-    private static void createDirectory(String dir) throws InterruptedException, IOException {
+    public static void createDirectory(String dir) throws InterruptedException, IOException {
 
         String cmd = "[ ! -d " + dir + " ]";
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
