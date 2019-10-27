@@ -22,7 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-public class HomeController {
+public class PlayController {
 
     private final File _folder = new File(Main.getCreationDir());
     private ObservableList<String> _items;
