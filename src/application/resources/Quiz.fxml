@@ -20,11 +20,11 @@
             <Image url="@images/woodtexture.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="_answerField" disable="true" layoutX="30.0" layoutY="519.0" prefHeight="66.0" prefWidth="313.0" promptText="Enter term here...">
+      <TextField fx:id="answerField" disable="true" layoutX="30.0" layoutY="519.0" prefHeight="66.0" prefWidth="313.0" promptText="Enter term here...">
          <font>
             <Font name="Manjari Regular" size="20.0" />
          </font></TextField>
-      <Button fx:id="_btnCheck" disable="true" layoutX="340.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleBtnCheck" prefHeight="66.0" prefWidth="116.0" style="-fx-border-radius: 0 20 20 0; -fx-background-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Enter">
+      <Button fx:id="btnCheck" disable="true" layoutX="340.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleBtnCheck" prefHeight="66.0" prefWidth="116.0" style="-fx-border-radius: 0 20 20 0; -fx-background-radius: 0 20 20 0; -fx-border-color: white; -fx-border-width: 5;" text="Enter">
          <font>
             <Font name="Manjari Regular" size="25.0" />
          </font></Button>
@@ -32,7 +32,7 @@
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font></Button>
-      <ToggleButton fx:id="music" disable="true" layoutX="990.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleMusic" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: OFF">
+      <ToggleButton fx:id="btnMusic" disable="true" layoutX="990.0" layoutY="23.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: OFF">
          <font>
             <Font name="Manjari Thin" size="20.0" />
          </font>
@@ -48,7 +48,7 @@
                </font></Tooltip>
          </tooltip>
       </Label>
-      <Pane fx:id="_player" layoutX="484.0" layoutY="180.0" prefHeight="527.0" prefWidth="650.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5; -fx-background-radius: 0 20 20 20; -fx-border-radius: 0 20 20 20;" />
+      <Pane fx:id="videoPane" layoutX="484.0" layoutY="180.0" prefHeight="527.0" prefWidth="650.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5; -fx-background-radius: 0 20 20 20; -fx-border-radius: 0 20 20 20;" />
       <Button layoutX="26.0" layoutY="722.0" mnemonicParsing="false" onAction="#handleManageQuiz" prefHeight="56.0" prefWidth="430.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 5; -fx-border-color: white;" text="Manage Quiz">
          <font>
             <Font name="Manjari Regular" size="25.0" />
@@ -56,11 +56,11 @@
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="54.0" layoutX="775.0" layoutY="727.0" stroke="WHITE" strokeType="INSIDE" width="107.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="54.0" layoutX="1023.0" layoutY="727.0" stroke="WHITE" strokeType="INSIDE" width="107.0" />
-      <Text fx:id="_correctText" layoutX="792.0" layoutY="764.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="0" textAlignment="CENTER" wrappingWidth="73.0">
+      <Text fx:id="correctText" layoutX="792.0" layoutY="764.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="0" textAlignment="CENTER" wrappingWidth="73.0">
          <font>
             <Font name="Manjari Regular" size="30.0" />
          </font></Text>
-      <Text fx:id="_questionsText" layoutX="1041.0" layoutY="764.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="0" textAlignment="CENTER" wrappingWidth="73.0">
+      <Text fx:id="questionsText" layoutX="1041.0" layoutY="764.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: aqua; -fx-border-width: 5;" text="0" textAlignment="CENTER" wrappingWidth="73.0">
          <font>
             <Font name="Manjari Regular" size="30.0" />
          </font></Text>
@@ -94,7 +94,7 @@
             <Font name="Manjari Regular" size="25.0" />
          </font>
       </Button>
-      <Button fx:id="_btnStart" layoutX="293.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleBtnStart" prefHeight="43.0" prefWidth="163.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-width: 5; -fx-border-color: green; -fx-background-color: rgba(0, 255, 0, 0.7);" text="Start Quiz" textFill="WHITE">
+      <Button fx:id="btnStart" layoutX="293.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleBtnStart" prefHeight="43.0" prefWidth="163.0" style="-fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20; -fx-border-width: 5; -fx-border-color: green; -fx-background-color: rgba(0, 255, 0, 0.7);" text="Start Quiz" textFill="WHITE">
          <font>
             <Font name="Manjari Regular" size="25.0" />
          </font></Button>
@@ -135,7 +135,7 @@
             </Tooltip>
          </tooltip>
       </Label>
-      <Label fx:id="_answerLabel" layoutX="37.0" layoutY="563.0" prefHeight="66.0" prefWidth="319.0" wrapText="true">
+      <Label fx:id="answerLabel" layoutX="37.0" layoutY="563.0" prefHeight="66.0" prefWidth="319.0" wrapText="true">
          <font>
             <Font name="Manjari Regular" size="20.0" />
          </font>
