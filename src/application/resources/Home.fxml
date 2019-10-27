@@ -21,7 +21,7 @@
    <children>
       <ImageView fitHeight="1197.0" fitWidth="1212.0" layoutX="-40.0" layoutY="-271.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
-            <Image url="@woodtexture.jpg" />
+            <Image url="@images/woodtexture.jpg" />
          </image>
       </ImageView>
       <Pane fx:id="_player" layoutX="484.0" layoutY="180.0" prefHeight="527.0" prefWidth="650.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5; -fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20;" />
@@ -111,7 +111,7 @@
    </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="737.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@popcorn.gif" />
+            <Image url="@gif/popcorn.gif" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1099.0" layoutY="125.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 24; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ">

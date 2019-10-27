@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="1197.0" fitWidth="1212.0" layoutX="-40.0" layoutY="-271.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
-            <Image url="@woodtexture.jpg" />
+            <Image url="@images/woodtexture.jpg" />
          </image>
       </ImageView>
       <TextField fx:id="_answerField" disable="true" layoutX="30.0" layoutY="519.0" prefHeight="66.0" prefWidth="313.0" promptText="Enter term here...">
@@ -120,7 +120,7 @@
       </Label>
       <ImageView fitHeight="135.0" fitWidth="116.0" layoutX="760.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@books.gif" />
+            <Image url="@gif/books.gif" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="420.0" layoutY="720.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 24; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 24; -fx-border-width: 5;" text="ℹ">

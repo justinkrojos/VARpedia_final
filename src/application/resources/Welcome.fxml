@@ -14,12 +14,12 @@
    <children>
       <ImageView fitHeight="738.0" fitWidth="690.0" layoutY="-252.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
-            <Image url="@woodtexture.jpg" />
+            <Image url="@images/woodtexture.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="152.0" fitWidth="447.0" layoutX="10.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pastel.gif" />
+            <Image url="@gif/pastel.gif" />
          </image>
       </ImageView>
 
@@ -30,7 +30,7 @@
          <graphic>
          <ImageView fitHeight="229.0" fitWidth="98.0">
                <image>
-                  <Image url="@playimage.jpg" />
+                  <Image url="@images/playimage.jpg" />
                </image>
             </ImageView>
       </graphic>
@@ -42,7 +42,7 @@
          <graphic>
          <ImageView fitHeight="229.0" fitWidth="98.0">
             <image>
-               <Image url="@createimage.jpg" />
+               <Image url="@images/createimage.jpg" />
             </image>
          </ImageView>
          </graphic>
@@ -59,7 +59,7 @@
          <graphic>
             <ImageView fitHeight="229.0" fitWidth="98.0">
                <image>
-                  <Image url="@learnimage.jpg" />
+                  <Image url="@images/learnimage.jpg" />
                </image>
             </ImageView>
          </graphic>

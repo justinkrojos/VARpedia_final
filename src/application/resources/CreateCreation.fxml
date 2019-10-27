@@ -20,7 +20,7 @@
    <children>
       <ImageView fitHeight="1197.0" fitWidth="1212.0" layoutX="-40.0" layoutY="-271.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
          <image>
-            <Image url="@woodtexture.jpg" />
+            <Image url="@images/woodtexture.jpg" />
          </image>
       </ImageView>
       <AnchorPane fx:id="saveAudioPane" layoutY="-1.0" prefHeight="810.0" prefWidth="1154.0">

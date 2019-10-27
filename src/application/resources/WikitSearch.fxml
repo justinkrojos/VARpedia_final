@@ -15,7 +15,7 @@
     <children>
         <ImageView fitHeight="738.0" fitWidth="690.0" layoutY="-252.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
         <image>
-            <Image url="@woodtexture.jpg" />
+            <Image url="@images/woodtexture.jpg" />
         </image>
         </ImageView>
           <Label alignment="CENTER" layoutX="38.0" layoutY="113.0" prefHeight="105.0" prefWidth="612.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: red; -fx-border-width: 5;" text="         CREATE YOUR CREATION" textAlignment="CENTER" wrapText="true">
@@ -49,7 +49,7 @@
               </Label>
             <ImageView fx:id="loadingGif" fitHeight="166.0" fitWidth="162.0" layoutX="405.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@panda.gif" />
+                  <Image url="@gif/panda.gif" />
                </image>
             </ImageView>
             </children>
@@ -79,7 +79,7 @@
       </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="11.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pencil.gif" />
+            <Image url="@gif/pencil.gif" />
          </image>
       </ImageView>
     </children>
