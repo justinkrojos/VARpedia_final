@@ -1,6 +1,5 @@
 package application;
 
-import application.controllers.CreateController;
 import application.controllers.WelcomeController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -16,9 +15,6 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Main extends Application {
 
