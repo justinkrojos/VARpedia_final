@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +21,13 @@ import java.util.Collections;
 public class QuizManController {
 
     private final File _folder = new File(Main.getQuizDir());
+
+    private MediaPlayer bgmusic;
+
+    private Boolean musicToggled;
+
+    @FXML
+    private ToggleButton music;
 
     @FXML
     private ListView _listView;
@@ -88,6 +97,15 @@ public class QuizManController {
     @FXML
     private void handleBtnBack() throws IOException {
         Main.changeScene("resources/Quiz.fxml");
+    }
+
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
+        this.bgmusic = bgmusic;
+        music.setSelected(true);
+        music.setText("Music: OFF");
+        music.setDisable(true);
+        bgmusic.pause();
+        musicToggled = toggle;
     }
 
 }

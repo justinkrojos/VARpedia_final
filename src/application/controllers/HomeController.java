@@ -532,21 +532,6 @@ public class HomeController {
     }
 
     /**
-     * Toggle background music.
-     */
-    @FXML
-    private void handleMusic() {
-        if (music.isSelected()) {
-            music.setText("Music: OFF");
-            bgmusic.pause();
-        }
-        else {
-            music.setText("Music: ON");
-            bgmusic.play();
-        }
-    }
-
-    /**
      * Turn off music for this window and keep previous user selection for music.
      * @param bgmusic
      * @param toggle

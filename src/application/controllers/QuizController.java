@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -26,8 +27,10 @@ import java.io.IOException;
  */
 public class QuizController {
 
-    MediaPlayer player;
-    MediaPlayer bgmusic;
+    private MediaPlayer player;
+    private MediaPlayer bgmusic;
+
+    private Boolean musicToggled;
 
     private int _numCorrect = 0;
     private int _numQuestions = 0;
@@ -61,6 +64,9 @@ public class QuizController {
     @FXML
     private Button _btnCheck;
 
+    @FXML
+    private Button btnSkip;
+
     /**
      * Go back to main screen. Check if the player is still playing before going back.
      * @throws IOException
@@ -75,7 +81,11 @@ public class QuizController {
         _btnStart.setDisable(false);
         FXMLLoader loader = Main.changeScene("resources/Welcome.fxml");
         WelcomeController welcomeController = loader.<WelcomeController>getController();
-        welcomeController.transferMusic(bgmusic, music.isSelected(), music.getText());
+        String s = "Music: ON";
+        if (musicToggled) {
+            s = "Music: OFF";
+        }
+        welcomeController.transferMusic(bgmusic, musicToggled, s);
     }
 
 
@@ -92,6 +102,35 @@ public class QuizController {
                 }
             }
         });
+        btnSkip.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnSkip.setOpacity(0.7);
+            }
+        });
+
+        btnSkip.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                btnSkip.setOpacity(1.0);
+            }
+        });
+
+        _btnStart.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                _btnStart.setOpacity(0.7);
+            }
+        });
+
+        _btnStart.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                _btnStart.setOpacity(1.0);
+            }
+        });
+
+
     }
 
     /**
@@ -99,6 +138,12 @@ public class QuizController {
      */
     @FXML
     private void handleBtnStart() {
+        if (player!= null) {
+            player.stop();
+        }
+        btnSkip.setDisable(false);
+        _btnCheck.setDisable(false);
+        _answerField.setDisable(false);
         _correctText.setText("" +_numCorrect);
         _questionsText.setText("" + _numQuestions);
         _btnCheck.setDisable(false);
@@ -114,9 +159,9 @@ public class QuizController {
         player = new MediaPlayer(video);
         player.setAutoPlay(true);
         MediaView mediaView = new MediaView(player);
-        mediaView.setFitWidth(800);
-        mediaView.setFitHeight(600);
-
+        mediaView.fitWidthProperty().bind(_player.widthProperty());
+        mediaView.fitHeightProperty().bind(_player.heightProperty());
+        mediaView.setPreserveRatio(false);
         player.setOnReady(new Runnable() {
             @Override
             public void run() {
@@ -145,11 +190,11 @@ public class QuizController {
         if (_answerField.getText().equals("")){
             return;
         }
+
         String term = _term.toLowerCase();
         String answer = _answerField.getText().toLowerCase();
 
         if (term.equals(answer)) {
-            System.out.println("Correct");
             _numCorrect++;
             _numQuestions++;
             _answerLabel.setText("Correct!!! Keep Going!");
@@ -181,12 +226,6 @@ public class QuizController {
         }
     }
 
-    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
-        this.bgmusic = bgmusic;
-        music.setSelected(toggle);
-        music.setText(text);
-    }
-
     /**
      * Stop the current media player and change to manage quiz scene.
      * @throws IOException
@@ -198,5 +237,20 @@ public class QuizController {
             player = null;
         }
         Main.changeScene("resources/QuizMan.fxml");
+    }
+
+    /**
+     * Turn off music for this window and keep previous user selection for music.
+     * @param bgmusic
+     * @param toggle
+     * @param text
+     */
+    public void transferMusic(MediaPlayer bgmusic, Boolean toggle, String text) {
+        this.bgmusic = bgmusic;
+        music.setSelected(true);
+        music.setText("Music: OFF");
+        music.setDisable(true);
+        bgmusic.pause();
+        musicToggled = toggle;
     }
 }

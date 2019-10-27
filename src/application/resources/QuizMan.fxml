@@ -19,7 +19,7 @@
       </ImageView>
       <Button disable="true" layoutX="362.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleBtnDelete" prefHeight="42.0" prefWidth="300.0" style="-fx-background-radius: 0 0 15 15; -fx-border-color: red; -fx-border-radius: 0 0 15 15; -fx-border-width: 5;" text="DELETE">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="18.0" />
          </font>
       </Button>
       <ToggleButton fx:id="music" disable="true" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-radius: 0 10 10 0; -fx-border-radius: 0 10 10 0; -fx-border-width: 5;" text="Music: OFF">
@@ -34,7 +34,7 @@
       </Button>
       <Label alignment="CENTER" layoutX="362.0" layoutY="111.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: grey; -fx-background-radius: 10 10 0 0; -fx-opacity: 0.8;" text="Select a term and delete it" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="20.0" />
          </font>
       </Label>
       <Label alignment="CENTER_RIGHT" layoutX="210.0" layoutY="26.0" prefHeight="66.0" prefWidth="270.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-opacity: 0.8; -fx-border-radius: 20; -fx-border-color: green; -fx-border-width: 5;" text="MANAGE QUIZ   " textAlignment="CENTER" wrapText="true">
@@ -53,10 +53,10 @@
                </font></Tooltip>
          </tooltip>
       </Label>
-      <ListView layoutX="359.0" layoutY="246.0" prefHeight="119.0" prefWidth="300.0" />
+      <ListView style="-fx-background-color: white; -fx-fixed-cell-size: 30px; -fx-font: 20px &quot;Manjari Thin&quot;" layoutX="359.0" layoutY="246.0" prefHeight="119.0" prefWidth="300.0" />
       <Button disable="true" layoutX="359.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleBtnDelete" prefHeight="42.0" prefWidth="300.0" style="-fx-background-radius: 0 0 10 10; -fx-border-color: yellow; -fx-border-radius: 0 0 10 10; -fx-border-width: 5;" text="ADD">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="18.0" />
          </font>
       </Button>
       <Label alignment="CENTER" layoutX="35.0" layoutY="111.0" prefHeight="35.0" prefWidth="165.0" style="-fx-background-color: white; -fx-background-radius: 20 20 0 0;" text="Existing quizzes" textAlignment="CENTER">
@@ -64,10 +64,10 @@
             <Font name="Manjari Regular" size="18.0" />
          </font>
       </Label>
-      <ListView fx:id="_listView" layoutX="34.0" layoutY="145.0" onMouseClicked="#selectItem" prefHeight="263.0" prefWidth="281.0" />
+      <ListView fx:id="_listView" style="-fx-background-color: white; -fx-fixed-cell-size: 40px; -fx-font: 20px &quot;Manjari Thin&quot;" layoutX="34.0" layoutY="145.0" onMouseClicked="#selectItem" prefHeight="269.0" prefWidth="281.0" />
       <Label alignment="CENTER" layoutX="359.0" layoutY="211.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: grey; -fx-background-radius: 10 10 0 0; -fx-opacity: 0.8;" text="Or add deleted creations" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Manjari Regular" size="20.0" />
          </font>
       </Label>
       <ImageView fitHeight="119.0" fitWidth="66.0" layoutX="220.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
