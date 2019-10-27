@@ -373,7 +373,7 @@ public class HomeController {
                 favourites.remove(_selectedItem);
             }
 
-            String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4";
+            String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4 " + Main.getQuizDir() + "/" + _selectedItem + ".mp4";
             ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
 
             Process delProcess = null;
@@ -542,7 +542,7 @@ public class HomeController {
         music.setSelected(true);
         music.setText("Music: OFF");
         music.setDisable(true);
-        bgmusic.pause();
+        this.bgmusic.pause();
         musicToggled = toggle;
     }
 
