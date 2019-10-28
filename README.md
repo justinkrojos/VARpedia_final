@@ -32,7 +32,7 @@ The flickr API keys are located in flickr-api-keys.txt, in the same folder as th
 # Runnable jar
 This application should be run on the SOFTENG 206 Virtual Image.
 Make sure the flickr-api-keys.txt, the jar file, the media folder and the run.sh are in the same folder.
-Make sure the bgmusic.wav file is in the same level as the jar file!
+
 Open up terminal and navigate to that folder in terminal.
 You can run the jar file with the included run.sh script(with the command "./run.sh"), make sure its in the same folder as the jar file.
 Or from terminal type these two commands:
