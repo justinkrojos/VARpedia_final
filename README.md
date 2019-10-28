@@ -21,6 +21,11 @@ These libraries are included in the libs folder, excluding JavaFX13.
 Along with some other libraries from the 206_FlickrExample ACP project.
 This application was compiled with Java13.
 
+# Packages
+Make sure the following packages are installed on your linux system.
+
+ffmpeg, ffmplay, soxi, festival, wikit, mp3info, vlc
+
 # Flickr API Keys
 The flickr API keys are located in flickr-api-keys.txt, in the same folder as the jar file.
 
