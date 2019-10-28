@@ -398,7 +398,7 @@ public class PlayController {
                 _favourites.remove(_selectedItem);
 
             }
-            String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4 " + Main.getQuizDir() + "/" + _selectedItem + ".mp4";
+            String delCmd = "rm -r "+ Main.getCreationDir() + "/" + _selectedItem + " " + Main.getCreationDir() + "/"+_selectedItem + ".mp4";
 
             ProcessBuilder delBuilder = new ProcessBuilder("bash","-c",delCmd);
             Process delProcess = null;
