@@ -1,5 +1,5 @@
-# SOFTENG 206 Assignment 3 
-This is a prototype for VARpedia. A Visual Audio Reading wikipedia search.
+# SOFTENG 206 Project / Justin Rojos / Tianren Shen
+VARpedia is a Visual Audio Reading encyclopaedia.
 This application should be tested in the SOFTENG 206 updated VirtualBox image.
 
 # Libraries
@@ -35,9 +35,16 @@ Or from terminal type these two commands:
 >
 >java --module-path /home/student/Downloads/openjfx-13-rc+2_linux-x64_bin-sdk/javafx-sdk-13/lib --add-modules javafx.base,javafx.controls,javafx.media,javafx.graphics,javafx.fxml -jar 206Assignment3.jar
 
-# Background Music:
-Make sure the bgmusic.wav file is in the same level as the jar file!
-Ukulele Vs. Kazoo and Whistle, Too (C) 2013
+# Music:
+Make sure the all music files (bgmusic.wav, Techno.mp3, Chill.mp3) are in the same level as the jar file!
+
 >Licensed under a Creative Commons Attribution (3.0) License
 
+Ukulele Vs. Kazoo and Whistle, Too (C) 2013
 >http://ccmixter.org/files/mindmapthat/41199 ft: Kara Square
+
+Good Night (C) 2019
+>http://ccmixter.org/files/JohnDope/60163 ft: John Dope
+
+ElectricBody (C) 2019
+>http://ccmixter.org/files/destinazione_altrove/60185 ft: Dysfunction_AL
