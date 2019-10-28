@@ -458,8 +458,6 @@ public class PlayController {
 
             for (int i = 0; i < _favourites.size(); i++) {
 
-                System.out.println(_favourites.get(i));
-
                 if (_favourites.get(i) == _selectedItem) {
                     _favourites.remove(i);
                 }
