@@ -35,7 +35,7 @@ Or from terminal type these two commands:
 >
 >java --module-path /home/student/Downloads/openjfx-13-rc+2_linux-x64_bin-sdk/javafx-sdk-13/lib --add-modules javafx.base,javafx.controls,javafx.media,javafx.graphics,javafx.fxml -jar 206Assignment3.jar
 
-# Music:
+# Music Attribution:
 Make sure the all music files (bgmusic.wav, Techno.mp3, Chill.mp3) are in the same level as the jar file!
 
 >Licensed under a Creative Commons Attribution (3.0) License
@@ -48,3 +48,20 @@ Good Night (C) 2019
 
 ElectricBody (C) 2019
 >http://ccmixter.org/files/destinazione_altrove/60185 ft: Dysfunction_AL
+
+# Image Attribution
+
+A Set of Active Kids on A White Background
+>Vecteezy.com
+
+Several GIFs were taken from GIPHY
+>giphy.com
+
+# Code Attribution
+
+Nasser's Flickr ACP
+>https://acp.foe.auckland.ac.nz/
+
+Alert CSS Style Sheet
+>https://stackoverflow.com/questions/37354686/customize-javafx-alert-with-css
+
