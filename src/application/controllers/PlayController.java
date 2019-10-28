@@ -79,6 +79,10 @@ public class PlayController {
 
                     }
                     else {
+                        btnPlay.setDisable(false);
+                        btnDel.setDisable(false);
+                        btnFavourite.setDisable(false);
+
                         File fileUrl = new File(Main.getCreationDir() + "/" + _selectedItem + ".mp4");
                         _video = new Media(fileUrl.toURI().toString());
                         _player = new MediaPlayer(_video);
@@ -91,9 +95,6 @@ public class PlayController {
                         videoPane.getChildren().clear();
                         videoPane.getChildren().add(_mediaView);
 
-                        btnPlay.setDisable(false);
-                        btnDel.setDisable(false);
-                        btnFavourite.setDisable(false);
 
                         if (_favourites.contains(_selectedItem)) {
                             btnFavourite.setText("Unlike ★");
@@ -454,11 +455,18 @@ public class PlayController {
         } else {
             creationList.getSelectionModel().getSelectedItem().setStyle("-fx-background-color: rgba(255, 255, 0, 0.0);");
             btnFavourite.setText("Like ★");
-            _favourites.remove(_selectedItem);
 
+            for (int i = 0; i < _favourites.size(); i++) {
+
+                System.out.println(_favourites.get(i));
+
+                if (_favourites.get(i) == _selectedItem) {
+                    _favourites.remove(i);
+                }
+
+            }
         }
         updateFavourites();
-
     }
 
     /**
